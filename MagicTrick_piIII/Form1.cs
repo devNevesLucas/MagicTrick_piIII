@@ -21,6 +21,14 @@ namespace MagicTrick_piIII
         private void Form1_Load(object sender, EventArgs e)
         {
             lblVersao.Text = Jogo.Versao;
+
+        }
+
+        private void btnJogar_Click(object sender, EventArgs e)
+        {
+            frmMenu menu = new frmMenu();
+            menu.ShowDialog();
+
         }
     }
 }

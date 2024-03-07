@@ -36,11 +36,11 @@
             // lblVersao
             // 
             this.lblVersao.AutoSize = true;
-            this.lblVersao.Location = new System.Drawing.Point(368, 428);
+            this.lblVersao.Location = new System.Drawing.Point(385, 9);
             this.lblVersao.Name = "lblVersao";
-            this.lblVersao.Size = new System.Drawing.Size(39, 13);
+            this.lblVersao.Size = new System.Drawing.Size(22, 13);
             this.lblVersao.TabIndex = 0;
-            this.lblVersao.Text = "versão";
+            this.lblVersao.Text = "1.0";
             // 
             // btnJogar
             // 
@@ -50,6 +50,7 @@
             this.btnJogar.TabIndex = 1;
             this.btnJogar.Text = "Jogar";
             this.btnJogar.UseVisualStyleBackColor = true;
+            this.btnJogar.Click += new System.EventHandler(this.btnJogar_Click);
             // 
             // btnCreditos
             // 
