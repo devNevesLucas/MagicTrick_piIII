@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicTrick_piIII", "MagicTrick_piIII\MagicTrick_piIII.csproj", "{15647A4A-60A3-4A8E-A0DF-00005E145E2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15647A4A-60A3-4A8E-A0DF-00005E145E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15647A4A-60A3-4A8E-A0DF-00005E145E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15647A4A-60A3-4A8E-A0DF-00005E145E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15647A4A-60A3-4A8E-A0DF-00005E145E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD0ABC0B-BF34-4ABF-BFF5-B32F9B929331}
+	EndGlobalSection
+EndGlobal

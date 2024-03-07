@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MagicTrickServer</name>
+    </assembly>
+    <members>
+        <member name="T:MagicTrickServer.Jogo">
+            <summary>
+            Interface do jogo Magic Trick - BCC 2024
+            </summary>
+        </member>
+        <member name="F:MagicTrickServer.Jogo.Versao">
+            <summary>
+            Retorna a versão do servidor do jogo
+            </summary>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.ListarPartidas(System.String)">
+            <summary>
+            Retorna a lista de partidas do tipo solicitado
+            </summary>
+            <param name="status">Envie um caracter: (T)odas, (A)bertas, (J)ogando, (F)inalizadas</param>
+            <returns>Id, nome, data de criação e status</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.CriarPartida(System.String,System.String,System.String)">
+            <summary>
+            Cria uma nova partida
+            </summary>
+            <param name="nome">Nome da partida (deve ser único)</param>
+            <param name="senha">Senha da partida (até 10 caracteres)</param>
+            <param name="grupo">Nome do grupo</param>
+            <returns>Id da partida criada</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.ListarJogadores(System.Int32)">
+            <summary>
+            Lista de jogadores de uma determinada partida
+            </summary>
+            <param name="idPartida">Id da partida</param>
+            <returns>Id do Jogador, nome, pontuação atual</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.EntrarPartida(System.Int32,System.String,System.String)">
+            <summary>
+            Cria um jogador e entra em uma partida
+            </summary>
+            <param name="idPartida">Id da partida</param>
+            <param name="nome">Nome do Jogador</param>
+            <param name="senha">Senha da Partida</param>
+            <returns>Id do jogador criado, senha gerada</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.IniciarPartida(System.Int32,System.String)">
+            <summary>
+            Inicia uma partida, mudando seu status para J
+            </summary>
+            <param name="idJogador">Id do jogador</param>
+            <param name="senha">Senha do jogador</param>
+            <returns>Id do jogador que vai iniciar jogando</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.Jogar(System.Int32,System.String,System.Int32)">
+            <summary>
+            Jogar enviando uma carta
+            </summary>
+            <param name="id">Id do jogador</param>
+            <param name="senha">Senha do jogador</param>
+            <param name="posicao">Posição da carta a ser jogada</param>
+            <returns>Valor da carta jogada</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.Apostar(System.Int32,System.String,System.Int32)">
+            <summary>
+            Apostar enviando uma carta
+            </summary>
+            <param name="id">Id do jogador</param>
+            <param name="senha">Senha do jogador</param>
+            <param name="posicao">Posição da carta a ser apostada</param>
+            <returns>Valor da carta jogada na aposta</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.ConsultarMao(System.Int32)">
+            <summary>
+            As cartas que os jogadores possuem atualmente
+            </summary>
+            <param name="idPartida">Id da partida</param>
+            <returns>Jogador, Posicao, Naipe</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.VerificarVez(System.Int32)">
+            <summary>
+            Exibe todas informações do momento do jogo.
+            </summary>
+            <param name="idPartida">Id da Partida</param>
+            <returns>Status da Partida, Id do jogador da vez, numero da rodada e o status.</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.ExibirJogadas(System.Int32,System.Int32)">
+            <summary>
+            Retorna a relação de jogadas já realizadas no round especificado
+            </summary>
+            <param name="idPartida">Id da Partida</param>
+            <param name="Round">Número do Round</param>
+            <returns>Número do Round, Id do Jogador, Naipe, Valor</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.ExibirJogadas(System.Int32)">
+            <summary>
+            Retorna a relação de jogadas já realizadas no round atual
+            </summary>
+            <param name="idPartida">Id da Partida</param>
+            <returns>Número do Round, Id do Jogador, Naipe, Valor</returns>
+        </member>
+    </members>
+</doc>
