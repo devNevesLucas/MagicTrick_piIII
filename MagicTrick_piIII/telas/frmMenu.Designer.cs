@@ -35,9 +35,6 @@
             this.btnEntrar = new System.Windows.Forms.Button();
             this.btnCriar = new System.Windows.Forms.Button();
             this.lblVersao = new System.Windows.Forms.Label();
-            this.nomePartida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataCriacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartidas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,14 +49,16 @@
             // 
             // dgvPartidas
             // 
+            this.dgvPartidas.AllowUserToAddRows = false;
+            this.dgvPartidas.AllowUserToDeleteRows = false;
+            this.dgvPartidas.AllowUserToResizeColumns = false;
+            this.dgvPartidas.AllowUserToResizeRows = false;
             this.dgvPartidas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPartidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPartidas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nomePartida,
-            this.Status,
-            this.dataCriacao});
             this.dgvPartidas.Location = new System.Drawing.Point(12, 83);
+            this.dgvPartidas.MultiSelect = false;
             this.dgvPartidas.Name = "dgvPartidas";
+            this.dgvPartidas.ReadOnly = true;
             this.dgvPartidas.Size = new System.Drawing.Size(504, 393);
             this.dgvPartidas.TabIndex = 2;
             this.dgvPartidas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellContentClick);
@@ -112,27 +111,6 @@
             this.lblVersao.Text = "1.0";
             this.lblVersao.Click += new System.EventHandler(this.lblVersao_Click);
             // 
-            // nomePartida
-            // 
-            this.nomePartida.HeaderText = "nome";
-            this.nomePartida.Name = "nomePartida";
-            this.nomePartida.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.nomePartida.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Status
-            // 
-            this.Status.HeaderText = "status";
-            this.Status.Name = "Status";
-            this.Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataCriacao
-            // 
-            this.dataCriacao.HeaderText = "data de criação";
-            this.dataCriacao.Name = "dataCriacao";
-            this.dataCriacao.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataCriacao.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,8 +142,5 @@
         private System.Windows.Forms.Button btnEntrar;
         private System.Windows.Forms.Button btnCriar;
         private System.Windows.Forms.Label lblVersao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomePartida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataCriacao;
     }
 }

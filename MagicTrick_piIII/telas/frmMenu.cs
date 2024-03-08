@@ -27,9 +27,6 @@ namespace MagicTrick_piIII
         private void frmMenu_Load(object sender, EventArgs e)
         {
             lblVersao.Text = Jogo.Versao;
-
-            List<Partida> partidas = new List<Partida>();   
-            dgvPartidas.DataSource = partidas;
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)
@@ -48,9 +45,13 @@ namespace MagicTrick_piIII
 
             string[] partidasBrutas = result.Split('\n');
 
-            Console.WriteLine(partidasBrutas);
-
             List<Partida> partidasTmp = new List<Partida>();
+
+            foreach(string partida in partidasBrutas)
+                if(partida.Length > 0)
+                    partidasTmp.Add(new Partida(partida));
+
+            dgvPartidas.DataSource = partidasTmp;
         }
     }
 }
