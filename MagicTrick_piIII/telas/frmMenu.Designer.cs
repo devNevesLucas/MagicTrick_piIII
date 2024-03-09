@@ -28,24 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.grbJogadores = new System.Windows.Forms.GroupBox();
             this.dgvPartidas = new System.Windows.Forms.DataGridView();
             this.btnListagem = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
             this.btnEntrar = new System.Windows.Forms.Button();
             this.btnCriar = new System.Windows.Forms.Button();
             this.lblVersao = new System.Windows.Forms.Label();
+            this.gpbJogadores = new System.Windows.Forms.GroupBox();
+            this.dgvJogadores = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartidas)).BeginInit();
+            this.gpbJogadores.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).BeginInit();
             this.SuspendLayout();
-            // 
-            // grbJogadores
-            // 
-            this.grbJogadores.Location = new System.Drawing.Point(725, 83);
-            this.grbJogadores.Name = "grbJogadores";
-            this.grbJogadores.Size = new System.Drawing.Size(225, 264);
-            this.grbJogadores.TabIndex = 1;
-            this.grbJogadores.TabStop = false;
-            this.grbJogadores.Text = "Jogadores";
             // 
             // dgvPartidas
             // 
@@ -61,6 +55,7 @@
             this.dgvPartidas.ReadOnly = true;
             this.dgvPartidas.Size = new System.Drawing.Size(504, 393);
             this.dgvPartidas.TabIndex = 2;
+            this.dgvPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellClick);
             this.dgvPartidas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellContentClick);
             // 
             // btnListagem
@@ -111,36 +106,61 @@
             this.lblVersao.Text = "1.0";
             this.lblVersao.Click += new System.EventHandler(this.lblVersao_Click);
             // 
+            // gpbJogadores
+            // 
+            this.gpbJogadores.Controls.Add(this.dgvJogadores);
+            this.gpbJogadores.Location = new System.Drawing.Point(599, 83);
+            this.gpbJogadores.Name = "gpbJogadores";
+            this.gpbJogadores.Size = new System.Drawing.Size(351, 313);
+            this.gpbJogadores.TabIndex = 9;
+            this.gpbJogadores.TabStop = false;
+            this.gpbJogadores.Text = "Jogadores";
+            // 
+            // dgvJogadores
+            // 
+            this.dgvJogadores.AllowUserToAddRows = false;
+            this.dgvJogadores.AllowUserToDeleteRows = false;
+            this.dgvJogadores.AllowUserToResizeColumns = false;
+            this.dgvJogadores.AllowUserToResizeRows = false;
+            this.dgvJogadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvJogadores.Enabled = false;
+            this.dgvJogadores.Location = new System.Drawing.Point(6, 43);
+            this.dgvJogadores.Name = "dgvJogadores";
+            this.dgvJogadores.Size = new System.Drawing.Size(339, 264);
+            this.dgvJogadores.TabIndex = 9;
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 564);
+            this.Controls.Add(this.gpbJogadores);
             this.Controls.Add(this.lblVersao);
             this.Controls.Add(this.btnCriar);
             this.Controls.Add(this.btnEntrar);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.btnListagem);
             this.Controls.Add(this.dgvPartidas);
-            this.Controls.Add(this.grbJogadores);
             this.Name = "frmMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Magic Trick (Luxemburgo) - Menu";
             this.Load += new System.EventHandler(this.frmMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartidas)).EndInit();
+            this.gpbJogadores.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox grbJogadores;
         private System.Windows.Forms.DataGridView dgvPartidas;
         private System.Windows.Forms.Button btnListagem;
         private System.Windows.Forms.Button btnVoltar;
         private System.Windows.Forms.Button btnEntrar;
         private System.Windows.Forms.Button btnCriar;
         private System.Windows.Forms.Label lblVersao;
+        private System.Windows.Forms.GroupBox gpbJogadores;
+        private System.Windows.Forms.DataGridView dgvJogadores;
     }
 }
