@@ -13,10 +13,13 @@ namespace MagicTrick_piIII
         public string DataCriacao { get; set; }
         public char Status { get; set; }
 
+
         public Partida(string linha)
         {
-            string[] dados = linha.Split(',');    
-            dados[3] = dados[3].Remove(1, 1);
+            string[] dados = linha.Split(',');
+
+            int posicaoCr = dados[3].IndexOf('\r');
+            dados[3] = dados[3].Remove(posicaoCr, 1);
 
             this.IdPartida = Convert.ToInt32(dados[0]);
             this.NomePartida = dados[1];

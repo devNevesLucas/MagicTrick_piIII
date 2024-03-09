@@ -16,7 +16,9 @@ namespace MagicTrick_piIII
         public Jogador(string linha)
         {
             string[] dados = linha.Split(',');
-            dados[2] = dados[2].Remove(1, 1);
+
+            int posicaoCR = dados[2].IndexOf('\r');         
+            dados[2] = dados[2].Remove(posicaoCR, 1);
 
             this.IdJogador = Convert.ToInt32(dados[0]);
             this.Nome = dados[1];
