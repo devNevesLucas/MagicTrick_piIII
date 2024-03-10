@@ -61,6 +61,9 @@ namespace MagicTrick_piIII
         {
             int linhaSelecionada = e.RowIndex;
 
+            if (linhaSelecionada < 0)
+                return;
+
             Partida partidaSelecionada = this.partidas[linhaSelecionada];
             int idPartida = partidaSelecionada.IdPartida;
             
@@ -74,6 +77,11 @@ namespace MagicTrick_piIII
                     jogadoresTmp.Add(new Jogador(jogador));
 
             dgvJogadores.DataSource = jogadoresTmp;
+        }
+
+        private void btnCriar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

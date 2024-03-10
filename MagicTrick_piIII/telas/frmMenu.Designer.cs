@@ -95,6 +95,7 @@
             this.btnCriar.TabIndex = 6;
             this.btnCriar.Text = "Criar partida";
             this.btnCriar.UseVisualStyleBackColor = true;
+            this.btnCriar.Click += new System.EventHandler(this.btnCriar_Click);
             // 
             // lblVersao
             // 
