@@ -1,4 +1,5 @@
-﻿using MagicTrickServer;
+﻿using MagicTrick_piIII.telas;
+using MagicTrickServer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,10 +25,10 @@ namespace MagicTrick_piIII
         {
 
         }
-
+        
         private void frmMenu_Load(object sender, EventArgs e)
         {
-            lblVersao.Text = Jogo.Versao;
+            lblVersao.Text += Jogo.Versao;
             dgvPartidas.DataSource = this.partidas;
         }
 
@@ -81,7 +82,8 @@ namespace MagicTrick_piIII
 
         private void btnCriar_Click(object sender, EventArgs e)
         {
-
+            frmCriancaoPartida frmNovaPartida = new frmCriancaoPartida();
+            frmNovaPartida.ShowDialog();
         }
     }
 }

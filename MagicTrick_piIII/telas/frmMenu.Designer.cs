@@ -100,11 +100,12 @@
             // lblVersao
             // 
             this.lblVersao.AutoSize = true;
-            this.lblVersao.Location = new System.Drawing.Point(928, 9);
+            this.lblVersao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersao.Location = new System.Drawing.Point(842, 9);
             this.lblVersao.Name = "lblVersao";
-            this.lblVersao.Size = new System.Drawing.Size(22, 13);
+            this.lblVersao.Size = new System.Drawing.Size(91, 16);
             this.lblVersao.TabIndex = 7;
-            this.lblVersao.Text = "1.0";
+            this.lblVersao.Text = "Luxemburgo - ";
             this.lblVersao.Click += new System.EventHandler(this.lblVersao_Click);
             // 
             // gpbJogadores

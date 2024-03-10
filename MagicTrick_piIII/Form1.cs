@@ -20,7 +20,7 @@ namespace MagicTrick_piIII
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            lblVersao.Text = Jogo.Versao;
+            lblVersao.Text += Jogo.Versao;
 
         }
 
@@ -28,6 +28,16 @@ namespace MagicTrick_piIII
         {
             frmMenu menu = new frmMenu();
             menu.ShowDialog();
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblVersao_Click(object sender, EventArgs e)
+        {
 
         }
     }
