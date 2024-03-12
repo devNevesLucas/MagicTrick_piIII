@@ -24,7 +24,6 @@ namespace MagicTrick_piIII
         private void frmMenu_Load(object sender, EventArgs e)
         {
             lblVersao.Text += Jogo.Versao;
-            dgvPartidas.DataSource = this.partidas;
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)

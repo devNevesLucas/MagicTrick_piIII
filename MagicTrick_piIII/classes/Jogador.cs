@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrick_piIII.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,10 @@ namespace MagicTrick_piIII
         public int IdJogador { get; set; }  
         public string Nome { get; set; }
         public int Pontuacao { get; set; }
-    
+        public List<Carta> Deck { get; set; }
+        public int ValorAposta { get; set; }
+        public char[] NaipeVitorias { get; set; }
+
 
         public Jogador(string linha)
         {

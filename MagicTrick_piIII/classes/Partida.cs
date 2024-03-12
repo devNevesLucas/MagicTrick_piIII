@@ -10,9 +10,10 @@ namespace MagicTrick_piIII
     {
         public int IdPartida { get; set; }
         public string NomePartida { get; set; }
+        public string Senha { get; set; }
+        public int Round { get; set; }
         public string DataCriacao { get; set; }
         public char Status { get; set; }
-
 
         public Partida(string linha)
         {
