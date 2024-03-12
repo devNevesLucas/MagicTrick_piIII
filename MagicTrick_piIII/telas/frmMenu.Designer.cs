@@ -55,8 +55,7 @@
             this.dgvPartidas.ReadOnly = true;
             this.dgvPartidas.Size = new System.Drawing.Size(504, 393);
             this.dgvPartidas.TabIndex = 2;
-            this.dgvPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellClick);
-            this.dgvPartidas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellContentClick);
+            this.dgvPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellClick);       
             // 
             // btnListagem
             // 
@@ -106,7 +105,6 @@
             this.lblVersao.Size = new System.Drawing.Size(91, 16);
             this.lblVersao.TabIndex = 7;
             this.lblVersao.Text = "Luxemburgo - ";
-            this.lblVersao.Click += new System.EventHandler(this.lblVersao_Click);
             // 
             // gpbJogadores
             // 

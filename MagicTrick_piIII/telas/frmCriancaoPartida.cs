@@ -23,21 +23,6 @@ namespace MagicTrick_piIII.telas
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCriarPartida_Click(object sender, EventArgs e)
         {
             string nomePartida = txtNomePartida.Text;
@@ -48,9 +33,17 @@ namespace MagicTrick_piIII.telas
 
             string resultado = Jogo.CriarPartida(nomePartida, senhaPartida, "luxemburgo");
 
-            MessageBox.Show($"Partida Criada! :D\r\nO ID da partida foi: {resultado}", "Parabéns!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            if (!Auxiliar.VerificaErro(resultado))
+            { 
+                MessageBox.Show(
+                        $"Partida Criada! :D\r\nO ID da partida foi: {resultado}",
+                        "Parabéns!",
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Asterisk
+                    );
 
-            this.Close();
+                this.Close();
+            }
         }
     }
 }

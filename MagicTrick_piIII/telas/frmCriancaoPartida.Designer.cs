@@ -40,8 +40,7 @@
             this.txtNomePartida.Location = new System.Drawing.Point(37, 109);
             this.txtNomePartida.Name = "txtNomePartida";
             this.txtNomePartida.Size = new System.Drawing.Size(180, 20);
-            this.txtNomePartida.TabIndex = 1;
-            this.txtNomePartida.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtNomePartida.TabIndex = 1;        
             // 
             // txtSenha
             // 
@@ -58,7 +57,6 @@
             this.lblNomePartida.Size = new System.Drawing.Size(86, 13);
             this.lblNomePartida.TabIndex = 3;
             this.lblNomePartida.Text = "Nome da Partida";
-            this.lblNomePartida.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblSenha
             // 
@@ -68,7 +66,6 @@
             this.lblSenha.Size = new System.Drawing.Size(38, 13);
             this.lblSenha.TabIndex = 4;
             this.lblSenha.Text = "Senha";
-            this.lblSenha.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // btnCriarPartida
             // 

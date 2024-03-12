@@ -20,11 +20,6 @@ namespace MagicTrick_piIII
         {
             InitializeComponent();
         }
-
-        private void dgvPartidas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
         
         private void frmMenu_Load(object sender, EventArgs e)
         {
@@ -37,14 +32,12 @@ namespace MagicTrick_piIII
             this.Close();
         }
 
-        private void lblVersao_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnListagem_Click(object sender, EventArgs e)
         {
             string result = Jogo.ListarPartidas("T");
+
+            if (Auxiliar.VerificaErro(result))
+                return;
 
             string[] partidasBrutas = result.Split('\n');
 
@@ -69,6 +62,9 @@ namespace MagicTrick_piIII
             int idPartida = partidaSelecionada.IdPartida;
             
             string result = Jogo.ListarJogadores(idPartida);
+
+            if (Auxiliar.VerificaErro(result))
+                return;
 
             string[] jogadoresBrutos = result.Split('\n');
 
