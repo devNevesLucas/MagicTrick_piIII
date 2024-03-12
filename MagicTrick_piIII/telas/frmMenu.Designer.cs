@@ -55,7 +55,8 @@
             this.dgvPartidas.ReadOnly = true;
             this.dgvPartidas.Size = new System.Drawing.Size(504, 393);
             this.dgvPartidas.TabIndex = 2;
-            this.dgvPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellClick);            // 
+            this.dgvPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellClick);
+            // 
             // btnListagem
             // 
             this.btnListagem.Location = new System.Drawing.Point(12, 12);
@@ -84,6 +85,7 @@
             this.btnEntrar.TabIndex = 5;
             this.btnEntrar.Text = "Entrar";
             this.btnEntrar.UseVisualStyleBackColor = true;
+            this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
             // 
             // btnCriar
             // 

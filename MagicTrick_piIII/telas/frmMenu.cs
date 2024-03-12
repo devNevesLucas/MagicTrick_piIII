@@ -48,6 +48,9 @@ namespace MagicTrick_piIII
 
             this.partidas = partidasTmp;
             dgvPartidas.DataSource = partidasTmp;
+
+            dgvPartidas.Columns.Remove("Round");
+            dgvPartidas.Columns.Remove("Senha");
         }
 
         private void dgvPartidas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -79,6 +82,11 @@ namespace MagicTrick_piIII
         {
             frmCriancaoPartida frmNovaPartida = new frmCriancaoPartida();
             frmNovaPartida.ShowDialog();
+        }
+
+        private void btnEntrar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
