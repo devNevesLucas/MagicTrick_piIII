@@ -43,6 +43,14 @@ namespace MagicTrick_piIII.telas
             string senhaJogador = dados[1];
 
             Jogador jogador = new Jogador(idJogador, nomeJogador, senhaJogador);
+
+            frmPartida frmPartida = new frmPartida(this.Partida, this.JogadoresPartida, jogador);
+            frmPartida.ShowDialog();
+        }
+
+        private void frmEntrarPartida_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

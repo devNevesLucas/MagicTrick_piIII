@@ -21,13 +21,9 @@ namespace MagicTrick_piIII
          */
         public static bool VerificaErro(string texto)
         {
-<<<<<<< Updated upstream
-            if(texto.StartsWith("ERRO"))
-            {              
-=======
-            if (texto.StartsWith("ERRO");
+
+            if (texto.StartsWith("ERRO"))
             {
->>>>>>> Stashed changes
                 MessageBox.Show(texto, "Houve um erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }

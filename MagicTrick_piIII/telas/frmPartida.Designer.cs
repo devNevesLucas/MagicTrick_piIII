@@ -32,6 +32,7 @@
             this.dgvJogadores = new System.Windows.Forms.DataGridView();
             this.btnIniciarPartida = new System.Windows.Forms.Button();
             this.lblStatusPartida = new System.Windows.Forms.Label();
+            this.lblVersao = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,7 +40,7 @@
             // 
             this.grpJogo.Location = new System.Drawing.Point(12, 55);
             this.grpJogo.Name = "grpJogo";
-            this.grpJogo.Size = new System.Drawing.Size(814, 581);
+            this.grpJogo.Size = new System.Drawing.Size(731, 581);
             this.grpJogo.TabIndex = 0;
             this.grpJogo.TabStop = false;
             this.grpJogo.Text = "Joguinho";
@@ -51,9 +52,10 @@
             this.dgvJogadores.AllowUserToResizeColumns = false;
             this.dgvJogadores.AllowUserToResizeRows = false;
             this.dgvJogadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvJogadores.Location = new System.Drawing.Point(887, 55);
+            this.dgvJogadores.Enabled = false;
+            this.dgvJogadores.Location = new System.Drawing.Point(828, 55);
             this.dgvJogadores.Name = "dgvJogadores";
-            this.dgvJogadores.Size = new System.Drawing.Size(277, 581);
+            this.dgvJogadores.Size = new System.Drawing.Size(336, 581);
             this.dgvJogadores.TabIndex = 1;
             // 
             // btnIniciarPartida
@@ -77,17 +79,28 @@
             this.lblStatusPartida.TabIndex = 3;
             this.lblStatusPartida.Text = "Aguardando o inicio da partida";
             // 
+            // lblVersao
+            // 
+            this.lblVersao.AutoSize = true;
+            this.lblVersao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersao.Location = new System.Drawing.Point(1056, 22);
+            this.lblVersao.Name = "lblVersao";
+            this.lblVersao.Size = new System.Drawing.Size(91, 16);
+            this.lblVersao.TabIndex = 4;
+            this.lblVersao.Text = "Luxemburgo - ";
+            // 
             // frmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 645);
+            this.Controls.Add(this.lblVersao);
             this.Controls.Add(this.lblStatusPartida);
             this.Controls.Add(this.btnIniciarPartida);
             this.Controls.Add(this.dgvJogadores);
             this.Controls.Add(this.grpJogo);
             this.Name = "frmPartida";
-            this.Text = "frmPartida";
+            this.Text = "Magic Trick (Luxemburgo) - Partida";
             ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -100,5 +113,6 @@
         private System.Windows.Forms.DataGridView dgvJogadores;
         private System.Windows.Forms.Button btnIniciarPartida;
         private System.Windows.Forms.Label lblStatusPartida;
+        private System.Windows.Forms.Label lblVersao;
     }
 }

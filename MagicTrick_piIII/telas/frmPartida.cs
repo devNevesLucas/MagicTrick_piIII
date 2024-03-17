@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrickServer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +14,7 @@ namespace MagicTrick_piIII.telas
     public partial class frmPartida : Form
     {
 
-        List<Jogador> Adversarios = new List<Jogador>();
+        List<Jogador> Jogadores = new List<Jogador>();
         Jogador Player;
         Partida Partida;
 
@@ -22,12 +23,18 @@ namespace MagicTrick_piIII.telas
             InitializeComponent();
 
             this.Partida = partida;
-            this.Adversarios = adversarios;
+            this.Jogadores = adversarios;
             this.Player = player;
 
-            List<Jogador> jogadorTemp = adversarios;
-            jogadorTemp.Add(Player);
-            dgvJogadores.DataSource = jogadorTemp;
+            this.Jogadores.Add(Player);
+            dgvJogadores.DataSource = this.Jogadores;
+
+            char status = this.Partida.Status;
+
+            if(status != 'A')
+                btnIniciarPartida.Enabled = false;
+
+            lblVersao.Text += Jogo.Versao;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -37,7 +44,26 @@ namespace MagicTrick_piIII.telas
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
         {
+            int idJogador = this.Player.IdJogador;
+            string senhaJogador = this.Player.Senha;
 
+            string retorno = Jogo.IniciarPartida(idJogador, senhaJogador);
+
+            if (Auxiliar.VerificaErro(retorno))
+                return;
+
+            btnIniciarPartida.Enabled = false;
+
+            int idRetornado = Convert.ToInt32(retorno);
+
+            Jogador jogadorTmp = Jogadores.Find(j => j.IdJogador == idRetornado);
+
+            string nomeJogadorTmp = jogadorTmp.Nome;
+            int idJogadorTmp = jogadorTmp.IdJogador;
+
+            string statusNovo = $"Vez do jogador: {nomeJogadorTmp}   -   ID: {idJogadorTmp}";
+
+            lblStatusPartida.Text = statusNovo;
         }
     }
 }

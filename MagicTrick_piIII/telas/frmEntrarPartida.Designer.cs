@@ -90,7 +90,8 @@
             this.Controls.Add(this.lblSenha);
             this.Controls.Add(this.lblNomeJogador);
             this.Name = "frmEntrarPartida";
-            this.Text = "frmEntrarPartida";
+            this.Text = "Magic Trick (Luxemburgo) - Entrar";
+            this.Load += new System.EventHandler(this.frmEntrarPartida_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
