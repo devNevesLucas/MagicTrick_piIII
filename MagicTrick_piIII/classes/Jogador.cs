@@ -15,7 +15,7 @@ namespace MagicTrick_piIII
         public List<Carta> Deck { get; set; }
         public int ValorAposta { get; set; }
         public char[] NaipeVitorias { get; set; }
-
+        public string Senha { get; set; }
 
         public Jogador(string linha)
         {
@@ -27,6 +27,14 @@ namespace MagicTrick_piIII
             this.IdJogador = Convert.ToInt32(dados[0]);
             this.Nome = dados[1];
             this.Pontuacao = Convert.ToInt32(dados[2]);
+        }
+        
+        public Jogador(int idJogador, string nome, string senha)
+        {
+            this.IdJogador = idJogador;
+            this.Nome = nome;
+            this.Senha = senha;
+            this.Pontuacao = 0;
         }
     }
 }

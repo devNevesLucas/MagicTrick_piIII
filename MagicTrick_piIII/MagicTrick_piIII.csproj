@@ -64,6 +64,12 @@
     <Compile Include="telas\frmCriancaoPartida.Designer.cs">
       <DependentUpon>frmCriancaoPartida.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\frmEntrarPartida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\frmEntrarPartida.Designer.cs">
+      <DependentUpon>frmEntrarPartida.cs</DependentUpon>
+    </Compile>
     <Compile Include="telas\frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,11 +79,20 @@
     <Compile Include="classes\Partida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="telas\frmPartida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\frmPartida.Designer.cs">
+      <DependentUpon>frmPartida.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\frmCriancaoPartida.resx">
       <DependentUpon>frmCriancaoPartida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\frmEntrarPartida.resx">
+      <DependentUpon>frmEntrarPartida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
@@ -91,6 +106,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="telas\frmPartida.resx">
+      <DependentUpon>frmPartida.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

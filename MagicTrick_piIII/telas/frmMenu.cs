@@ -14,7 +14,9 @@ namespace MagicTrick_piIII
 {
     public partial class frmMenu : Form
     {
-        List<Partida> partidas = new List<Partida>();
+        List<Partida> Partidas = new List<Partida>();
+        Partida PartidaSelecionada = null;
+        List<Jogador> JogadoresPartidaSelecionada = new List<Jogador>();
 
         public frmMenu()
         {
@@ -46,7 +48,7 @@ namespace MagicTrick_piIII
                 if(partida.Length > 0)
                     partidasTmp.Add(new Partida(partida));
 
-            this.partidas = partidasTmp;
+            this.Partidas = partidasTmp;
             dgvPartidas.DataSource = partidasTmp;
 
             dgvPartidas.Columns.Remove("Round");
@@ -60,8 +62,9 @@ namespace MagicTrick_piIII
             if (linhaSelecionada < 0)
                 return;
 
-            Partida partidaSelecionada = this.partidas[linhaSelecionada];
-            int idPartida = partidaSelecionada.IdPartida;
+            this.PartidaSelecionada = this.Partidas[linhaSelecionada];
+
+            int idPartida = this.PartidaSelecionada.IdPartida;
             
             string result = Jogo.ListarJogadores(idPartida);
 
@@ -76,6 +79,7 @@ namespace MagicTrick_piIII
                     jogadoresTmp.Add(new Jogador(jogador));
 
             dgvJogadores.DataSource = jogadoresTmp;
+            this.JogadoresPartidaSelecionada = jogadoresTmp;
         }
 
         private void btnCriar_Click(object sender, EventArgs e)
@@ -86,7 +90,8 @@ namespace MagicTrick_piIII
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-
+            frmEntrarPartida frmPartida = new frmEntrarPartida(this.PartidaSelecionada, this.JogadoresPartidaSelecionada);
+            frmPartida.ShowDialog();
         }
     }
 }
