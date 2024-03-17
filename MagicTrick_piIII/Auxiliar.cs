@@ -21,8 +21,8 @@ namespace MagicTrick_piIII
          */
         public static bool VerificaErro(string texto)
         {
-            if(texto.Contains("ERRO"))
-            {
+            if(texto.StartsWith("ERRO"))
+            {              
                 MessageBox.Show(texto, "Houve um erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
