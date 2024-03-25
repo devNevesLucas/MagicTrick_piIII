@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MagicTrick_piIII.classes
 {
     public class Carta
     {
-        int ValorReal { get; set; }
-        int[] PossiveisValores { get; set; }    
-        char Naipe { get; set; }
-        bool Disponivel {  get; set; }  
+        public int ValorReal { get; set; }
+        public int[] PossiveisValores { get; set; }    
+        public char Naipe { get; set; }
+        public bool Disponivel {  get; set; }  
+
+        public Panel PanelCarta { get; set; }    
 
         public Carta (string naipe)
         {
