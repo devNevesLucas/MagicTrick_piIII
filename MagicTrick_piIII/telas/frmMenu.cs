@@ -65,21 +65,13 @@ namespace MagicTrick_piIII
             this.PartidaSelecionada = this.Partidas[linhaSelecionada];
 
             int idPartida = this.PartidaSelecionada.IdPartida;
-            
-            string result = Jogo.ListarJogadores(idPartida);
-
-            if (Auxiliar.VerificaErro(result))
-                return;
-
-            string[] jogadoresBrutos = result.Split('\n');
-
-            List<Jogador> jogadoresTmp = new List<Jogador>();
-            foreach (string jogador in jogadoresBrutos)
-                if (jogador.Length > 0)
-                    jogadoresTmp.Add(new Jogador(jogador));
-
+                  
+            List<Jogador> jogadoresTmp = Auxiliar.RetornaJogadoresPartida(idPartida);
             dgvJogadores.DataSource = jogadoresTmp;
             this.JogadoresPartidaSelecionada = jogadoresTmp;
+
+            dgvJogadores.Columns.Remove("ValorAposta");
+            dgvJogadores.Columns.Remove("Senha");
         }
 
         private void btnCriar_Click(object sender, EventArgs e)

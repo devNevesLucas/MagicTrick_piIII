@@ -53,6 +53,8 @@
             this.dgvPartidas.MultiSelect = false;
             this.dgvPartidas.Name = "dgvPartidas";
             this.dgvPartidas.ReadOnly = true;
+            this.dgvPartidas.RowHeadersVisible = false;
+            this.dgvPartidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPartidas.Size = new System.Drawing.Size(504, 393);
             this.dgvPartidas.TabIndex = 2;
             this.dgvPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPartidas_CellClick);
@@ -123,10 +125,13 @@
             this.dgvJogadores.AllowUserToDeleteRows = false;
             this.dgvJogadores.AllowUserToResizeColumns = false;
             this.dgvJogadores.AllowUserToResizeRows = false;
+            this.dgvJogadores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvJogadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvJogadores.Enabled = false;
             this.dgvJogadores.Location = new System.Drawing.Point(6, 43);
             this.dgvJogadores.Name = "dgvJogadores";
+            this.dgvJogadores.RowHeadersVisible = false;
+            this.dgvJogadores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvJogadores.Size = new System.Drawing.Size(339, 264);
             this.dgvJogadores.TabIndex = 9;
             // 

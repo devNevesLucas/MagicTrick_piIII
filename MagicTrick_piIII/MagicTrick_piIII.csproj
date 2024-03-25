@@ -105,6 +105,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="telas\frmPartida.resx">
       <DependentUpon>frmPartida.cs</DependentUpon>
@@ -121,6 +122,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coracao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\espadas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estrelas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lua.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ouros.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\triangulo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aposta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aposta1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coracaoHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\espadasHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estrelasHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luaHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ourosHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pausHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trianguloHorizontal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
