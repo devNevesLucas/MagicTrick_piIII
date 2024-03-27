@@ -52,5 +52,10 @@ namespace MagicTrick_piIII.telas
         {
 
         }
+
+        private void lblSenha_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

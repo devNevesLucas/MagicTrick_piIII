@@ -37,14 +37,14 @@
             // 
             // txtNomePartida
             // 
-            this.txtNomePartida.Location = new System.Drawing.Point(37, 109);
+            this.txtNomePartida.Location = new System.Drawing.Point(88, 109);
             this.txtNomePartida.Name = "txtNomePartida";
             this.txtNomePartida.Size = new System.Drawing.Size(180, 20);
-            this.txtNomePartida.TabIndex = 1;        
+            this.txtNomePartida.TabIndex = 1;
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(37, 160);
+            this.txtSenha.Location = new System.Drawing.Point(88, 172);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(180, 20);
             this.txtSenha.TabIndex = 2;
@@ -52,36 +52,46 @@
             // lblNomePartida
             // 
             this.lblNomePartida.AutoSize = true;
-            this.lblNomePartida.Location = new System.Drawing.Point(34, 93);
+            this.lblNomePartida.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomePartida.ForeColor = System.Drawing.Color.White;
+            this.lblNomePartida.Location = new System.Drawing.Point(84, 87);
             this.lblNomePartida.Name = "lblNomePartida";
-            this.lblNomePartida.Size = new System.Drawing.Size(86, 13);
+            this.lblNomePartida.Size = new System.Drawing.Size(113, 19);
             this.lblNomePartida.TabIndex = 3;
             this.lblNomePartida.Text = "Nome da Partida";
             // 
             // lblSenha
             // 
             this.lblSenha.AutoSize = true;
-            this.lblSenha.Location = new System.Drawing.Point(34, 144);
+            this.lblSenha.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSenha.ForeColor = System.Drawing.Color.White;
+            this.lblSenha.Location = new System.Drawing.Point(84, 150);
             this.lblSenha.Name = "lblSenha";
-            this.lblSenha.Size = new System.Drawing.Size(38, 13);
+            this.lblSenha.Size = new System.Drawing.Size(47, 19);
             this.lblSenha.TabIndex = 4;
             this.lblSenha.Text = "Senha";
             // 
             // btnCriarPartida
             // 
-            this.btnCriarPartida.Location = new System.Drawing.Point(338, 109);
+            this.btnCriarPartida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(24)))));
+            this.btnCriarPartida.FlatAppearance.BorderSize = 0;
+            this.btnCriarPartida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCriarPartida.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCriarPartida.ForeColor = System.Drawing.Color.White;
+            this.btnCriarPartida.Location = new System.Drawing.Point(114, 236);
             this.btnCriarPartida.Name = "btnCriarPartida";
-            this.btnCriarPartida.Size = new System.Drawing.Size(75, 71);
+            this.btnCriarPartida.Size = new System.Drawing.Size(133, 52);
             this.btnCriarPartida.TabIndex = 5;
             this.btnCriarPartida.Text = "Criar Partida";
-            this.btnCriarPartida.UseVisualStyleBackColor = true;
+            this.btnCriarPartida.UseVisualStyleBackColor = false;
             this.btnCriarPartida.Click += new System.EventHandler(this.btnCriarPartida_Click);
             // 
             // frmCriancaoPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 337);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(33)))), ((int)(((byte)(46)))));
+            this.ClientSize = new System.Drawing.Size(359, 337);
             this.Controls.Add(this.btnCriarPartida);
             this.Controls.Add(this.lblSenha);
             this.Controls.Add(this.lblNomePartida);

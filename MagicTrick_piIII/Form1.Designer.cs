@@ -36,37 +36,49 @@
             // lblVersao
             // 
             this.lblVersao.AutoSize = true;
-            this.lblVersao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersao.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersao.ForeColor = System.Drawing.Color.White;
             this.lblVersao.Location = new System.Drawing.Point(299, 9);
             this.lblVersao.Name = "lblVersao";
-            this.lblVersao.Size = new System.Drawing.Size(91, 16);
+            this.lblVersao.Size = new System.Drawing.Size(101, 19);
             this.lblVersao.TabIndex = 0;
             this.lblVersao.Text = "Luxemburgo - ";
             this.lblVersao.Click += new System.EventHandler(this.lblVersao_Click);
             // 
             // btnJogar
             // 
+            this.btnJogar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(24)))));
+            this.btnJogar.FlatAppearance.BorderSize = 0;
+            this.btnJogar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnJogar.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJogar.ForeColor = System.Drawing.Color.White;
             this.btnJogar.Location = new System.Drawing.Point(135, 227);
             this.btnJogar.Name = "btnJogar";
             this.btnJogar.Size = new System.Drawing.Size(146, 46);
             this.btnJogar.TabIndex = 1;
             this.btnJogar.Text = "Jogar";
-            this.btnJogar.UseVisualStyleBackColor = true;
+            this.btnJogar.UseVisualStyleBackColor = false;
             this.btnJogar.Click += new System.EventHandler(this.btnJogar_Click);
             // 
             // btnCreditos
             // 
+            this.btnCreditos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(24)))));
+            this.btnCreditos.FlatAppearance.BorderSize = 0;
+            this.btnCreditos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreditos.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreditos.ForeColor = System.Drawing.Color.White;
             this.btnCreditos.Location = new System.Drawing.Point(135, 303);
             this.btnCreditos.Name = "btnCreditos";
             this.btnCreditos.Size = new System.Drawing.Size(146, 46);
             this.btnCreditos.TabIndex = 2;
-            this.btnCreditos.Text = "Créditos (do automato)";
-            this.btnCreditos.UseVisualStyleBackColor = true;
+            this.btnCreditos.Text = "Créditos\r\n(do automato)";
+            this.btnCreditos.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(33)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(419, 450);
             this.Controls.Add(this.btnCreditos);
             this.Controls.Add(this.btnJogar);

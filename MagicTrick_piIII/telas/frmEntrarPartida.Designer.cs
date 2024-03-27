@@ -38,10 +38,11 @@
             // lblNomeJogador
             // 
             this.lblNomeJogador.AutoSize = true;
-            this.lblNomeJogador.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomeJogador.Location = new System.Drawing.Point(122, 83);
+            this.lblNomeJogador.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomeJogador.ForeColor = System.Drawing.Color.White;
+            this.lblNomeJogador.Location = new System.Drawing.Point(93, 83);
             this.lblNomeJogador.Name = "lblNomeJogador";
-            this.lblNomeJogador.Size = new System.Drawing.Size(120, 16);
+            this.lblNomeJogador.Size = new System.Drawing.Size(123, 19);
             this.lblNomeJogador.TabIndex = 0;
             this.lblNomeJogador.Text = "Nome do Jogador:";
             // 
@@ -49,41 +50,49 @@
             // 
             this.lblSenha.AutoSize = true;
             this.lblSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSenha.Location = new System.Drawing.Point(159, 162);
+            this.lblSenha.ForeColor = System.Drawing.Color.White;
+            this.lblSenha.Location = new System.Drawing.Point(93, 162);
             this.lblSenha.Name = "lblSenha";
             this.lblSenha.Size = new System.Drawing.Size(49, 16);
             this.lblSenha.TabIndex = 1;
             this.lblSenha.Text = "Senha:";
+            this.lblSenha.Click += new System.EventHandler(this.lblSenha_Click);
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(125, 181);
+            this.txtSenha.Location = new System.Drawing.Point(96, 181);
             this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(117, 20);
+            this.txtSenha.Size = new System.Drawing.Size(180, 20);
             this.txtSenha.TabIndex = 3;
             // 
             // txtNomeJogador
             // 
-            this.txtNomeJogador.Location = new System.Drawing.Point(125, 102);
+            this.txtNomeJogador.Location = new System.Drawing.Point(96, 102);
             this.txtNomeJogador.Name = "txtNomeJogador";
-            this.txtNomeJogador.Size = new System.Drawing.Size(117, 20);
+            this.txtNomeJogador.Size = new System.Drawing.Size(180, 20);
             this.txtNomeJogador.TabIndex = 4;
             // 
             // btnEntrar
             // 
+            this.btnEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(24)))));
+            this.btnEntrar.FlatAppearance.BorderSize = 0;
+            this.btnEntrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEntrar.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEntrar.ForeColor = System.Drawing.Color.White;
             this.btnEntrar.Location = new System.Drawing.Point(125, 240);
             this.btnEntrar.Name = "btnEntrar";
             this.btnEntrar.Size = new System.Drawing.Size(117, 56);
             this.btnEntrar.TabIndex = 5;
             this.btnEntrar.Text = "Entrar";
-            this.btnEntrar.UseVisualStyleBackColor = true;
+            this.btnEntrar.UseVisualStyleBackColor = false;
             this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
             // 
             // frmEntrarPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 425);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(33)))), ((int)(((byte)(46)))));
+            this.ClientSize = new System.Drawing.Size(369, 371);
             this.Controls.Add(this.btnEntrar);
             this.Controls.Add(this.txtNomeJogador);
             this.Controls.Add(this.txtSenha);
