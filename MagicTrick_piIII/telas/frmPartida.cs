@@ -246,5 +246,10 @@ namespace MagicTrick_piIII.telas
         {
 
         }
+
+        private void frmPartida_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
