@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="Auxiliar.cs" />
     <Compile Include="classes\Carta.cs" />
+    <Compile Include="classes\ImagemCarta.cs" />
     <Compile Include="classes\Jogador.cs" />
+    <Compile Include="classes\Posicionamento.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

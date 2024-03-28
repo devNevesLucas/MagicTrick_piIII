@@ -15,6 +15,7 @@ namespace MagicTrick_piIII.classes
         public bool Disponivel {  get; set; }  
 
         public Panel PanelCarta { get; set; }    
+        public ImagemCarta ImagemCarta { get; set; }
 
         public Carta (string naipe)
         {

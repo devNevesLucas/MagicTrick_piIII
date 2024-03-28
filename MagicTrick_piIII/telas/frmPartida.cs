@@ -188,6 +188,9 @@ namespace MagicTrick_piIII.telas
             {
                 this.Controls.Add(panel);
                 panel.BringToFront();
+
+                //Control.ControlCollection controle = this.Controls;                
+                
             }
 
         }
