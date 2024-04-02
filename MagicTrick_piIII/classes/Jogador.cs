@@ -1,4 +1,5 @@
 ﻿using MagicTrick_piIII.classes;
+using MagicTrickServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,41 @@ namespace MagicTrick_piIII
 
             this.Deck = new List<Carta>();
             this.NaipeVitorias = new List<char>();
+        }
+
+        public static List<Jogador> RetornarJogadoresPartida(int idPartida)
+        {
+            List<Jogador> jogadoresTmp = new List<Jogador>();
+
+            string result = Jogo.ListarJogadores(idPartida);
+
+            if (!Auxiliar.VerificarErro(result))
+            {
+                string[] jogadoresBrutos = result.Split('\n');
+
+                foreach (string jogador in jogadoresBrutos)
+                    if (jogador.Length > 0)
+                        jogadoresTmp.Add(new Jogador(jogador));
+            }
+            return jogadoresTmp;
+        }
+
+        public static List<Jogador> OrganizarJogadores(List<Jogador> jogadores, int idPlayer)
+        {
+            List<Jogador> jogadoresTmp = new List<Jogador>();
+
+            int indexPlayer = jogadores.FindIndex(j => j.IdJogador == idPlayer);
+            indexPlayer += 1;
+
+            int posicao;
+
+            for(int i = 0; i < 3; i++)
+            {
+                posicao = indexPlayer++ % 4;
+                jogadoresTmp.Add(jogadores[posicao]);
+            }
+
+            return jogadoresTmp;
         }
     }
 }
