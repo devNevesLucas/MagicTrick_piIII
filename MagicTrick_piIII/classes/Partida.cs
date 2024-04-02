@@ -11,6 +11,8 @@ namespace MagicTrick_piIII
         public int IdPartida { get; set; }
         public string NomePartida { get; set; }
         public string Senha { get; set; }
+        public int Rodada { get ; set; }   
+        public char StatusRodada { get; set; } 
         public int Round { get; set; }
         public string DataCriacao { get; set; }
         public char Status { get; set; }
