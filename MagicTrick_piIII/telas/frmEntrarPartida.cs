@@ -32,7 +32,7 @@ namespace MagicTrick_piIII.telas
 
             string retorno = Jogo.EntrarPartida(idPartida, nomeJogador, senhaPartida);
 
-            if (Auxiliar.VerificaErro(retorno))
+            if (Auxiliar.VerificarErro(retorno))
                 return;
 
             int posicaoCR = retorno.IndexOf('\r');

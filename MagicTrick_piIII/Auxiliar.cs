@@ -21,7 +21,7 @@ namespace MagicTrick_piIII
             verifica se a string contém a palavra 'ERRO', caso contenha, exibe uma 
             mensagem de erro e retorna true, caso contrário, retorna false.
          */
-        public static bool VerificaErro(string texto)
+        public static bool VerificarErro(string texto)
         {
 
             if (texto.StartsWith("ERRO"))
@@ -42,7 +42,7 @@ namespace MagicTrick_piIII
 
             string result = Jogo.ListarJogadores(idPartida);
 
-            if (!VerificaErro(result))
+            if (!VerificarErro(result))
             {
                 string[] jogadoresBrutos = result.Split('\n');
 

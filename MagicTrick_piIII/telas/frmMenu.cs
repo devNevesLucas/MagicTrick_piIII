@@ -37,7 +37,7 @@ namespace MagicTrick_piIII
         {
             string result = Jogo.ListarPartidas("T");
 
-            if (Auxiliar.VerificaErro(result))
+            if (Auxiliar.VerificarErro(result))
                 return;
 
             string[] partidasBrutas = result.Split('\n');

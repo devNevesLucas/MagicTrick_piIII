@@ -33,7 +33,7 @@ namespace MagicTrick_piIII.telas
 
             string resultado = Jogo.CriarPartida(nomePartida, senhaPartida, "luxemburgo");
 
-            if (!Auxiliar.VerificaErro(resultado))
+            if (!Auxiliar.VerificarErro(resultado))
             { 
                 MessageBox.Show(
                         $"Partida Criada! :D\r\nO ID da partida foi: {resultado}",
