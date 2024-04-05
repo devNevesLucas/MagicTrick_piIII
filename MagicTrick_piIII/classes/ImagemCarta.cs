@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrick_piIII.telas;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -69,6 +70,9 @@ namespace MagicTrick_piIII.classes
                     case 'L':
                         return Properties.Resources.lua;
 
+                    case 'A':
+                        return Properties.Resources.aposta;
+
                     default:
                         return Properties.Resources.ouros;
                 }
@@ -100,10 +104,9 @@ namespace MagicTrick_piIII.classes
                     default:
                         return Properties.Resources.ourosHorizontal;
                 }
-
         }
 
-        public static void ExibirCartas(List<Jogador> jogadores, Control.ControlCollection controle)
+        public static void CriarImagemCartas(List<Jogador> jogadores, Control.ControlCollection controle)
         {
             for(int i = 0; i <  jogadores.Count; i++)
             {
@@ -125,5 +128,42 @@ namespace MagicTrick_piIII.classes
                 }            
             }
         }
+
+        public static void AtualizarCartas(List<Jogador> jogadores)
+        {
+            for(int i = 0; i < jogadores.Count; i++)
+            {
+                char orientacao = 'H';
+
+                if (i % 2 == 0)
+                    orientacao = 'V';
+
+                for(int j = 0; j < jogadores[i].Deck.Count; j++)
+                {
+                    char naipe = jogadores[j].Deck[j].Naipe;
+                    jogadores[i].Deck[j].ImagemCarta.ImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
+                }
+            }
+        }
+
+        public static void ImprimirCartaDeAposta(Control.ControlCollection controle)
+        {
+            ImagemCarta aposta = new ImagemCarta(561, 522, 'H', 'A');
+            controle.Add(aposta.ImgNaipe);
+            aposta.ImgNaipe.BringToFront();
+
+           
+
+        }
+
+        public void ApostaPanel_Click(object sender, EventArgs e)
+        {
+            Label cartaAposta = sender as Label;
+
+      
+
+
+        }
+
     }
 }

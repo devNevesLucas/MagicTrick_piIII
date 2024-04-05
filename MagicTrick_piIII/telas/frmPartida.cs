@@ -18,7 +18,7 @@ namespace MagicTrick_piIII.telas
         List<Jogador> Jogadores = new List<Jogador>();
         Jogador Player;
         Partida Partida;
-        Carta Aposta = new Carta("A");
+        Carta Aposta = new Carta('A');
         int IndexSelecao;
         char StatusRodada;
         int Rodada;
@@ -30,24 +30,11 @@ namespace MagicTrick_piIII.telas
 
             this.Partida = partida;
             this.Jogadores = adversarios;
+            this.Jogadores.Add(player);
             this.Player = player;
-
-            /*
-             */
-
-            List<Jogador> jogadoresTmp = adversarios.ToList();
-            jogadoresTmp.Add(player);
-            dgvJogadores.DataSource = jogadoresTmp;
-
-            dgvJogadores.Columns[3].Visible = false;
-            dgvJogadores.Columns[4].Visible = false;
-
-
-            /*
-            */
-
-
-
+           
+            AtualizarDataGridView(adversarios);
+            
             char status = this.Partida.Status;
 
             if(status != 'A')
@@ -63,21 +50,15 @@ namespace MagicTrick_piIII.telas
 
         }
 
-        private void AtualizaDataGridView(List<Jogador> jogadores)
+        private void AtualizarDataGridView(List<Jogador> jogadores)
         {
-            List<Jogador> jogadoresTmp = jogadores.ToList();
-
-            int idPlayer = this.Player.IdJogador;
-
-            if(jogadoresTmp.FindIndex(j => j.IdJogador == idPlayer) < 0)
-                jogadoresTmp.Add(this.Player);
+            List<Jogador> jogadoresTmp = jogadores.ToList();         
                        
             dgvJogadores.DataSource = jogadoresTmp;
 
             dgvJogadores.Columns[3].Visible = false;
             dgvJogadores.Columns[4].Visible = false;
         }
-
 
         private void AtualizarStatus(string status)
         {
@@ -112,38 +93,61 @@ namespace MagicTrick_piIII.telas
             lblStatusPartida.Text = statusNovo;
         }
 
+        private void ConsultarMao()
+        {
+            int idPartida = this.Partida.IdPartida;
+
+            List<CartasConsulta> cartas = CartasConsulta.HandleConsultarMao(idPartida);
+
+            Control.ControlCollection controle = this.Controls;
+
+            if (this.Partida.Round == 1)
+                Jogador.PreencherDeck(this.Jogadores, cartas, controle);
+
+            else
+                Jogador.AtualizarDeck(this.Jogadores, cartas);
+        }
+
+
         private void HandleVerificarVez()
         {
             int idPartida = this.Partida.IdPartida;
+            int idJogador = this.Player.IdJogador;
 
             string retornoVerificacao = Jogo.VerificarVez(idPartida);
 
             List<Jogador> jogadoresPartida = new List<Jogador>();
 
-            if (!this.CartasImpressas)
+            if (retornoVerificacao.StartsWith("ERRO"))
             {
                 jogadoresPartida = Jogador.RetornarJogadoresPartida(idPartida);
-                dgvJogadores.DataSource = jogadoresPartida; 
-            }
+                AtualizarDataGridView(jogadoresPartida);
 
-            if (retornoVerificacao.StartsWith("ERRO"))
                 return;
-
-            int idJogador = this.Player.IdJogador;
+            }
 
             retornoVerificacao = retornoVerificacao.Replace("\r", "");
 
             string[] dadosVerificacao = retornoVerificacao.Split('\n');
 
             string dadosPartida = dadosVerificacao[0];
-            this.AtualizarStatus(dadosPartida);
+            AtualizarStatus(dadosPartida);
+
+            if (!this.CartasImpressas)
+            {
+                jogadoresPartida = Jogador.RetornarJogadoresPartida(idPartida);
+                AtualizarDataGridView(jogadoresPartida);
+
+                Jogador.OrganizarJogadores(jogadoresPartida, idJogador);
+                ConsultarMao();
+
+                this.CartasImpressas = true;
+            }
 
             dadosVerificacao = dadosVerificacao.Skip(1).ToArray();
 
             if (dadosVerificacao.Length == 0)
                 return;
-
-
         }
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
@@ -178,125 +182,13 @@ namespace MagicTrick_piIII.telas
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)
-        {
-            int idPartida = this.Partida.IdPartida;
-
-            string retornoVerificacao = Jogo.VerificarVez(idPartida);
-
-            if (retornoVerificacao.StartsWith("ERRO"))
-                return;
-
-            
-            retornoVerificacao = retornoVerificacao.Replace("\r", "");
-
-
-            /*
-             */
-
-            string[] linhasVerificacao = retornoVerificacao.Split('\n');
-
-            string[] dadosVerificacao = linhasVerificacao[0].Split(',');
-
-            int indexCr = dadosVerificacao[3].IndexOf('\r');
-            dadosVerificacao[3] = dadosVerificacao[3].Remove(indexCr, 1);
-
-            Jogador jogadorTmp;
-
-            this.Partida.Status = Convert.ToChar(dadosVerificacao[0]);
-
-            int idRetornado = Convert.ToInt32(dadosVerificacao[1]);
-
-            if (this.Player.IdJogador == idRetornado)
-                jogadorTmp = this.Player;
-
-            else
-                jogadorTmp = this.Jogadores.Find(j => j.IdJogador == idRetornado);
-
-            string nomeJogadorTmp = jogadorTmp.Nome;
-
-            string statusRodada = "Jogar carta";
-
-            if (dadosVerificacao[3] == "A")
-                statusRodada = "Apostar";
-
-            this.StatusRodada = Convert.ToChar(dadosVerificacao[3]);
-
-            string statusNovo = $"Vez do jogador: {nomeJogadorTmp}   -   ID: {idRetornado} : {statusRodada}";
-            lblStatusPartida.Text = statusNovo;
-
-
-            /*
-             */
-
-
-            if (this.Player.Deck.Count != 0)
-                return;
-
-            string retornoCartas = Jogo.ConsultarMao(idPartida);
-
-            if (Auxiliar.VerificarErro(retornoCartas))
-                return;
-
-            string[] linhas = retornoCartas.Split('\n');
-
-            foreach(string linha in linhas)
-            {
-                if (linha == "") continue;
-
-                string[] dados = linha.Split(',');
-
-                indexCr = dados[2].IndexOf('\r');
-                dados[2] = dados[2].Remove(indexCr, 1);
-
-                int idJogador = Convert.ToInt32(dados[0]);
-                int indexCarta = Convert.ToInt32(dados[1]) - 1;
-
-                if(this.Player.IdJogador == idJogador)
-                    this.Player.Deck.Add(new Carta(dados[2]));
-                                      
-                else
-                {
-                    int indexJogador = this.Jogadores.FindIndex(j => j.IdJogador == idJogador);         
-                    this.Jogadores[indexJogador].Deck.Add(new Carta(dados[2]));             
-                }             
-            }
-
+        {          
             Panel panelAposta = new Panel();
             panelAposta.Width = 38;
             panelAposta.Height = 56;
             panelAposta.BackgroundImage = Properties.Resources.aposta;
             panelAposta.Location = new Point(561, 522);
             panelAposta.Click += ApostaCardPanel_Click;
-
-            List<Panel> panels = new List<Panel>();           
-
-            List<Panel> playerPanels = Auxiliar.CriaPanels(this.Player.Deck, 212, 481, 'H'); ;
-
-            for(int i = 0; i < playerPanels.Count; i++)
-            {
-                this.Player.Deck[i].PanelCarta = playerPanels[i];
-                playerPanels[i].Click += CardPanel_Click;
-            }
-
-            panels.AddRange(playerPanels);
-
-            if (this.Jogadores.Count == 1)
-            {
-                List<Panel> panelsTmp = Auxiliar.CriaPanels(this.Jogadores[0].Deck, 212, 84,'H');
-                panels.AddRange(panelsTmp);
-            }
-
-            panels.Add(panelAposta);
-
-            foreach (Panel panel in panels)
-            {
-                this.Controls.Add(panel);
-                panel.BringToFront();
-
-                //Control.ControlCollection controle = this.Controls;                
-                
-            }
-
         }
 
          private void CardPanel_Click(object sender, EventArgs e)

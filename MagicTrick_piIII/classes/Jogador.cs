@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MagicTrick_piIII
 {
@@ -17,6 +18,7 @@ namespace MagicTrick_piIII
         public int ValorAposta { get; set; }
         public List<char> NaipeVitorias { get; set; }
         public string Senha { get; set; }
+
 
         public Jogador(string linha)
         {
@@ -61,22 +63,68 @@ namespace MagicTrick_piIII
             return jogadoresTmp;
         }
 
-        public static List<Jogador> OrganizarJogadores(List<Jogador> jogadores, int idPlayer)
+        public static void OrganizarJogadores(List<Jogador> jogadores, int idPlayer)
         {
             List<Jogador> jogadoresTmp = new List<Jogador>();
 
             int indexPlayer = jogadores.FindIndex(j => j.IdJogador == idPlayer);
-            indexPlayer += 1;
+            int contador = indexPlayer + 1;
 
             int posicao;
 
             for(int i = 0; i < 3; i++)
             {
-                posicao = indexPlayer++ % 4;
+                posicao = contador++ % 4;
                 jogadoresTmp.Add(jogadores[posicao]);
             }
 
-            return jogadoresTmp;
+            jogadoresTmp.Add(jogadores[indexPlayer]);
+
+            jogadores = jogadoresTmp;
+        }
+
+        public static void PreencherDeck(List<Jogador> jogadores, List<CartasConsulta> decks, Control.ControlCollection controle)
+        {
+            int idJogador;
+            CartasConsulta deckJogador;
+            char naipe;
+
+            for(int i = 0; i < jogadores.Count; i++)
+            {
+                idJogador = jogadores[i].IdJogador;
+                deckJogador = decks.Find(c => c.IdJogador == idJogador);
+
+                if (deckJogador == null) continue;
+
+                for(int j = 0; j < deckJogador.NaipeCartas.Count; j++)
+                {
+                    naipe = deckJogador.NaipeCartas[j];
+                    jogadores[i].Deck.Add(new Carta(naipe));
+                }
+            }
+                ImagemCarta.CriarImagemCartas(jogadores, controle);
+        }
+
+        public static void AtualizarDeck(List<Jogador> jogadores, List<CartasConsulta> decks)
+        {
+            int idJogador;
+            CartasConsulta deckJogador;
+            char naipe;
+
+            for(int i = 0; i < jogadores.Count; i++)
+            {
+                idJogador = jogadores[i].IdJogador;
+                deckJogador = decks.Find(d => d.IdJogador == idJogador);
+
+                if (deckJogador == null) continue;
+
+                for(int j = 0; j < deckJogador.NaipeCartas.Count; j++)
+                {
+                    naipe = deckJogador.NaipeCartas[j];
+                    jogadores[i].Deck[j].ResetarCarta(naipe);
+                }
+            }
+            ImagemCarta.AtualizarCartas(jogadores);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace MagicTrick_piIII.classes
             return RetornarCartasJogadores(result);   
         }
 
-        public static List<CartasConsulta> RetornarCartasJogadores(string consultaBruta)
+        private static List<CartasConsulta> RetornarCartasJogadores(string consultaBruta)
         {
             List<CartasConsulta> cartasConsulta = new List<CartasConsulta>();
 
