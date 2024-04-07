@@ -174,5 +174,11 @@
   <ItemGroup>
     <None Include="Resources\trianguloHorizontal.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mascara.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mascaraHorizontal.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
