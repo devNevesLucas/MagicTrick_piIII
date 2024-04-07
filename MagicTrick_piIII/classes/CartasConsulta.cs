@@ -52,7 +52,7 @@ namespace MagicTrick_piIII.classes
             {
                 if (dadosBrutos[i] == "") continue;
 
-                dados = dadosBrutos[i].Split('\n');
+                dados = dadosBrutos[i].Split(',');
 
                 idJogador = Convert.ToInt32(dados[0]);
                 indexCarta = Convert.ToInt32(dados[1]);
