@@ -28,16 +28,28 @@ namespace MagicTrick_piIII.telas
             this.Jogadores.Add(player);
             this.Player = player;
            
-            AtualizarDataGridView(this.Jogadores);
+            AtualizarDataGridView();
                                
             lblVersao.Text += Jogo.Versao;
         }
 
-        private void AtualizarDataGridView(List<Jogador> jogadores)
+        private void AtualizarDataGridView()
         {
-            List<Jogador> jogadoresTmp = jogadores.ToList();         
-                       
-            dgvJogadores.DataSource = jogadoresTmp;
+            int idPartida = this.Partida.IdPartida;
+            int idJogador = this.Player.IdJogador;
+
+            List<Jogador> jogadoresTmp = Jogador.RetornarJogadoresPartida(idPartida);
+
+            List<Jogador> jogadoresDgv = jogadoresTmp.ToList();         
+
+            if(this.Jogadores.Count != jogadoresTmp.Count)
+            {
+                this.Jogadores = jogadoresTmp;
+                int indexJogador = this.Jogadores.FindIndex(j => j.IdJogador == idJogador);
+                this.Jogadores[indexJogador] = this.Player;
+            }
+          
+            dgvJogadores.DataSource = jogadoresDgv;
 
             dgvJogadores.Columns[3].Visible = false;
             dgvJogadores.Columns[4].Visible = false;
@@ -46,6 +58,10 @@ namespace MagicTrick_piIII.telas
 
         private void AtualizarStatus(string status)
         {
+
+            if(this.Partida.Round == 1 && this.Partida.Rodada == 1)
+                AtualizarDataGridView();
+
             string[] dadosPartida = status.Split(',');
 
             this.Partida.Status = Convert.ToChar(dadosPartida[0]);
@@ -110,10 +126,8 @@ namespace MagicTrick_piIII.telas
             List<Jogador> jogadoresPartida = new List<Jogador>();
 
             if (retornoVerificacao.StartsWith("ERRO"))
-            {
-                jogadoresPartida = Jogador.RetornarJogadoresPartida(idPartida);
-                AtualizarDataGridView(jogadoresPartida);
-
+            {                
+                AtualizarDataGridView();
                 return;
             }
 
@@ -127,11 +141,9 @@ namespace MagicTrick_piIII.telas
             if (!this.CartasImpressas)
             {
                 if(this.Partida.Round == 1)
-                {
-                    jogadoresPartida = Jogador.RetornarJogadoresPartida(idPartida);
-                    AtualizarDataGridView(jogadoresPartida);
-
-                    Jogador.OrganizarJogadores(jogadoresPartida, idJogador);
+                {                    
+                    AtualizarDataGridView();
+                    Jogador.OrganizarJogadores(this.Jogadores, idJogador);
                 }
                 ConsultarMao();
 

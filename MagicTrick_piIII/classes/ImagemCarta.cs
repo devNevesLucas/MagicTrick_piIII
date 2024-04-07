@@ -161,7 +161,7 @@ namespace MagicTrick_piIII.classes
                     if (i % 2 == 0)
                         orientacao = 'V';
             
-                    for(int j = 0; j < jogadores[i].Deck.Count(); j++)
+                    for(int j = 0; j < jogadores[i].Deck.Count; j++)
                     {                                      
                         char naipe = jogadores[i].Deck[j].Naipe;
                         x = posicoes[i, 0];
@@ -182,12 +182,7 @@ namespace MagicTrick_piIII.classes
                     y = posicoesJogadas[i, 1];
 
                     jogadores[i].CartaJogada.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
-
-                    x = posicoesApostas[i, 0];
-                    y = posicoesApostas[i, 1];
-
-                    jogadores[i].CartaAposta.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
-
+                    
                     controle.Add(jogadores[i].CartaJogada.ImagemCarta.ImgNaipe);
                     controle.Add(jogadores[i].CartaJogada.ImagemCarta.ValorCarta);
 
@@ -195,6 +190,11 @@ namespace MagicTrick_piIII.classes
                     jogadores[i].CartaJogada.ImagemCarta.ImgNaipe.BringToFront();
                     jogadores[i].CartaJogada.ImagemCarta.ValorCarta.BringToFront();
 
+
+                    x = posicoesApostas[i, 0];
+                    y = posicoesApostas[i, 1];
+
+                    jogadores[i].CartaAposta.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
 
                     controle.Add(jogadores[i].CartaAposta.ImagemCarta.ImgNaipe);
                     controle.Add(jogadores[i].CartaAposta.ImagemCarta.ValorCarta);
@@ -209,7 +209,7 @@ namespace MagicTrick_piIII.classes
                 char orientacao = 'H';
                 int contador = 1;
 
-                for(int i = 0; i < jogadores.Count(); i++)
+                for(int i = 0; i < jogadores.Count; i++)
                 {
                     int x, y;
 
