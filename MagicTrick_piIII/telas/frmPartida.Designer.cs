@@ -28,25 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grpJogo = new System.Windows.Forms.GroupBox();
-            this.lblValorAposta = new System.Windows.Forms.Label();
-            this.lblValorCarta = new System.Windows.Forms.Label();
             this.dgvJogadores = new System.Windows.Forms.DataGridView();
             this.btnIniciarPartida = new System.Windows.Forms.Button();
             this.lblStatusPartida = new System.Windows.Forms.Label();
             this.lblVersao = new System.Windows.Forms.Label();
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnEnviar = new System.Windows.Forms.Button();
-            this.grpJogo.SuspendLayout();
+            this.txtCarta = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).BeginInit();
             this.SuspendLayout();
             // 
             // grpJogo
             // 
             this.grpJogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
-            this.grpJogo.Controls.Add(this.lblValorAposta);
-            this.grpJogo.Controls.Add(this.lblValorCarta);
             this.grpJogo.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpJogo.ForeColor = System.Drawing.Color.White;
             this.grpJogo.Location = new System.Drawing.Point(12, 55);
@@ -55,24 +51,6 @@
             this.grpJogo.TabIndex = 0;
             this.grpJogo.TabStop = false;
             this.grpJogo.Text = "Joguinho";
-            // 
-            // lblValorAposta
-            // 
-            this.lblValorAposta.AutoSize = true;
-            this.lblValorAposta.Location = new System.Drawing.Point(300, 343);
-            this.lblValorAposta.Name = "lblValorAposta";
-            this.lblValorAposta.Size = new System.Drawing.Size(0, 21);
-            this.lblValorAposta.TabIndex = 1;
-            // 
-            // lblValorCarta
-            // 
-            this.lblValorCarta.AutoSize = true;
-            this.lblValorCarta.Location = new System.Drawing.Point(300, 301);
-            this.lblValorCarta.Name = "lblValorCarta";
-            this.lblValorCarta.Size = new System.Drawing.Size(15, 21);
-            this.lblValorCarta.TabIndex = 0;
-            this.lblValorCarta.Text = " ";
-            this.lblValorCarta.Click += new System.EventHandler(this.lblValorCarta_Click);
             // 
             // dgvJogadores
             // 
@@ -88,12 +66,12 @@
             this.dgvJogadores.Location = new System.Drawing.Point(828, 55);
             this.dgvJogadores.Name = "dgvJogadores";
             this.dgvJogadores.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(70)))), ((int)(((byte)(84)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvJogadores.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(70)))), ((int)(((byte)(84)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvJogadores.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvJogadores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvJogadores.Size = new System.Drawing.Size(336, 253);
             this.dgvJogadores.TabIndex = 1;
@@ -116,11 +94,11 @@
             // lblStatusPartida
             // 
             this.lblStatusPartida.AutoSize = true;
-            this.lblStatusPartida.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatusPartida.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatusPartida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(18)))), ((int)(((byte)(38)))));
             this.lblStatusPartida.Location = new System.Drawing.Point(137, 19);
             this.lblStatusPartida.Name = "lblStatusPartida";
-            this.lblStatusPartida.Size = new System.Drawing.Size(313, 26);
+            this.lblStatusPartida.Size = new System.Drawing.Size(243, 19);
             this.lblStatusPartida.TabIndex = 3;
             this.lblStatusPartida.Text = "Aguardando o inicio da partida";
             // 
@@ -166,12 +144,20 @@
             this.btnEnviar.UseVisualStyleBackColor = false;
             this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
+            // txtCarta
+            // 
+            this.txtCarta.Location = new System.Drawing.Point(959, 554);
+            this.txtCarta.Name = "txtCarta";
+            this.txtCarta.Size = new System.Drawing.Size(85, 20);
+            this.txtCarta.TabIndex = 7;
+            // 
             // frmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(33)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(1187, 645);
+            this.Controls.Add(this.txtCarta);
             this.Controls.Add(this.btnEnviar);
             this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.lblVersao);
@@ -180,10 +166,7 @@
             this.Controls.Add(this.dgvJogadores);
             this.Controls.Add(this.grpJogo);
             this.Name = "frmPartida";
-            this.Text = "Magic Trick (Luxemburgo) - Partida";
-            this.Load += new System.EventHandler(this.frmPartida_Load);
-            this.grpJogo.ResumeLayout(false);
-            this.grpJogo.PerformLayout();
+            this.Text = "Magic Trick (Luxemburgo) - Partida";           
             ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -199,7 +182,6 @@
         private System.Windows.Forms.Label lblVersao;
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.Button btnEnviar;
-        private System.Windows.Forms.Label lblValorAposta;
-        private System.Windows.Forms.Label lblValorCarta;
+        private System.Windows.Forms.TextBox txtCarta;
     }
 }

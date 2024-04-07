@@ -118,52 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="estrelas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\estrelas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="lua" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lua.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="triangulo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\triangulo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="aposta" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\aposta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="paus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\paus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="espadas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\espadas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="trianguloHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trianguloHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ouros" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ouros.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="coracao" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\coracao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="aposta1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\aposta1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="coracaoHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\coracaoHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="espadasHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\espadasHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="estrelasHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\estrelasHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="luaHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\luaHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ourosHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ourosHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="paus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\paus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pausHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pausHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="trianguloHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\trianguloHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="aposta1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\aposta1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="estrelas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\estrelas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="espadasHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\espadasHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aposta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\aposta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="estrelasHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\estrelasHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ourosHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ourosHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coracaoHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coracaoHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="luaHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\luaHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="triangulo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\triangulo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coracao" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coracao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="espadas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\espadas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mascara" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mascara.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mascaraHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mascaraHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -14,14 +14,9 @@ namespace MagicTrick_piIII.telas
 {
     public partial class frmPartida : Form
     {
-
         List<Jogador> Jogadores = new List<Jogador>();
         Jogador Player;
         Partida Partida;
-        Carta Aposta = new Carta('A');
-        int IndexSelecao;
-        char StatusRodada;
-        int Rodada;
         bool CartasImpressas = false;
 
         public frmPartida(Partida partida, List<Jogador> adversarios, Jogador player)
@@ -33,21 +28,9 @@ namespace MagicTrick_piIII.telas
             this.Jogadores.Add(player);
             this.Player = player;
            
-            AtualizarDataGridView(adversarios);
-            
-            char status = this.Partida.Status;
-
-            if(status != 'A')
-                btnIniciarPartida.Enabled = false;
-
-            this.Aposta.ValorReal = 0;
-
+            AtualizarDataGridView(this.Jogadores);
+                               
             lblVersao.Text += Jogo.Versao;
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void AtualizarDataGridView(List<Jogador> jogadores)
@@ -58,6 +41,7 @@ namespace MagicTrick_piIII.telas
 
             dgvJogadores.Columns[3].Visible = false;
             dgvJogadores.Columns[4].Visible = false;
+            dgvJogadores.Columns[5].Visible = false;
         }
 
         private void AtualizarStatus(string status)
@@ -78,18 +62,25 @@ namespace MagicTrick_piIII.telas
 
             int rodadaAtual = Convert.ToInt32(dadosPartida[2]);
 
-            if (this.Rodada > rodadaAtual)
+           
+            if (this.Partida.Rodada > rodadaAtual)
+            {
                 this.CartasImpressas = false;
+                this.Partida.Round++;
+            }
 
-            this.Rodada = rodadaAtual;
+            this.Partida.Rodada = rodadaAtual;
 
             string nomeJogador = jogadorTmp.Nome;
-            string statusRodada = "Jogar carta";
+            string tipoJogada = "Jogar carta";
 
-            if (dadosPartida[3] == "A")
-                statusRodada = "Apostar";
+            char statusRodada = Convert.ToChar(dadosPartida[3]);
+            this.Partida.StatusRodada = statusRodada;
 
-            string statusNovo = $"Vez do jogador: {nomeJogador}   -   ID: {idRetornado} : {statusRodada}";
+            if (statusRodada == 'A')
+                tipoJogada = "Apostar";
+
+            string statusNovo = $"Vez do jogador: {nomeJogador}   -   ID: {idRetornado} : {tipoJogada}";
             lblStatusPartida.Text = statusNovo;
         }
 
@@ -135,10 +126,13 @@ namespace MagicTrick_piIII.telas
 
             if (!this.CartasImpressas)
             {
-                jogadoresPartida = Jogador.RetornarJogadoresPartida(idPartida);
-                AtualizarDataGridView(jogadoresPartida);
+                if(this.Partida.Round == 1)
+                {
+                    jogadoresPartida = Jogador.RetornarJogadoresPartida(idPartida);
+                    AtualizarDataGridView(jogadoresPartida);
 
-                Jogador.OrganizarJogadores(jogadoresPartida, idJogador);
+                    Jogador.OrganizarJogadores(jogadoresPartida, idJogador);
+                }
                 ConsultarMao();
 
                 this.CartasImpressas = true;
@@ -146,8 +140,67 @@ namespace MagicTrick_piIII.telas
 
             dadosVerificacao = dadosVerificacao.Skip(1).ToArray();
 
+            Jogador.EsconderCartas(this.Jogadores);
+
             if (dadosVerificacao.Length == 0)
                 return;
+
+            string[] dadosJogada;
+            char naipe;
+            int numeroCarta;
+            bool flagCarta; 
+
+            Jogador jogadorAtual;
+            int indexJogador;
+
+            int contador;
+
+            for(int i = 0; i < dadosVerificacao.Length; i++)
+            {
+                if (dadosVerificacao[i].Length == 0) continue;
+
+                if (dadosVerificacao[i].StartsWith("C"))
+                {
+                    dadosVerificacao[i] = dadosVerificacao[i].Replace("C:", "");
+                    flagCarta = true;
+                }
+                else
+                {
+                    dadosVerificacao[i] = dadosVerificacao[i].Replace("A:", "");
+                    flagCarta = false;
+                }
+
+                dadosJogada = dadosVerificacao[i].Split(',');
+                idJogador = Convert.ToInt32(dadosJogada[0]);
+                naipe = Convert.ToChar(dadosJogada[1]);
+                numeroCarta = Convert.ToInt32(dadosJogada[2]);
+
+                jogadorAtual = this.Jogadores.Find(j => j.IdJogador == idJogador);
+                indexJogador = this.Jogadores.FindIndex(j => jogadorAtual.IdJogador == idJogador);
+
+                if (this.Jogadores.Count == 4)
+                {
+                    if (flagCarta)
+                        jogadorAtual.CartaJogada.AtualizarCarta(naipe, numeroCarta, indexJogador);
+
+                    else
+                        jogadorAtual.CartaAposta.AtualizarCarta(naipe, numeroCarta, indexJogador);
+                }
+                else
+                {
+                    if (jogadorAtual == this.Player)
+                        contador = 3;
+
+                    else
+                        contador = 1;
+
+                    if (flagCarta)
+                        jogadorAtual.CartaJogada.AtualizarCarta(naipe, numeroCarta, contador);
+
+                    else
+                        jogadorAtual.CartaAposta.AtualizarCarta(naipe, numeroCarta, contador);
+                }              
+            }
         }
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
@@ -167,11 +220,22 @@ namespace MagicTrick_piIII.telas
 
             Jogador jogadorTmp;
 
+            int idPartida = this.Partida.IdPartida;
+            this.Jogadores = Jogador.RetornarJogadoresPartida(idPartida);
+
+            int indexPlayer = this.Jogadores.FindIndex(j => j.IdJogador == idJogador);
+
+            this.Jogadores[indexPlayer] = this.Player;
+
             if (this.Player.IdJogador == idRetornado)
                 jogadorTmp = this.Player;
 
             else                
                 jogadorTmp = this.Jogadores.Find(j => j.IdJogador == idRetornado);
+
+
+            if (jogadorTmp == null)
+                return;
 
             string nomeJogadorTmp = jogadorTmp.Nome;
             int idJogadorTmp = jogadorTmp.IdJogador;
@@ -182,70 +246,44 @@ namespace MagicTrick_piIII.telas
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)
-        {          
-            Panel panelAposta = new Panel();
-            panelAposta.Width = 38;
-            panelAposta.Height = 56;
-            panelAposta.BackgroundImage = Properties.Resources.aposta;
-            panelAposta.Location = new Point(561, 522);
-            panelAposta.Click += ApostaCardPanel_Click;
-        }
-
-         private void CardPanel_Click(object sender, EventArgs e)
         {
-            Panel painelClicado = sender as Panel;
-
-            if (painelClicado == null)
-                return;
-
-            Carta cartaClicada = this.Player.Deck.Find(c => c.PanelCarta == painelClicado);
-
-            if (cartaClicada == null)
-                return;
-
-            int indexCarta = this.Player.Deck.IndexOf(cartaClicada);
-
-            this.IndexSelecao = indexCarta + 1;
-        }
-
-        private void ApostaCardPanel_Click(object sender, EventArgs e)
-        {
-            this.IndexSelecao = 0;
-        }
+            HandleVerificarVez();
+        }  
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
             int idJogador = this.Player.IdJogador;
             string senha = this.Player.Senha;
 
-            if(this.StatusRodada == 'C')
+            int indexSelecao;
+
+            if (!int.TryParse(txtCarta.Text, out indexSelecao))
+                return;
+
+            if(this.Partida.StatusRodada == 'C')
             {
-                string retorno = Jogo.Jogar(idJogador, senha, this.IndexSelecao);
+                string retorno = Jogo.Jogar(idJogador, senha, indexSelecao);
 
                 if (Auxiliar.VerificarErro(retorno))
                     return;
 
-                lblValorCarta.Text = "Valor da carta jogada: " + retorno;
+                int id = this.Jogadores[0].IdJogador;
+
+                int numeroRetornado = Convert.ToInt32(retorno);
+                this.Player.Deck[indexSelecao - 1].TornarIndisponivel(numeroRetornado);
             }
             else
-            {
-                string retorno = Jogo.Apostar(idJogador, senha, this.IndexSelecao);
+            {               
+                string retorno = Jogo.Apostar(idJogador, senha, indexSelecao);
 
                 if (Auxiliar.VerificarErro(retorno))
                     return;
 
-                lblValorAposta.Text = "Valor da aposta: " + retorno;
+                if (indexSelecao == 0) return;
+
+                int numeroRetornado = Convert.ToInt32(retorno);
+                this.Player.Deck[indexSelecao - 1].TornarIndisponivel(numeroRetornado);
             }
-        }
-
-        private void lblValorCarta_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void frmPartida_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
