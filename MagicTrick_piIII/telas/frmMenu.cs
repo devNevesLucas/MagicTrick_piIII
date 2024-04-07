@@ -70,8 +70,9 @@ namespace MagicTrick_piIII
             dgvJogadores.DataSource = jogadoresTmp;
             this.JogadoresPartidaSelecionada = jogadoresTmp;
 
-            dgvJogadores.Columns.Remove("ValorAposta");
-            dgvJogadores.Columns.Remove("Senha");
+            dgvJogadores.Columns[3].Visible = false;
+            dgvJogadores.Columns[4].Visible = false;
+            dgvJogadores.Columns[5].Visible = false;
         }
 
         private void btnCriar_Click(object sender, EventArgs e)
