@@ -27,7 +27,10 @@ namespace MagicTrick_piIII
             this.IdPartida = Convert.ToInt32(dados[0]);
             this.NomePartida = dados[1];
             this.DataCriacao = dados[2];
-            this.Status = Convert.ToChar(dados[3]);    
+            this.Status = Convert.ToChar(dados[3]);
+
+            this.Rodada = 1;
+            this.Round = 1;
         }
 
         public Partida(int id, string nome, string data, char status) {

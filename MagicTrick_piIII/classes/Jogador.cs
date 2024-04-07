@@ -15,7 +15,8 @@ namespace MagicTrick_piIII
         public string Nome { get; set; }
         public int Pontuacao { get; set; }
         public List<Carta> Deck { get; set; }
-        public int ValorAposta { get; set; }
+        public Carta CartaJogada { get; set; }
+        public Carta CartaAposta { get; set; }
         public List<char> NaipeVitorias { get; set; }
         public string Senha { get; set; }
 
@@ -70,11 +71,12 @@ namespace MagicTrick_piIII
             int indexPlayer = jogadores.FindIndex(j => j.IdJogador == idPlayer);
             int contador = indexPlayer + 1;
 
+            int qtdJogadores = jogadores.Count();
             int posicao;
 
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < qtdJogadores - 1; i++)
             {
-                posicao = contador++ % 4;
+                posicao = contador++ % qtdJogadores;
                 jogadoresTmp.Add(jogadores[posicao]);
             }
 
@@ -101,6 +103,9 @@ namespace MagicTrick_piIII
                     naipe = deckJogador.NaipeCartas[j];
                     jogadores[i].Deck.Add(new Carta(naipe));
                 }
+
+                jogadores[i].CartaJogada = new Carta('C');
+                jogadores[i].CartaAposta = new Carta('C');
             }
                 ImagemCarta.CriarImagemCartas(jogadores, controle);
         }
@@ -125,6 +130,15 @@ namespace MagicTrick_piIII
                 }
             }
             ImagemCarta.AtualizarCartas(jogadores);
+        }
+
+        public static void EsconderCartas(List<Jogador> jogadores)
+        {
+            for(int i = 0; i < jogadores.Count; i++)
+            {
+                jogadores[i].CartaJogada.ImagemCarta.TornarInvisivel();
+                jogadores[i].CartaAposta.ImagemCarta.TornarInvisivel();
+            }
         }
     }
 }

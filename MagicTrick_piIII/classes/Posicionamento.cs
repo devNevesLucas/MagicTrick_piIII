@@ -38,16 +38,13 @@ namespace MagicTrick_piIII.classes
             int xFinal = x;
             int yFinal = y;
 
+            this.Altura = 56;
+            this.Largura = 38;
 
             if (orientacao == 'V')
             {
                 this.Altura = 38;
                 this.Largura = 56;
-            }
-            else
-            {
-                this.Altura = 56;
-                this.Largura = 38;
             }
 
             if(orientacao == 'V')
@@ -67,7 +64,7 @@ namespace MagicTrick_piIII.classes
                 if(iterador >= 7)
                 {
                     iterador -= 7;
-                    yFinal = this.Altura + this.MargemCartas;
+                    yFinal += this.Altura + this.MargemCartas;
                 }
 
                 xFinal += this.Largura * iterador;
