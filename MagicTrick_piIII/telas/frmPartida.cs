@@ -143,7 +143,7 @@ namespace MagicTrick_piIII.telas
                 if(this.Partida.Round == 1)
                 {                    
                     AtualizarDataGridView();
-                    Jogador.OrganizarJogadores(this.Jogadores, idJogador);
+                    Jogador.OrganizarJogadores(ref this.Jogadores, idJogador);
                 }
                 ConsultarMao();
 

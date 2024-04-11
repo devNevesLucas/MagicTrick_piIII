@@ -64,7 +64,7 @@ namespace MagicTrick_piIII
             return jogadoresTmp;
         }
 
-        public static void OrganizarJogadores(List<Jogador> jogadores, int idPlayer)
+        public static void OrganizarJogadores(ref List<Jogador> jogadores, int idPlayer)
         {
             List<Jogador> jogadoresTmp = new List<Jogador>();
 
