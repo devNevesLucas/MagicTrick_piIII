@@ -56,7 +56,6 @@
             this.lblSenha.Size = new System.Drawing.Size(49, 16);
             this.lblSenha.TabIndex = 1;
             this.lblSenha.Text = "Senha:";
-            this.lblSenha.Click += new System.EventHandler(this.lblSenha_Click);
             // 
             // txtSenha
             // 
@@ -100,7 +99,6 @@
             this.Controls.Add(this.lblNomeJogador);
             this.Name = "frmEntrarPartida";
             this.Text = "Magic Trick (Luxemburgo) - Entrar";
-            this.Load += new System.EventHandler(this.frmEntrarPartida_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -27,11 +27,21 @@ namespace MagicTrick_piIII.telas
         {
             string nomePartida = txtNomePartida.Text;
             string senhaPartida = txtSenha.Text;
+            string resultado;
 
             if (nomePartida.Length <= 0 || senhaPartida.Length <= 0)
                 return;
 
-            string resultado = Jogo.CriarPartida(nomePartida, senhaPartida, "luxemburgo");
+            try
+            {
+
+                resultado = Jogo.CriarPartida(nomePartida, senhaPartida, "luxemburgo");
+            
+            } catch(Exception exception) 
+            {
+                MessageBox.Show("Ops...", exception.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (!Auxiliar.VerificarErro(resultado))
             { 

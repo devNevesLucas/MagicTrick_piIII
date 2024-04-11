@@ -29,9 +29,19 @@ namespace MagicTrick_piIII.telas
             string nomeJogador = txtNomeJogador.Text;
             string senhaPartida = txtSenha.Text;
             int idPartida = this.Partida.IdPartida;
+            string retorno;  
+                
+            try
+            {
 
-            string retorno = Jogo.EntrarPartida(idPartida, nomeJogador, senhaPartida);
+                retorno = Jogo.EntrarPartida(idPartida, nomeJogador, senhaPartida);
 
+            }   catch(Exception exception)
+            {
+                MessageBox.Show("Ops...", exception.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+                
             if (Auxiliar.VerificarErro(retorno))
                 return;
 
@@ -46,16 +56,6 @@ namespace MagicTrick_piIII.telas
 
             frmPartida frmPartida = new frmPartida(this.Partida, this.JogadoresPartida, jogador);
             frmPartida.ShowDialog();
-        }
-
-        private void frmEntrarPartida_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSenha_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

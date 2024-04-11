@@ -35,7 +35,18 @@ namespace MagicTrick_piIII
 
         private void btnListagem_Click(object sender, EventArgs e)
         {
-            string result = Jogo.ListarPartidas("T");
+            string result; 
+
+            try
+            {
+
+                result = Jogo.ListarPartidas("T");
+
+            } catch(Exception exception)
+            {
+                MessageBox.Show("Ops...", exception.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (Auxiliar.VerificarErro(result))
                 return;
@@ -66,7 +77,7 @@ namespace MagicTrick_piIII
 
             int idPartida = this.PartidaSelecionada.IdPartida;
                   
-            List<Jogador> jogadoresTmp = Auxiliar.RetornaJogadoresPartida(idPartida);
+            List<Jogador> jogadoresTmp = Jogador.RetornarJogadoresPartida(idPartida);
             dgvJogadores.DataSource = jogadoresTmp;
             this.JogadoresPartidaSelecionada = jogadoresTmp;
 
