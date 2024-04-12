@@ -188,7 +188,7 @@ namespace MagicTrick_piIII.telas
                 numeroCarta = Convert.ToInt32(dadosJogada[2]);
 
                 jogadorAtual = this.Jogadores.Find(j => j.IdJogador == idJogador);
-                indexJogador = this.Jogadores.FindIndex(j => jogadorAtual.IdJogador == idJogador);
+                indexJogador = this.Jogadores.FindIndex(j => j.IdJogador == idJogador);
 
                 if (this.Jogadores.Count == 4)
                 {
