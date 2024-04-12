@@ -21,49 +21,44 @@ namespace MagicTrick_piIII.classes
         public static int[,] posicoesJogadas = new int[,] { { 288, 326 }, { 359, 270 }, { 411, 326 }, { 359, 364 } };
 
         public static int[,] posicoesApostas = new int[,] { { 41, 117 }, { 559, 83 }, { 592, 529 }, { 156, 547 } };
-       
+
+
         public ImagemCarta(int x, int y, char orientacao, char naipe)
         {
             this.Posicionamento = new Posicionamento(x, y, orientacao);
-           
-            this.ImgNaipe = new Panel();
-            this.Mascara = new Panel();
-
-            this.PosicionarPanels();
-
-            this.ImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
-            this.Mascara.BackColor = Color.FromArgb(128, 19, 23, 31);
-
-            this.Mascara.Visible = false;
-
-            this.InicializarLabel();
+            this.InicializarPropriedades(orientacao, naipe);
         }
 
         public ImagemCarta(int x, int y, char orientacao, char naipe, int iterador)
         {
             this.Posicionamento = new Posicionamento(x, y, orientacao, iterador);
+            this.InicializarPropriedades(orientacao, naipe);
+        }
 
+        private void InicializarPropriedades(char orientacao, char naipe)
+        {
             this.ImgNaipe = new Panel();
-            this.Mascara = new Panel();
+            //this.Mascara = new Panel();
+            this.ValorCarta = new Label();
+
+            Point ponto = this.Posicionamento.Ponto;
 
             this.PosicionarPanels();
-           
+
             this.ImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
-            this.Mascara.BackColor = Color.FromArgb(128, 19, 23, 31);           
-            this.Mascara.Visible = false;
 
             this.InicializarLabel();
         }
-
+       
         private void PosicionarPanels()
         {
             this.ImgNaipe.Width = this.Posicionamento.Largura;
             this.ImgNaipe.Height = this.Posicionamento.Altura;
             this.ImgNaipe.Location = this.Posicionamento.Ponto;
 
-            this.Mascara.Width = this.Posicionamento.Largura;
-            this.Mascara.Height = this.Posicionamento.Altura;
-            this.Mascara.Location = this.Posicionamento.Ponto;
+            //this.Mascara.Width = this.Posicionamento.Largura;
+            //this.Mascara.Height = this.Posicionamento.Altura;
+            //this.Mascara.Location = this.Posicionamento.Ponto;
         }
 
         public void InicializarLabel()
@@ -153,7 +148,7 @@ namespace MagicTrick_piIII.classes
         public static void CriarImagemCartas(List<Jogador> jogadores, Control.ControlCollection controle)
         {
             if(jogadores.Count == 4)
-                for(int i = 0; i <  jogadores.Count(); i++)
+                for(int i = 0; i <  jogadores.Count; i++)
                 {
                     char orientacao = 'H';
                     int x, y;
@@ -170,11 +165,11 @@ namespace MagicTrick_piIII.classes
                         jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
 
                         controle.Add(jogadores[i].Deck[j].ImagemCarta.ImgNaipe);
-                        controle.Add(jogadores[i].Deck[j].ImagemCarta.Mascara);
+                        //controle.Add(jogadores[i].Deck[j].ImagemCarta.Mascara);
                         controle.Add(jogadores[i].Deck[j].ImagemCarta.ValorCarta);
 
                         jogadores[i].Deck[j].ImagemCarta.ImgNaipe.BringToFront();
-                        jogadores[i].Deck[j].ImagemCarta.Mascara.BringToFront();
+                        //jogadores[i].Deck[j].ImagemCarta.Mascara.BringToFront();
                         jogadores[i].Deck[j].ImagemCarta.ValorCarta.BringToFront();
                     }
 
@@ -204,7 +199,7 @@ namespace MagicTrick_piIII.classes
                     jogadores[i].CartaAposta.ImagemCarta.ValorCarta.BringToFront();
                 }
 
-            else
+            else 
             {
                 char orientacao = 'H';
                 int contador = 1;
@@ -226,7 +221,7 @@ namespace MagicTrick_piIII.classes
                         controle.Add(jogadores[i].Deck[j].ImagemCarta.ValorCarta);
 
                         jogadores[i].Deck[j].ImagemCarta.ImgNaipe.BringToFront();
-                        jogadores[i].Deck[j].ImagemCarta.Mascara.BringToFront();
+                        //jogadores[i].Deck[j].ImagemCarta.Mascara.BringToFront();
                         jogadores[i].Deck[j].ImagemCarta.ValorCarta.BringToFront();
 
                     }
