@@ -79,12 +79,27 @@
             <param name="idPartida">Id da partida</param>
             <returns>Jogador, Posicao, Naipe</returns>
         </member>
+        <member name="M:MagicTrickServer.Jogo.VerificarVez2(System.Int32)">
+            <summary>
+            Exibe todas informações do momento do jogo.
+            </summary>
+            <param name="idPartida">Id da Partida</param>
+            <returns>Status da Partida, Id do jogador da vez, numero da rodada e o status da rodada.</returns>
+        </member>
         <member name="M:MagicTrickServer.Jogo.VerificarVez(System.Int32)">
             <summary>
             Exibe todas informações do momento do jogo.
             </summary>
             <param name="idPartida">Id da Partida</param>
-            <returns>Status da Partida, Id do jogador da vez, numero da rodada e o status.</returns>
+            <returns>Status da Partida, Id do jogador da vez, numero da rodada e o status da rodada.</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.ExibirJogadas2(System.Int32,System.Int32)">
+            <summary>
+            Retorna a relação de jogadas já realizadas no round especificado
+            </summary>
+            <param name="idPartida">Id da Partida</param>
+            <param name="Round">Número do Round</param>
+            <returns>Número do Round, Id do Jogador, Naipe, Valor, Posição jogada</returns>
         </member>
         <member name="M:MagicTrickServer.Jogo.ExibirJogadas(System.Int32,System.Int32)">
             <summary>
@@ -92,6 +107,13 @@
             </summary>
             <param name="idPartida">Id da Partida</param>
             <param name="Round">Número do Round</param>
+            <returns>Número do Round, Id do Jogador, Naipe, Valor</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.ExibirJogadas2(System.Int32)">
+            <summary>
+            Retorna a relação de jogadas já realizadas no round atual
+            </summary>
+            <param name="idPartida">Id da Partida</param>
             <returns>Número do Round, Id do Jogador, Naipe, Valor</returns>
         </member>
         <member name="M:MagicTrickServer.Jogo.ExibirJogadas(System.Int32)">
