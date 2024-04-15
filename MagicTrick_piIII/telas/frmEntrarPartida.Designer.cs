@@ -98,6 +98,7 @@
             this.Controls.Add(this.lblSenha);
             this.Controls.Add(this.lblNomeJogador);
             this.Name = "frmEntrarPartida";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Magic Trick (Luxemburgo) - Entrar";
             this.ResumeLayout(false);
             this.PerformLayout();

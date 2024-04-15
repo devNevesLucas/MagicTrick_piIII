@@ -1,4 +1,5 @@
-﻿using MagicTrickServer;
+﻿using MagicTrick_piIII.telas;
+using MagicTrickServer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +40,11 @@ namespace MagicTrick_piIII
         private void lblVersao_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCreditos_Click(object sender, EventArgs e)
+        {
+        
         }
     }
 }

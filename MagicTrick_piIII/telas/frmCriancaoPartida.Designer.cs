@@ -37,13 +37,20 @@
             // 
             // txtNomePartida
             // 
+            this.txtNomePartida.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNomePartida.Location = new System.Drawing.Point(88, 109);
             this.txtNomePartida.Name = "txtNomePartida";
             this.txtNomePartida.Size = new System.Drawing.Size(180, 20);
             this.txtNomePartida.TabIndex = 1;
+            this.txtNomePartida.TextChanged += new System.EventHandler(this.txtNomePartida_TextChanged);
             // 
             // txtSenha
             // 
+            this.txtSenha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSenha.Location = new System.Drawing.Point(88, 172);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(180, 20);
@@ -51,6 +58,9 @@
             // 
             // lblNomePartida
             // 
+            this.lblNomePartida.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNomePartida.AutoSize = true;
             this.lblNomePartida.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNomePartida.ForeColor = System.Drawing.Color.White;
@@ -62,6 +72,8 @@
             // 
             // lblSenha
             // 
+            this.lblSenha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSenha.AutoSize = true;
             this.lblSenha.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSenha.ForeColor = System.Drawing.Color.White;
@@ -73,6 +85,9 @@
             // 
             // btnCriarPartida
             // 
+            this.btnCriarPartida.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCriarPartida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(24)))));
             this.btnCriarPartida.FlatAppearance.BorderSize = 0;
             this.btnCriarPartida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -97,7 +112,9 @@
             this.Controls.Add(this.lblNomePartida);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtNomePartida);
+            this.MaximumSize = new System.Drawing.Size(375, 376);
             this.Name = "frmCriancaoPartida";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Magic Trick (Luxemburgo) - Criar Partida";
             this.Load += new System.EventHandler(this.CriancaoPartida_Load);
             this.ResumeLayout(false);

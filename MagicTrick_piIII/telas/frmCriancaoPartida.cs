@@ -55,5 +55,10 @@ namespace MagicTrick_piIII.telas
                 this.Close();
             }
         }
+
+        private void txtNomePartida_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

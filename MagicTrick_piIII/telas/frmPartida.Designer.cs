@@ -166,7 +166,8 @@
             this.Controls.Add(this.dgvJogadores);
             this.Controls.Add(this.grpJogo);
             this.Name = "frmPartida";
-            this.Text = "Magic Trick (Luxemburgo) - Partida";           
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Magic Trick (Luxemburgo) - Partida";
             ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
