@@ -42,6 +42,9 @@ namespace MagicTrick_piIII.classes
 
         public void TornarIndisponivel(int numeroCarta)
         {
+            if (!this.Disponivel)
+                return;
+
             this.ValorReal = numeroCarta; 
             this.Disponivel = false;
 

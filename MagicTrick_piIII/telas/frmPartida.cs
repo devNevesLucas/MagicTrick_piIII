@@ -121,7 +121,7 @@ namespace MagicTrick_piIII.telas
             int idPartida = this.Partida.IdPartida;
             int idJogador = this.Player.IdJogador;
 
-            string retornoVerificacao = Jogo.VerificarVez(idPartida);
+            string retornoVerificacao = Jogo.VerificarVez2(idPartida);
 
             List<Jogador> jogadoresPartida = new List<Jogador>();
 
@@ -160,6 +160,7 @@ namespace MagicTrick_piIII.telas
             string[] dadosJogada;
             char naipe;
             int numeroCarta;
+            int posicaoCarta;
             bool flagCarta; 
 
             Jogador jogadorAtual;
@@ -187,6 +188,12 @@ namespace MagicTrick_piIII.telas
                 naipe = Convert.ToChar(dadosJogada[1]);
                 numeroCarta = Convert.ToInt32(dadosJogada[2]);
 
+                if (flagCarta)
+                    posicaoCarta = Convert.ToInt32(dadosJogada[3]);
+
+                else
+                    posicaoCarta = Convert.ToInt32(dadosJogada[4]);
+
                 jogadorAtual = this.Jogadores.Find(j => j.IdJogador == idJogador);
                 indexJogador = this.Jogadores.FindIndex(j => j.IdJogador == idJogador);
 
@@ -211,7 +218,9 @@ namespace MagicTrick_piIII.telas
 
                     else
                         jogadorAtual.CartaAposta.AtualizarCarta(naipe, numeroCarta, contador);
-                }              
+                }
+                
+                jogadorAtual.Deck[posicaoCarta - 1].TornarIndisponivel(numeroCarta);              
             }
         }
 
@@ -281,8 +290,8 @@ namespace MagicTrick_piIII.telas
 
                 int id = this.Jogadores[0].IdJogador;
 
-                int numeroRetornado = Convert.ToInt32(retorno);
-                this.Player.Deck[indexSelecao - 1].TornarIndisponivel(numeroRetornado);
+                //int numeroRetornado = Convert.ToInt32(retorno);
+                //this.Player.Deck[indexSelecao - 1].TornarIndisponivel(numeroRetornado);
             }
             else
             {               
@@ -293,8 +302,8 @@ namespace MagicTrick_piIII.telas
 
                 if (indexSelecao == 0) return;
 
-                int numeroRetornado = Convert.ToInt32(retorno);
-                this.Player.Deck[indexSelecao - 1].TornarIndisponivel(numeroRetornado);
+                //int numeroRetornado = Convert.ToInt32(retorno);
+                //this.Player.Deck[indexSelecao - 1].TornarIndisponivel(numeroRetornado);
             }
         }
     }
