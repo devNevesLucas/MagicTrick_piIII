@@ -12,7 +12,6 @@ namespace MagicTrick_piIII.classes
     public class ImagemCarta
     {
         public Panel ImgNaipe { get; set; }
-        public Panel Mascara { get; set; } 
         public Label ValorCarta { get; set; }
         public Posicionamento Posicionamento { get; set; }
 
@@ -38,7 +37,6 @@ namespace MagicTrick_piIII.classes
         private void InicializarPropriedades(char orientacao, char naipe)
         {
             this.ImgNaipe = new Panel();
-            //this.Mascara = new Panel();
             this.ValorCarta = new Label();
 
             Point ponto = this.Posicionamento.Ponto;
@@ -55,10 +53,6 @@ namespace MagicTrick_piIII.classes
             this.ImgNaipe.Width = this.Posicionamento.Largura;
             this.ImgNaipe.Height = this.Posicionamento.Altura;
             this.ImgNaipe.Location = this.Posicionamento.Ponto;
-
-            //this.Mascara.Width = this.Posicionamento.Largura;
-            //this.Mascara.Height = this.Posicionamento.Altura;
-            //this.Mascara.Location = this.Posicionamento.Ponto;
         }
 
         public void InicializarLabel()
@@ -164,12 +158,10 @@ namespace MagicTrick_piIII.classes
 
                         jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
 
-                        controle.Add(jogadores[i].Deck[j].ImagemCarta.ImgNaipe);
-                        //controle.Add(jogadores[i].Deck[j].ImagemCarta.Mascara);
+                        controle.Add(jogadores[i].Deck[j].ImagemCarta.ImgNaipe);                       
                         controle.Add(jogadores[i].Deck[j].ImagemCarta.ValorCarta);
 
                         jogadores[i].Deck[j].ImagemCarta.ImgNaipe.BringToFront();
-                        //jogadores[i].Deck[j].ImagemCarta.Mascara.BringToFront();
                         jogadores[i].Deck[j].ImagemCarta.ValorCarta.BringToFront();
                     }
 
@@ -217,11 +209,9 @@ namespace MagicTrick_piIII.classes
                         jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
 
                         controle.Add(jogadores[i].Deck[j].ImagemCarta.ImgNaipe);
-                        controle.Add(jogadores[i].Deck[j].ImagemCarta.Mascara);
                         controle.Add(jogadores[i].Deck[j].ImagemCarta.ValorCarta);
 
                         jogadores[i].Deck[j].ImagemCarta.ImgNaipe.BringToFront();
-                        //jogadores[i].Deck[j].ImagemCarta.Mascara.BringToFront();
                         jogadores[i].Deck[j].ImagemCarta.ValorCarta.BringToFront();
 
                     }

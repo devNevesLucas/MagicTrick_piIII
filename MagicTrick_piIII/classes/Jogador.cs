@@ -137,7 +137,7 @@ namespace MagicTrick_piIII
             for(int i = 0; i < jogadores.Count; i++)
             {
                 jogadores[i].CartaJogada.ImagemCarta.TornarInvisivel();
-                jogadores[i].CartaAposta.ImagemCarta.TornarInvisivel();
+                //jogadores[i].CartaAposta.ImagemCarta.TornarInvisivel();
             }
         }
     }
