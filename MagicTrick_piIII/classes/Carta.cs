@@ -61,5 +61,17 @@ namespace MagicTrick_piIII.classes
             this.TornarIndisponivel(numeroCarta);
             this.ImagemCarta.AtualizarImagemCarta(naipe, contador);
         }
+
+        public void LimitarAbaixo(int limite)
+        {
+            this.PossiveisValores.RemoveRange(0, limite - 1);
+        }
+
+        public void LimitarAcima(int limite)
+        {          
+            int qtdItens = this.PossiveisValores.Count - limite - 1;
+            int posicaoInicial = this.PossiveisValores.Count - qtdItens;
+            this.PossiveisValores.RemoveRange(posicaoInicial, qtdItens);
+        }
     }
 }
