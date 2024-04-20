@@ -7,38 +7,37 @@ using System.Threading.Tasks;
 
 namespace MagicTrick_piIII.classes
 {
-    public class CartasConsulta
-    {
-        public int IdJogador {  get; set; }
-        public List<int> Posicoes { get; set; }
-        public List<char> NaipeCartas {  get; set; }
+    public class CartasConsulta : CartasChamadas
+    {   
 
-
-        public CartasConsulta(int IdJogador, int posicao, char naipe)
-        {
-            this.IdJogador = IdJogador;
-            this.Posicoes = new List<int>();
-            this.NaipeCartas = new List<char>();
-
-            this.Posicoes.Add(posicao);
-            this.NaipeCartas.Add(naipe);
-        }
+        public CartasConsulta(int idJogador, int posicao, char naipe) : base(idJogador, posicao, naipe) { }
 
         public static List<CartasConsulta> HandleConsultarMao(int idPartida)
         {
             List<CartasConsulta> cartasConsultaTmp = new List<CartasConsulta>();
 
-            string result = Jogo.ConsultarMao(idPartida);
+            string result;
+
+            try
+            {
+                result = Jogo.ConsultarMao(idPartida);            
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine(e.Message);
+                return cartasConsultaTmp;
+            }
 
             if (Auxiliar.VerificarErro(result))
                 return cartasConsultaTmp;
 
+
             result = result.Replace("\r", "");
 
-            return RetornarCartasJogadores(result);   
+            return RetornarConsultarMaoTratada(result);   
         }
 
-        private static List<CartasConsulta> RetornarCartasJogadores(string consultaBruta)
+        private static List<CartasConsulta> RetornarConsultarMaoTratada(string consultaBruta)
         {
             List<CartasConsulta> cartasConsulta = new List<CartasConsulta>();
 
@@ -70,6 +69,6 @@ namespace MagicTrick_piIII.classes
                     cartasConsulta.Add(new CartasConsulta(idJogador, indexCarta, naipe));
             }
             return cartasConsulta;
-        }
+        }        
     }
 }
