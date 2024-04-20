@@ -152,7 +152,7 @@ namespace MagicTrick_piIII.telas
 
             dadosVerificacao = dadosVerificacao.Skip(1).ToArray();
 
-            Jogador.EsconderCartas(this.Jogadores);
+            //Jogador.EsconderCartas(this.Jogadores);
 
             if (dadosVerificacao.Length == 0)
                 return;
@@ -288,10 +288,7 @@ namespace MagicTrick_piIII.telas
                 if (Auxiliar.VerificarErro(retorno))
                     return;
 
-                int id = this.Jogadores[0].IdJogador;
-
-                //int numeroRetornado = Convert.ToInt32(retorno);
-                //this.Player.Deck[indexSelecao - 1].TornarIndisponivel(numeroRetornado);
+                int id = this.Jogadores[0].IdJogador;              
             }
             else
             {               
@@ -301,9 +298,6 @@ namespace MagicTrick_piIII.telas
                     return;
 
                 if (indexSelecao == 0) return;
-
-                //int numeroRetornado = Convert.ToInt32(retorno);
-                //this.Player.Deck[indexSelecao - 1].TornarIndisponivel(numeroRetornado);
             }
         }
     }
