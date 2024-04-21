@@ -55,6 +55,9 @@ namespace MagicTrick_piIII.classes
             if(naipeRodada != null)
                 posicao = this.Jogador.Deck.FindIndex(c => c.Naipe == naipeRodada && c.Disponivel);
 
+            if(naipeRodada == null)
+                posicao = this.Jogador.Deck.FindIndex(c => c.Disponivel);
+
             if (posicao < 0)
                 posicao = this.Jogador.Deck.FindIndex(c => c.Naipe == 'C' && c.Disponivel);
 

@@ -38,6 +38,8 @@ namespace MagicTrick_piIII.classes
 
             string result;
 
+            char? naipeTmp = null;
+
             try
             {
                 result = Jogo.VerificarVez2(idPartida);
@@ -59,16 +61,9 @@ namespace MagicTrick_piIII.classes
 
             dadosTmp = dadosTmp.Skip(1).ToArray();
 
-            dadosVerificacao.CartasRodada = CartasVerificacao.RetornarCartasVerificacaoTratadas(dadosTmp);
+            dadosVerificacao.CartasRodada = CartasVerificacao.RetornarCartasVerificacaoTratadas(dadosTmp, ref naipeTmp);
 
-            if(dadosVerificacao.CartasRodada.Count > 0)            
-                if (dadosVerificacao.CartasRodada[0].StatusCartas.Count > 0)
-                {
-                    int indexCarta = dadosVerificacao.CartasRodada[0].StatusCartas.FindIndex(c => c == 'C');
-                    
-                    if(indexCarta > -1)
-                        dadosVerificacao.NaipeRodada = dadosVerificacao.CartasRodada[0].NaipeCartas[indexCarta];
-                }          
+            dadosVerificacao.NaipeRodada = naipeTmp;
 
             return dadosVerificacao;    
         }        

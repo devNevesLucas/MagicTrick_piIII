@@ -20,13 +20,15 @@ namespace MagicTrick_piIII.classes
             this.StatusCartas.Add(status);
         }
 
-        public static List<CartasVerificacao> RetornarCartasVerificacaoTratadas(string[] dadosBrutos)
+        public static List<CartasVerificacao> RetornarCartasVerificacaoTratadas(string[] dadosBrutos, ref char? naipeRodada)
         {
             List<CartasVerificacao> cartasTmp = new List<CartasVerificacao>();
 
             string[] dados;
             int idJogador, valorCarta, posicaoCarta, indexJogador;
             char naipe, status;
+
+            bool flagNaipeRodada = false;
 
             for(int i = 0; i < dadosBrutos.Length; i++)
             {
@@ -48,6 +50,12 @@ namespace MagicTrick_piIII.classes
                 idJogador = Convert.ToInt32(dados[0]);
                 naipe = Convert.ToChar(dados[1]);
                 valorCarta = Convert.ToInt32(dados[2]);
+
+                if(status == 'C' && !flagNaipeRodada)
+                {
+                    naipeRodada = naipe;
+                    flagNaipeRodada = true;
+                }
 
                 if (status == 'C')
                     posicaoCarta = Convert.ToInt32(dados[3]);
