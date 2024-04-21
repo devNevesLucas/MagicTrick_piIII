@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grpJogo = new System.Windows.Forms.GroupBox();
             this.dgvJogadores = new System.Windows.Forms.DataGridView();
             this.btnIniciarPartida = new System.Windows.Forms.Button();
@@ -37,6 +38,7 @@
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.txtCarta = new System.Windows.Forms.TextBox();
+            this.tmrAtualizarEstado = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,12 +68,12 @@
             this.dgvJogadores.Location = new System.Drawing.Point(828, 55);
             this.dgvJogadores.Name = "dgvJogadores";
             this.dgvJogadores.RowHeadersVisible = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(70)))), ((int)(((byte)(84)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvJogadores.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(70)))), ((int)(((byte)(84)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvJogadores.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvJogadores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvJogadores.Size = new System.Drawing.Size(336, 253);
             this.dgvJogadores.TabIndex = 1;
@@ -151,6 +153,12 @@
             this.txtCarta.Size = new System.Drawing.Size(85, 20);
             this.txtCarta.TabIndex = 7;
             // 
+            // tmrAtualizarEstado
+            // 
+            this.tmrAtualizarEstado.Enabled = true;
+            this.tmrAtualizarEstado.Interval = 5000;
+            this.tmrAtualizarEstado.Tick += new System.EventHandler(this.tmrAtualizarEstado_Tick);
+            // 
             // frmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,5 +192,6 @@
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.Button btnEnviar;
         private System.Windows.Forms.TextBox txtCarta;
+        private System.Windows.Forms.Timer tmrAtualizarEstado;
     }
 }

@@ -48,11 +48,12 @@ namespace MagicTrick_piIII.classes
             dois naipes. É somado 1 no final pela posição da carta no banco de dados sendo iniciada com 1,
             ao invés de 0.
          */
-        public int JogarPrimeiraCartaPossivel(char naipeRodada = 'L')
+        public int JogarPrimeiraCartaPossivel(char? naipeRodada)
         {
-            int posicao;
+            int posicao = -1;
 
-            posicao = this.Jogador.Deck.FindIndex(c => c.Naipe == naipeRodada && c.Disponivel);
+            if(naipeRodada != null)
+                posicao = this.Jogador.Deck.FindIndex(c => c.Naipe == naipeRodada && c.Disponivel);
 
             if (posicao < 0)
                 posicao = this.Jogador.Deck.FindIndex(c => c.Naipe == 'C' && c.Disponivel);

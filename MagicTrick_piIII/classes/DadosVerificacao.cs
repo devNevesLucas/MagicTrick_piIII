@@ -13,6 +13,7 @@ namespace MagicTrick_piIII.classes
         public int IdJogador { get; set; } 
         public int RodadaAtual { get; set; }
         public char StatusRodada { get; set; }
+        public char? NaipeRodada { get; set; }  
         public List<CartasVerificacao> CartasRodada { get; set; }
 
         public DadosVerificacao(string dadosPartida) 
@@ -59,6 +60,15 @@ namespace MagicTrick_piIII.classes
             dadosTmp = dadosTmp.Skip(1).ToArray();
 
             dadosVerificacao.CartasRodada = CartasVerificacao.RetornarCartasVerificacaoTratadas(dadosTmp);
+
+            if(dadosVerificacao.CartasRodada.Count > 0)            
+                if (dadosVerificacao.CartasRodada[0].StatusCartas.Count > 0)
+                {
+                    int indexCarta = dadosVerificacao.CartasRodada[0].StatusCartas.FindIndex(c => c == 'C');
+                    
+                    if(indexCarta > -1)
+                        dadosVerificacao.NaipeRodada = dadosVerificacao.CartasRodada[0].NaipeCartas[indexCarta];
+                }          
 
             return dadosVerificacao;    
         }        

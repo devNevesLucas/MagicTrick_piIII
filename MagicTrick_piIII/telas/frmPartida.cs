@@ -17,8 +17,8 @@ namespace MagicTrick_piIII.telas
         List<Jogador> Jogadores = new List<Jogador>();
         Jogador Player;
         Partida Partida;
+        Automato Automato;
         bool CartasImpressas = false;
-
         public frmPartida(Partida partida, List<Jogador> adversarios, Jogador player)
         {
             InitializeComponent();
@@ -27,7 +27,9 @@ namespace MagicTrick_piIII.telas
             this.Jogadores = adversarios;
             this.Jogadores.Add(player);
             this.Player = player;
-           
+
+            this.Automato = new Automato(this.Player);
+
             AtualizarDataGridView();
                                
             lblVersao.Text += Jogo.Versao;
@@ -112,7 +114,7 @@ namespace MagicTrick_piIII.telas
                 Jogador.AtualizarDeck(this.Jogadores, cartas);
         }
 
-        private void HandleVerificarVez()
+        private bool HandleVerificarVez()
         {
             int idPartida = this.Partida.IdPartida;
             int idJogador = this.Player.IdJogador;
@@ -124,7 +126,7 @@ namespace MagicTrick_piIII.telas
             if (verificacao == null)
             {                
                 AtualizarDataGridView();
-                return;
+                return false;
             }
 
             if (this.Partida.Rodada != verificacao.RodadaAtual)
@@ -145,13 +147,21 @@ namespace MagicTrick_piIII.telas
                 ConsultarMao();
 
                 this.CartasImpressas = true;
-                flagNovaRodada = false;
+                flagNovaRodada = false;                
             }
 
             Jogador.AtualizarJogadas(this.Jogadores, verificacao);
 
             if (flagNovaRodada)
                 Jogador.VerificarHistorico(this.Jogadores, this.Partida);
+            
+            this.Partida.NaipeRodada = verificacao.NaipeRodada;
+
+            if (verificacao.IdJogador == this.Player.IdJogador)
+                return true;
+
+            else
+                return false;
         }
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
@@ -224,9 +234,45 @@ namespace MagicTrick_piIII.telas
 
                 if (Auxiliar.VerificarErro(retorno))
                     return;
-
-                if (indexSelecao == 0) return;
             }
+        }
+
+        private bool Jogar(int posicao)
+        {
+            int idJogador = this.Player.IdJogador;
+            string senha = this.Player.Senha;
+
+            if (this.Partida.StatusRodada == 'C')
+            {
+                string retorno = Jogo.Jogar(idJogador, senha, posicao);
+
+                if (Auxiliar.VerificarErro(retorno))
+                    return false;
+            }
+            else
+            {
+                string retorno = Jogo.Apostar(idJogador, senha, posicao);
+
+                if (Auxiliar.VerificarErro(retorno))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void tmrAtualizarEstado_Tick(object sender, EventArgs e)
+        {
+            int posicao;
+            tmrAtualizarEstado.Enabled = false;
+
+            bool vezDoPlayer = HandleVerificarVez();
+
+            if (vezDoPlayer)
+            {
+                posicao = this.Automato.JogarPrimeiraCartaPossivel(this.Partida.NaipeRodada);
+                this.Jogar(posicao);
+            }                                                   
+            tmrAtualizarEstado.Enabled = true;
         }
     }
 }
