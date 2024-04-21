@@ -256,7 +256,7 @@ namespace MagicTrick_piIII.classes
                                                   
                 for(int j = 0; j < jogadores[i].Deck.Count; j++)
                 {
-                    char naipe = jogadores[j].Deck[j].Naipe;
+                    char naipe = jogadores[i].Deck[j].Naipe;
                     jogadores[i].Deck[j].ImagemCarta.ImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
                 }
             }
