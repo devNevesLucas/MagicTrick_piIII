@@ -184,5 +184,28 @@ namespace MagicTrick_piIII
                 }
             }
         }
+
+        public static void VerificarHistorico(List<Jogador> jogadores, Partida partida)
+        {
+            List<CartasHistorico> historicoJogadas = CartasHistorico.HandleHistoricoJogadas(partida);
+            int idJogador, posicao, valorCarta;
+            Jogador jogadorAtual;
+
+            foreach(CartasHistorico cartasPorJogador in historicoJogadas)
+            {
+                idJogador = cartasPorJogador.IdJogador;
+                jogadorAtual = jogadores.Find(j => j.IdJogador == idJogador);
+
+                for(int i = 0; i < cartasPorJogador.NaipeCartas.Count; i++)
+                {
+                    posicao = cartasPorJogador.Posicoes[i];
+                    valorCarta = cartasPorJogador.Valores[i];
+
+                    if (jogadorAtual.Deck[posicao - 1].Disponivel)
+                        jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
+                }
+            }
+
+        }
     }
 }

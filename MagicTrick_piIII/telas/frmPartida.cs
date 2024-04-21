@@ -117,6 +117,8 @@ namespace MagicTrick_piIII.telas
             int idPartida = this.Partida.IdPartida;
             int idJogador = this.Player.IdJogador;
 
+            bool flagNovaRodada = false;
+
             DadosVerificacao verificacao = DadosVerificacao.RetornarDadosVerificacao(idPartida);
 
             if (verificacao == null)
@@ -126,7 +128,10 @@ namespace MagicTrick_piIII.telas
             }
 
             if (this.Partida.Rodada != verificacao.RodadaAtual)
+            {
                 Jogador.EsconderCartasJogadas(this.Jogadores);
+                flagNovaRodada = true;
+            }
 
             AtualizarStatus(verificacao);
 
@@ -140,8 +145,13 @@ namespace MagicTrick_piIII.telas
                 ConsultarMao();
 
                 this.CartasImpressas = true;
+                flagNovaRodada = false;
             }
-            Jogador.AtualizarJogadas(this.Jogadores, verificacao);         
+
+            Jogador.AtualizarJogadas(this.Jogadores, verificacao);
+
+            if (flagNovaRodada)
+                Jogador.VerificarHistorico(this.Jogadores, this.Partida);
         }
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)

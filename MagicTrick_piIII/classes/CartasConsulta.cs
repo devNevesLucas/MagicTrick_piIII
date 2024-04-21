@@ -9,7 +9,6 @@ namespace MagicTrick_piIII.classes
 {
     public class CartasConsulta : CartasChamadas
     {   
-
         public CartasConsulta(int idJogador, int posicao, char naipe) : base(idJogador, posicao, naipe) { }
 
         public static List<CartasConsulta> HandleConsultarMao(int idPartida)

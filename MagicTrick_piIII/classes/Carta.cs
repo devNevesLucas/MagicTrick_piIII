@@ -42,6 +42,8 @@ namespace MagicTrick_piIII.classes
 
         public void TornarIndisponivel(int numeroCarta)
         {
+            this.ImagemCarta.ExibirLabelNumero(numeroCarta);
+
             if (!this.Disponivel)
                 return;
 
@@ -50,8 +52,6 @@ namespace MagicTrick_piIII.classes
 
             this.PossiveisValores.Clear();
             this.PossiveisValores.Add(numeroCarta);
-
-            this.ImagemCarta.ExibirLabelNumero(numeroCarta);
         }
 
         public void AtualizarCarta(char naipe, int numeroCarta, int contador)
