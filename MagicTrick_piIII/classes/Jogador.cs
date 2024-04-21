@@ -132,12 +132,56 @@ namespace MagicTrick_piIII
             ImagemCarta.AtualizarCartas(jogadores);
         }
 
-        public static void EsconderCartas(List<Jogador> jogadores)
+        public static void EsconderCartasJogadas(List<Jogador> jogadores)
         {
             for(int i = 0; i < jogadores.Count; i++)
             {
                 jogadores[i].CartaJogada.ImagemCarta.TornarInvisivel();
-                //jogadores[i].CartaAposta.ImagemCarta.TornarInvisivel();
+            }
+        }
+
+        public static void AtualizarJogadas(List<Jogador> jogadores, DadosVerificacao dados)
+        {
+            int indexJogador, valorCarta, posicao;
+            char naipe, statusCarta;
+            Jogador jogadorAtual;
+          
+            foreach(CartasVerificacao cartasJogador in dados.CartasRodada)
+            {
+                indexJogador = jogadores.FindIndex(j => j.IdJogador == cartasJogador.IdJogador);
+                jogadorAtual = jogadores[indexJogador];
+
+                for(int i = 0; i < cartasJogador.Posicoes.Count; i++)
+                {
+                    valorCarta = cartasJogador.Valores[i];
+                    posicao = cartasJogador.Posicoes[i];
+                    naipe = cartasJogador.NaipeCartas[i];
+                    statusCarta = cartasJogador.StatusCartas[i];
+
+                    if(jogadores.Count == 4)
+                    {
+                        if (statusCarta == 'C')
+                            jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta, indexJogador);
+
+                        else
+                            jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, indexJogador);
+                    }
+                    else
+                    {
+                        int contador = 1;
+
+                        if (indexJogador == 1)
+                            contador = 3;
+
+                        if(statusCarta == 'C')
+                            jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta, contador);
+
+                        else
+                            jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, contador);
+                    }
+
+                    jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
+                }
             }
         }
     }

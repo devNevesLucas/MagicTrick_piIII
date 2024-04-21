@@ -12,7 +12,6 @@ namespace MagicTrick_piIII.classes
         public List<int> Posicoes { get; set; }
         public List<char> NaipeCartas { get; set; }
 
-
         public CartasChamadas(int idJogador, int posicao, char naipe) 
         {
             this.IdJogador = idJogador;

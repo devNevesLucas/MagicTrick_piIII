@@ -9,7 +9,7 @@ namespace MagicTrick_piIII.classes
 {
     internal class CartasHistorico : CartasChamadas
     {
-        List<int> Valores { get; set; }
+        public List<int> Valores { get; set; }
 
         CartasHistorico(int idJogador, int posicao, char naipe, int valor) : base(idJogador, posicao, naipe)
         {
