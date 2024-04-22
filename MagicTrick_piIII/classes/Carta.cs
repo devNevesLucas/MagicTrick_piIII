@@ -31,7 +31,7 @@ namespace MagicTrick_piIII.classes
 
         public void ResetarCarta (char naipe)
         {
-            this.PossiveisValores = new List<int>();
+            this.PossiveisValores.Clear();
 
             this.PossiveisValores.AddRange(valores.ToList());
 

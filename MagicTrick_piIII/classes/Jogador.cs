@@ -51,7 +51,17 @@ namespace MagicTrick_piIII
         {
             List<Jogador> jogadoresTmp = new List<Jogador>();
 
-            string result = Jogo.ListarJogadores(idPartida);
+            string result;
+
+            try
+            {
+                result = Jogo.ListarJogadores(idPartida);
+            }
+            catch ( Exception e )
+            {
+                Console.WriteLine(e.Message);
+                return jogadoresTmp;
+            }
 
             if (!Auxiliar.VerificarErro(result))
             {

@@ -250,10 +250,12 @@ namespace MagicTrick_piIII.classes
 
         public static void AtualizarCartas(List<Jogador> jogadores)
         {
-            char orientacao = 'H';  
+            char orientacao;  
 
             for(int i = 0; i < jogadores.Count; i++)
             {
+                orientacao = 'H';
+
                 if (i % 2 == 0 && jogadores.Count == 4)                
                     orientacao = 'V';
                                                   

@@ -27,7 +27,7 @@ namespace MagicTrick_piIII.classes
                 return cartasConsultaTmp;
             }
 
-            if (Auxiliar.VerificarErro(result))
+            if (result.StartsWith("ERRO")) 
                 return cartasConsultaTmp;
 
 

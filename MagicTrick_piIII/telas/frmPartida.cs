@@ -42,7 +42,10 @@ namespace MagicTrick_piIII.telas
 
             List<Jogador> jogadoresTmp = Jogador.RetornarJogadoresPartida(idPartida);
 
-            List<Jogador> jogadoresDgv = jogadoresTmp.ToList();         
+            List<Jogador> jogadoresDgv = jogadoresTmp.ToList();
+
+            if (jogadoresTmp.Count == 0)
+                return;
 
             if(this.Jogadores.Count != jogadoresTmp.Count)
             {
@@ -99,11 +102,14 @@ namespace MagicTrick_piIII.telas
             lblStatusPartida.Text = statusNovo;
         }
 
-        private void ConsultarMao()
+        private bool ConsultarMao()
         {
             int idPartida = this.Partida.IdPartida;
 
             List<CartasConsulta> cartas = CartasConsulta.HandleConsultarMao(idPartida);
+
+            if (cartas.Count < 0)
+                return false;
 
             Control.ControlCollection controle = this.Controls;
 
@@ -112,6 +118,8 @@ namespace MagicTrick_piIII.telas
 
             else
                 Jogador.AtualizarDeck(this.Jogadores, cartas);
+
+            return true;
         }
 
         private bool HandleVerificarVez()
@@ -144,7 +152,9 @@ namespace MagicTrick_piIII.telas
                     AtualizarDataGridView();
                     Jogador.OrganizarJogadores(ref this.Jogadores, idJogador);
                 }
-                ConsultarMao();
+
+                if (!ConsultarMao())
+                    return false;
 
                 this.CartasImpressas = true;
                 flagNovaRodada = false;                
@@ -242,21 +252,38 @@ namespace MagicTrick_piIII.telas
             int idJogador = this.Player.IdJogador;
             string senha = this.Player.Senha;
 
+            string retorno = "";
+
             if (this.Partida.StatusRodada == 'C')
             {
-                string retorno = Jogo.Jogar(idJogador, senha, posicao);
+                try
+                {
+                    retorno = Jogo.Jogar(idJogador, senha, posicao);
+                } 
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return this.Jogar(posicao);
+                }
 
                 if (Auxiliar.VerificarErro(retorno))
                     return false;
             }
             else
             {
-                string retorno = Jogo.Apostar(idJogador, senha, posicao);
+                try
+                {
+                    retorno = Jogo.Apostar(idJogador, senha, posicao);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return this.Jogar(posicao);
+                }
 
                 if (Auxiliar.VerificarErro(retorno))
                     return false;
             }
-
             return true;
         }
 
