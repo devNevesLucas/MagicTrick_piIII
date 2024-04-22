@@ -194,5 +194,26 @@
   <ItemGroup>
     <None Include="Resources\mascaraHorizontal.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coracao_vitoria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\espadas_vitoria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estrela_vitoria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lua_vitoria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ouros_vitoria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paus_vitoria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\triangulo_vitoria.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

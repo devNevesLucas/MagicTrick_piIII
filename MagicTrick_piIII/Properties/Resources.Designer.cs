@@ -93,6 +93,16 @@ namespace MagicTrick_piIII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap coracao_vitoria {
+            get {
+                object obj = ResourceManager.GetObject("coracao_vitoria", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap coracaoHorizontal {
             get {
                 object obj = ResourceManager.GetObject("coracaoHorizontal", resourceCulture);
@@ -113,9 +123,29 @@ namespace MagicTrick_piIII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap espadas_vitoria {
+            get {
+                object obj = ResourceManager.GetObject("espadas_vitoria", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap espadasHorizontal {
             get {
                 object obj = ResourceManager.GetObject("espadasHorizontal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap estrela_vitoria {
+            get {
+                object obj = ResourceManager.GetObject("estrela_vitoria", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +176,16 @@ namespace MagicTrick_piIII.Properties {
         internal static System.Drawing.Bitmap lua {
             get {
                 object obj = ResourceManager.GetObject("lua", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lua_vitoria {
+            get {
+                object obj = ResourceManager.GetObject("lua_vitoria", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,6 +233,16 @@ namespace MagicTrick_piIII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ouros_vitoria {
+            get {
+                object obj = ResourceManager.GetObject("ouros_vitoria", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ourosHorizontal {
             get {
                 object obj = ResourceManager.GetObject("ourosHorizontal", resourceCulture);
@@ -213,6 +263,16 @@ namespace MagicTrick_piIII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap paus_vitoria {
+            get {
+                object obj = ResourceManager.GetObject("paus_vitoria", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pausHorizontal {
             get {
                 object obj = ResourceManager.GetObject("pausHorizontal", resourceCulture);
@@ -226,6 +286,16 @@ namespace MagicTrick_piIII.Properties {
         internal static System.Drawing.Bitmap triangulo {
             get {
                 object obj = ResourceManager.GetObject("triangulo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap triangulo_vitoria {
+            get {
+                object obj = ResourceManager.GetObject("triangulo_vitoria", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
