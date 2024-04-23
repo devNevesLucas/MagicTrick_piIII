@@ -29,17 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grpJogo = new System.Windows.Forms.GroupBox();
-            this.dgvJogadores = new System.Windows.Forms.DataGridView();
             this.btnIniciarPartida = new System.Windows.Forms.Button();
             this.lblStatusPartida = new System.Windows.Forms.Label();
             this.lblVersao = new System.Windows.Forms.Label();
-            this.btnAtualizar = new System.Windows.Forms.Button();
-            this.btnEnviar = new System.Windows.Forms.Button();
-            this.txtCarta = new System.Windows.Forms.TextBox();
             this.tmrAtualizarEstado = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).BeginInit();
             this.SuspendLayout();
             // 
             // grpJogo
@@ -49,34 +43,10 @@
             this.grpJogo.ForeColor = System.Drawing.Color.White;
             this.grpJogo.Location = new System.Drawing.Point(12, 55);
             this.grpJogo.Name = "grpJogo";
-            this.grpJogo.Size = new System.Drawing.Size(731, 581);
+            this.grpJogo.Size = new System.Drawing.Size(1152, 581);
             this.grpJogo.TabIndex = 0;
             this.grpJogo.TabStop = false;
             this.grpJogo.Text = "Joguinho";
-            // 
-            // dgvJogadores
-            // 
-            this.dgvJogadores.AllowUserToAddRows = false;
-            this.dgvJogadores.AllowUserToDeleteRows = false;
-            this.dgvJogadores.AllowUserToResizeColumns = false;
-            this.dgvJogadores.AllowUserToResizeRows = false;
-            this.dgvJogadores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvJogadores.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
-            this.dgvJogadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvJogadores.Enabled = false;
-            this.dgvJogadores.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
-            this.dgvJogadores.Location = new System.Drawing.Point(828, 55);
-            this.dgvJogadores.Name = "dgvJogadores";
-            this.dgvJogadores.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(70)))), ((int)(((byte)(84)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvJogadores.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvJogadores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvJogadores.Size = new System.Drawing.Size(336, 253);
-            this.dgvJogadores.TabIndex = 1;
             // 
             // btnIniciarPartida
             // 
@@ -116,43 +86,6 @@
             this.lblVersao.TabIndex = 4;
             this.lblVersao.Text = "Luxemburgo - ";
             // 
-            // btnAtualizar
-            // 
-            this.btnAtualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(24)))));
-            this.btnAtualizar.FlatAppearance.BorderSize = 0;
-            this.btnAtualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAtualizar.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAtualizar.ForeColor = System.Drawing.Color.White;
-            this.btnAtualizar.Location = new System.Drawing.Point(624, 12);
-            this.btnAtualizar.Name = "btnAtualizar";
-            this.btnAtualizar.Size = new System.Drawing.Size(119, 37);
-            this.btnAtualizar.TabIndex = 5;
-            this.btnAtualizar.Text = "Atualizar";
-            this.btnAtualizar.UseVisualStyleBackColor = false;
-            this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
-            // 
-            // btnEnviar
-            // 
-            this.btnEnviar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(24)))));
-            this.btnEnviar.FlatAppearance.BorderSize = 0;
-            this.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEnviar.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnviar.ForeColor = System.Drawing.Color.White;
-            this.btnEnviar.Location = new System.Drawing.Point(932, 580);
-            this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(142, 53);
-            this.btnEnviar.TabIndex = 6;
-            this.btnEnviar.Text = "Enviar";
-            this.btnEnviar.UseVisualStyleBackColor = false;
-            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
-            // 
-            // txtCarta
-            // 
-            this.txtCarta.Location = new System.Drawing.Point(959, 554);
-            this.txtCarta.Name = "txtCarta";
-            this.txtCarta.Size = new System.Drawing.Size(85, 20);
-            this.txtCarta.TabIndex = 7;
-            // 
             // tmrAtualizarEstado
             // 
             this.tmrAtualizarEstado.Enabled = true;
@@ -165,18 +98,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(33)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(1187, 645);
-            this.Controls.Add(this.txtCarta);
-            this.Controls.Add(this.btnEnviar);
-            this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.lblVersao);
             this.Controls.Add(this.lblStatusPartida);
             this.Controls.Add(this.btnIniciarPartida);
-            this.Controls.Add(this.dgvJogadores);
             this.Controls.Add(this.grpJogo);
             this.Name = "frmPartida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Magic Trick (Luxemburgo) - Partida";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).EndInit();
+            this.Load += new System.EventHandler(this.frmPartida_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,13 +114,9 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grpJogo;
-        private System.Windows.Forms.DataGridView dgvJogadores;
         private System.Windows.Forms.Button btnIniciarPartida;
         private System.Windows.Forms.Label lblStatusPartida;
         private System.Windows.Forms.Label lblVersao;
-        private System.Windows.Forms.Button btnAtualizar;
-        private System.Windows.Forms.Button btnEnviar;
-        private System.Windows.Forms.TextBox txtCarta;
         private System.Windows.Forms.Timer tmrAtualizarEstado;
     }
 }

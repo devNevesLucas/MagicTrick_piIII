@@ -30,19 +30,17 @@ namespace MagicTrick_piIII.telas
 
             this.Automato = new Automato(this.Player);
 
-            AtualizarDataGridView();
+            AtualizarListaDeJogadores();
                                
             lblVersao.Text += Jogo.Versao;
         }
 
-        private void AtualizarDataGridView()
+        private void AtualizarListaDeJogadores()
         {
             int idPartida = this.Partida.IdPartida;
             int idJogador = this.Player.IdJogador;
 
             List<Jogador> jogadoresTmp = Jogador.RetornarJogadoresPartida(idPartida);
-
-            List<Jogador> jogadoresDgv = jogadoresTmp.ToList();
 
             if (jogadoresTmp.Count == 0)
                 return;
@@ -52,20 +50,14 @@ namespace MagicTrick_piIII.telas
                 this.Jogadores = jogadoresTmp;
                 int indexJogador = this.Jogadores.FindIndex(j => j.IdJogador == idJogador);
                 this.Jogadores[indexJogador] = this.Player;
-            }
-          
-            dgvJogadores.DataSource = jogadoresDgv;
-
-            dgvJogadores.Columns[3].Visible = false;
-            dgvJogadores.Columns[4].Visible = false;
-            dgvJogadores.Columns[5].Visible = false;
+            }                   
         }
 
         private void AtualizarStatus(DadosVerificacao dadosVerificacao)
         {
             
             if(this.Partida.Round == 1 && this.Partida.Rodada == 1)
-                AtualizarDataGridView();
+                AtualizarListaDeJogadores();
           
             this.Partida.Status = dadosVerificacao.StatusPartida;
 
@@ -133,9 +125,14 @@ namespace MagicTrick_piIII.telas
 
             if (verificacao == null)
             {                
-                AtualizarDataGridView();
+                AtualizarListaDeJogadores();
                 return false;
             }
+
+
+            //Verificações que demonstram que a partida finalizou:
+            if (verificacao.StatusPartida == 'E' || verificacao.StatusPartida == 'F')
+                return false;
 
             if (this.Partida.Rodada != verificacao.RodadaAtual)
             {
@@ -149,7 +146,7 @@ namespace MagicTrick_piIII.telas
             {
                 if(this.Partida.Round == 1)
                 {                    
-                    AtualizarDataGridView();
+                    AtualizarListaDeJogadores();
                     Jogador.OrganizarJogadores(ref this.Jogadores, idJogador);
                 }
 
@@ -214,38 +211,7 @@ namespace MagicTrick_piIII.telas
             string statusNovo = $"Vez do jogador: {nomeJogadorTmp}   -   ID: {idJogadorTmp} : Jogar Carta";
 
             lblStatusPartida.Text = statusNovo;
-        }
-
-        private void btnAtualizar_Click(object sender, EventArgs e)
-        {
-            HandleVerificarVez();
-        }  
-
-        private void btnEnviar_Click(object sender, EventArgs e)
-        {
-            int idJogador = this.Player.IdJogador;
-            string senha = this.Player.Senha;
-
-            int indexSelecao;
-
-            if (!int.TryParse(txtCarta.Text, out indexSelecao))
-                return;
-
-            if(this.Partida.StatusRodada == 'C')
-            {
-                string retorno = Jogo.Jogar(idJogador, senha, indexSelecao);
-
-                if (Auxiliar.VerificarErro(retorno))
-                    return;         
-            } 
-            else
-            {               
-                string retorno = Jogo.Apostar(idJogador, senha, indexSelecao);
-
-                if (Auxiliar.VerificarErro(retorno))
-                    return;
-            }
-        }
+        }       
 
         private bool Jogar(int posicao)
         {
@@ -300,6 +266,11 @@ namespace MagicTrick_piIII.telas
                 this.Jogar(posicao);
             }                                                   
             tmrAtualizarEstado.Enabled = true;
+        }
+
+        private void frmPartida_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

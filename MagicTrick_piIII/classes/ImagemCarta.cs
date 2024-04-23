@@ -15,11 +15,11 @@ namespace MagicTrick_piIII.classes
         public Label LblValorCarta { get; set; }
         public Posicionamento Posicionamento { get; set; }
 
-        public static int[,] posicoes = new int[,] { { 41, 178 }, { 212, 83 }, { 592, 178 }, { 212, 481 } };
+        public static int[,] posicoes = new int[,] { { 43, 180 }, { 419, 85 }, { 1011, 180 }, { 422, 483 } };
 
-        public static int[,] posicoesJogadas = new int[,] { { 288, 326 }, { 359, 270 }, { 411, 326 }, { 359, 364 } };
+        public static int[,] posicoesJogadas = new int[,] { { 498, 328 }, { 560, 275 }, { 604, 328 }, { 560, 363 } };
 
-        public static int[,] posicoesApostas = new int[,] { { 41, 117 }, { 559, 83 }, { 592, 529 }, { 156, 547 } };
+        public static int[,] posicoesApostas = new int[,] { { 76, 536 }, { 351, 118 }, { 1044, 117 }, { 778, 516 } };
 
 
         public ImagemCarta(int x, int y, char orientacao, char naipe)
@@ -64,8 +64,8 @@ namespace MagicTrick_piIII.classes
             ponto.Y += this.Posicionamento.Altura / 2 - 14;
 
             this.LblValorCarta.Location = ponto;
-            this.LblValorCarta.ForeColor = Color.Black;
-            this.LblValorCarta.BackColor = System.Drawing.Color.Transparent;
+            this.LblValorCarta.ForeColor = Color.White;
+            this.LblValorCarta.BackColor = Color.Black;
 
             this.LblValorCarta.TextAlign = ContentAlignment.MiddleCenter;
             this.LblValorCarta.Font = fonteLabel;
