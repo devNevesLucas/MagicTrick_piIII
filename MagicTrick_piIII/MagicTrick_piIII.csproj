@@ -59,6 +59,7 @@
     <Compile Include="classes\DadosVerificacao.cs" />
     <Compile Include="classes\ImagemCarta.cs" />
     <Compile Include="classes\Jogador.cs" />
+    <Compile Include="classes\Ponto.cs" />
     <Compile Include="classes\Posicionamento.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
