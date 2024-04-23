@@ -64,8 +64,8 @@ namespace MagicTrick_piIII.classes
             ponto.Y += this.Posicionamento.Altura / 2 - 14;
 
             this.LblValorCarta.Location = ponto;
-            this.LblValorCarta.ForeColor = Color.White;
-            this.LblValorCarta.BackColor = Color.Black;
+            this.LblValorCarta.ForeColor = Color.Black;
+            this.LblValorCarta.BackColor = System.Drawing.Color.Transparent;
 
             this.LblValorCarta.TextAlign = ContentAlignment.MiddleCenter;
             this.LblValorCarta.Font = fonteLabel;
