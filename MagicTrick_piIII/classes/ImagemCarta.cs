@@ -13,7 +13,7 @@ namespace MagicTrick_piIII.classes
     {
         public Panel PnlImgNaipe { get; set; }
         public Label LblValorCarta { get; set; }
-        public Posicionamento Posicionamento { get; set; }
+        public PosicionamentoCarta Posicionamento { get; set; }
 
         public static int[,] posicoes = new int[,] { { 43, 180 }, { 419, 85 }, { 1011, 180 }, { 422, 483 } };
 
@@ -24,13 +24,13 @@ namespace MagicTrick_piIII.classes
 
         public ImagemCarta(int x, int y, char orientacao, char naipe)
         {
-            this.Posicionamento = new Posicionamento(x, y, orientacao);
+            this.Posicionamento = new PosicionamentoCarta(x, y, orientacao);
             this.InicializarPropriedades(orientacao, naipe);
         }
 
         public ImagemCarta(int x, int y, char orientacao, char naipe, int iterador)
         {
-            this.Posicionamento = new Posicionamento(x, y, orientacao, iterador);
+            this.Posicionamento = new PosicionamentoCarta(x, y, orientacao, iterador);
             this.InicializarPropriedades(orientacao, naipe);
         }
 
