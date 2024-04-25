@@ -1,4 +1,5 @@
 ﻿using MagicTrick_piIII.classes;
+using MagicTrick_piIII.Enums;
 using MagicTrickServer;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ namespace MagicTrick_piIII
         public Carta CartaAposta { get; set; }
         public List<char> NaipesDePontosDaRodada { get; set; }
         public string Senha { get; set; }
-
+        public Orientacao Orientacao { get; set; }  
+        public Posicao Posicao { get; set; }
 
         public Jogador(string linha)
         {
@@ -94,6 +96,23 @@ namespace MagicTrick_piIII
             }
 
             jogadoresTmp.Add(jogadores[indexPlayer]);
+
+            if(jogadoresTmp.Count == 2)
+            {
+                jogadoresTmp[0].Posicao = Posicao.Cima;
+                jogadoresTmp[0].Orientacao = Orientacao.Horizontal;
+
+                jogadoresTmp[1].Posicao = Posicao.Baixo;
+                jogadoresTmp[1].Orientacao = Orientacao.Horizontal;
+            }
+            else
+            {
+                for(int i = 0; i < jogadoresTmp.Count; i++)
+                {
+                    jogadoresTmp[i].Posicao = (Posicao)i;
+                    jogadoresTmp[i].Orientacao = i % 2 == 0 ? Orientacao.Vertical : Orientacao.Horizontal;
+                }
+            }
 
             jogadores = jogadoresTmp;
         }

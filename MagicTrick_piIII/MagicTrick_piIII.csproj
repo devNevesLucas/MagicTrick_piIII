@@ -64,6 +64,8 @@
     <Compile Include="classes\Posicionamento.cs" />
     <Compile Include="classes\PosicionamentoCarta.cs" />
     <Compile Include="classes\PosicionamentoPonto.cs" />
+    <Compile Include="Enums\Orientacao.cs" />
+    <Compile Include="Enums\Posicao.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -9,12 +9,14 @@ namespace MagicTrick_piIII.classes
 {
     public class PosicionamentoPonto : Posicionamento
     {
-        int MargemPontos;
+        int MargemPontos = 2;
 
         public PosicionamentoPonto(int x, int y, char orientacao, int iterador) : base(18)
         {
             int xFinal = x;
             int yFinal = y;
+
+            iterador--;
 
             if (orientacao == 'V')
             {
