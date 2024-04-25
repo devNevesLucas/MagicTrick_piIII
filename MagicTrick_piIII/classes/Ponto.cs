@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MagicTrick_piIII.classes
 {
@@ -12,6 +13,8 @@ namespace MagicTrick_piIII.classes
         public char NaipeRodada { get; set; }    
         public int Rodada { get; set; }
         public List<char> Naipes { get; set; }
+        public ImagemPonto ImagemPonto { get; set; }
+
 
         public Ponto(List<CartasHistorico> historico, int rodadaAtual)
         {
@@ -53,6 +56,22 @@ namespace MagicTrick_piIII.classes
 
             }
             this.IdJogador = historico[indexMaior].IdJogador;
+        }
+
+        public static void AtribuirPonto(Jogador jogador, Ponto ponto, int indexJogador, Control.ControlCollection controle)
+        {
+            jogador.PontosRodada.Add(ponto);
+
+            int qtdPontosRodada = jogador.PontosRodada.Count;
+            char naipePonto = ponto.NaipeRodada;
+
+            foreach(char naipe in ponto.Naipes)            
+                if (!jogador.NaipesDePontosDaRodada.Contains(naipe))
+                    jogador.NaipesDePontosDaRodada.Add(naipe);
+            
+            ponto.ImagemPonto = new ImagemPonto(indexJogador, qtdPontosRodada, naipePonto);
+            controle.Add(ponto.ImagemPonto.PnlPonto);
+            ponto.ImagemPonto.PnlPonto.BringToFront();
         }
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="classes\CartasVerificacao.cs" />
     <Compile Include="classes\DadosVerificacao.cs" />
     <Compile Include="classes\ImagemCarta.cs" />
+    <Compile Include="classes\ImagemPonto.cs" />
     <Compile Include="classes\Jogador.cs" />
     <Compile Include="classes\Ponto.cs" />
     <Compile Include="classes\Posicionamento.cs" />

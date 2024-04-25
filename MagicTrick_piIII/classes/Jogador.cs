@@ -14,10 +14,11 @@ namespace MagicTrick_piIII
         public int IdJogador { get; set; }  
         public string Nome { get; set; }
         public int Pontuacao { get; set; }
+        public List<Ponto> PontosRodada { get; set; }
         public List<Carta> Deck { get; set; }
         public Carta CartaJogada { get; set; }
         public Carta CartaAposta { get; set; }
-        public List<char> NaipeVitorias { get; set; }
+        public List<char> NaipesDePontosDaRodada { get; set; }
         public string Senha { get; set; }
 
 
@@ -32,8 +33,9 @@ namespace MagicTrick_piIII
             this.Nome = dados[1];
             this.Pontuacao = Convert.ToInt32(dados[2]);
 
+            this.PontosRodada = new List<Ponto>();
             this.Deck = new List<Carta>();
-            this.NaipeVitorias = new List<char>();
+            this.NaipesDePontosDaRodada = new List<char>();
         }
         
         public Jogador(int idJogador, string nome, string senha)
@@ -43,8 +45,9 @@ namespace MagicTrick_piIII
             this.Senha = senha;
             this.Pontuacao = 0;
 
+            this.PontosRodada = new List<Ponto>();
             this.Deck = new List<Carta>();
-            this.NaipeVitorias = new List<char>();
+            this.NaipesDePontosDaRodada = new List<char>();
         }
 
         public static List<Jogador> RetornarJogadoresPartida(int idPartida)
@@ -131,6 +134,11 @@ namespace MagicTrick_piIII
                 idJogador = jogadores[i].IdJogador;
                 deckJogador = decks.Find(d => d.IdJogador == idJogador);
 
+                foreach (Ponto ponto in jogadores[i].PontosRodada)
+                    ponto.ImagemPonto.PnlPonto.Visible = false;
+
+                jogadores[i].PontosRodada.Clear();
+
                 if (deckJogador == null) continue;
 
                 for(int j = 0; j < deckJogador.NaipeCartas.Count; j++)
@@ -195,7 +203,7 @@ namespace MagicTrick_piIII
             }
         }
 
-        public static void VerificarHistorico(List<Jogador> jogadores, Partida partida)
+        public static void VerificarHistorico(List<Jogador> jogadores, Partida partida, Control.ControlCollection controle)
         {
             List<CartasHistorico> historicoJogadas = CartasHistorico.HandleHistoricoJogadas(partida);
             int idJogador, posicao, valorCarta;
@@ -216,6 +224,12 @@ namespace MagicTrick_piIII
                 }
             }
 
+            Ponto ponto = new Ponto(historicoJogadas, partida.Rodada);
+
+            int indexJogador = jogadores.FindIndex(j => j.IdJogador == ponto.IdJogador);
+            Jogador jogadorTmp = jogadores[indexJogador];
+
+            Ponto.AtribuirPonto(jogadorTmp, ponto, indexJogador, controle);
         }
     }
 }
