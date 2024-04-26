@@ -15,7 +15,6 @@ namespace MagicTrick_piIII.classes
         {
             this.Jogador = jogador;
         }
-
         /*
             Recebe todos os jogadores da partida, percorre o deck de cada um deles, 
             adiciona cada uma de suas cartas ao dicionário que o autômato possui.         
@@ -39,7 +38,6 @@ namespace MagicTrick_piIII.classes
                 }
             }
         }
-
         /*
             Função responsável por retornar a primeira carta disponível para ser jogada na rodada
             atual. Verifica se há alguma carta disponível com o atual naipe, caso não haja,
@@ -65,6 +63,35 @@ namespace MagicTrick_piIII.classes
                 posicao = this.Jogador.Deck.FindIndex(c => c.Disponivel);
 
             return posicao + 1;
+        }
+
+        public void LimitarCartas()
+        {
+            char naipe;
+            List<Carta> cartas;
+            int valor;
+
+           foreach(KeyValuePair<char, List<Carta>> chaveValor in this.Decks)
+            {
+                naipe = chaveValor.Key;
+                cartas = chaveValor.Value;  
+
+                foreach(Carta cartaAtual in cartas)                
+                    if(!cartaAtual.Disponivel)
+                    {
+                        valor = cartaAtual.ValorReal;
+
+                        for(int i = 0; i < cartas.Count; i++)                        
+                            if (cartas[i] != cartaAtual)
+                            {
+                                cartas[i].PossiveisValores.Remove(valor);
+
+                                if (cartas[i].PossiveisValores.Count == 1)
+                                    cartas[i].AtualizarCartaDescoberta();
+                            }
+                        
+                    }                
+            }
         }
     }
 }

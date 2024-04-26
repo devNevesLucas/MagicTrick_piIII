@@ -73,7 +73,6 @@ namespace MagicTrick_piIII.classes
            
             this.LblValorCarta.Size = new Size(28, 28);
             this.LblValorCarta.Visible = false;
-
         }
 
         public static Bitmap RetornarNaipeBitmap(char naipe, Orientacao orientacao)
@@ -144,108 +143,58 @@ namespace MagicTrick_piIII.classes
                 }
         }
 
+        private static void TrazerParaFrente(Carta carta)
+        {
+            carta.ImagemCarta.PnlImgNaipe.BringToFront();
+            carta.ImagemCarta.LblValorCarta.BringToFront();
+        }
+
         public static void CriarImagemCartas(List<Jogador> jogadores, Control.ControlCollection controle)
         {
-            int x, y;
+            int x, y, posicaoTela;
             char naipe;
             Orientacao orientacao;
+           
+            for(int i = 0; i < jogadores.Count; i++)
+            {                                      
+                orientacao = jogadores[i].Orientacao;
+                posicaoTela = (int)jogadores[i].Posicao;
+                x = posicoes[posicaoTela, 0];
+                y = posicoes[posicaoTela, 1];
 
-            if (jogadores.Count == 4)
-                for(int i = 0; i < jogadores.Count; i++)
+                for (int j = 0; j < jogadores[i].Deck.Count; j++)
                 {                                      
-                    orientacao = jogadores[i].Orientacao;
-                    x = posicoes[i, 0];
-                    y = posicoes[i, 1];
-
-                    for (int j = 0; j < jogadores[i].Deck.Count; j++)
-                    {                                      
-                        naipe = jogadores[i].Deck[j].Naipe;
+                    naipe = jogadores[i].Deck[j].Naipe;
                                                
-                        jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
+                    jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
 
-                        controle.Add(jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe);                       
-                        controle.Add(jogadores[i].Deck[j].ImagemCarta.LblValorCarta);
+                    controle.Add(jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe);                       
+                    controle.Add(jogadores[i].Deck[j].ImagemCarta.LblValorCarta);                    
+                    TrazerParaFrente(jogadores[i].Deck[j]);
+                }
 
-                        jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe.BringToFront();
-                        jogadores[i].Deck[j].ImagemCarta.LblValorCarta.BringToFront();
-                    }
+                x = posicoesJogadas[posicaoTela, 0];
+                y = posicoesJogadas[posicaoTela, 1];
 
-                    x = posicoesJogadas[i, 0];
-                    y = posicoesJogadas[i, 1];
-
-                    jogadores[i].CartaJogada.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
+                jogadores[i].CartaJogada.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
                     
-                    controle.Add(jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe);
-                    controle.Add(jogadores[i].CartaJogada.ImagemCarta.LblValorCarta);
+                controle.Add(jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe);
+                controle.Add(jogadores[i].CartaJogada.ImagemCarta.LblValorCarta);
 
-                    jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe.Visible = false;
-                    jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe.BringToFront();
-                    jogadores[i].CartaJogada.ImagemCarta.LblValorCarta.BringToFront();
+                jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe.Visible = false;
+                TrazerParaFrente(jogadores[i].CartaJogada);
+                
+                x = posicoesApostas[posicaoTela, 0];
+                y = posicoesApostas[posicaoTela, 1];
 
+                jogadores[i].CartaAposta.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
 
-                    x = posicoesApostas[i, 0];
-                    y = posicoesApostas[i, 1];
+                controle.Add(jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe);
+                controle.Add(jogadores[i].CartaAposta.ImagemCarta.LblValorCarta);
 
-                    jogadores[i].CartaAposta.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
-
-                    controle.Add(jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe);
-                    controle.Add(jogadores[i].CartaAposta.ImagemCarta.LblValorCarta);
-
-                    jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.Visible = false;
-                    jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.BringToFront();
-                    jogadores[i].CartaAposta.ImagemCarta.LblValorCarta.BringToFront();
-                }
-
-            else 
-            {
-                int posicaoTela;
-
-                for(int i = 0; i < jogadores.Count; i++)
-                {
-                    orientacao = jogadores[i].Orientacao;
-                    posicaoTela = (int)jogadores[i].Posicao;
-
-                    for(int j = 0; j < jogadores[i].Deck.Count(); j++)
-                    {
-                        naipe = jogadores[i].Deck[j].Naipe;
-                        x = posicoes[posicaoTela, 0];
-                        y = posicoes[posicaoTela, 1];
-
-                        jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
-
-                        controle.Add(jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe);
-                        controle.Add(jogadores[i].Deck[j].ImagemCarta.LblValorCarta);
-
-                        jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe.BringToFront();
-                        jogadores[i].Deck[j].ImagemCarta.LblValorCarta.BringToFront();
-
-                    }
-                    x = posicoesJogadas[posicaoTela, 0];
-                    y = posicoesJogadas[posicaoTela, 1];
-
-                    jogadores[i].CartaJogada.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
-
-                    x = posicoesApostas[posicaoTela, 0];
-                    y = posicoesApostas[posicaoTela, 1];
-
-                    jogadores[i].CartaAposta.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
-
-                    controle.Add(jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe);
-                    controle.Add(jogadores[i].CartaJogada.ImagemCarta.LblValorCarta);
-
-                    jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe.Visible = false;
-                    jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe.BringToFront();
-                    jogadores[i].CartaJogada.ImagemCarta.LblValorCarta.BringToFront();
-
-
-                    controle.Add(jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe);
-                    controle.Add(jogadores[i].CartaAposta.ImagemCarta.LblValorCarta);
-
-                    jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.Visible = false;
-                    jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.BringToFront();
-                    jogadores[i].CartaAposta.ImagemCarta.LblValorCarta.BringToFront();
-                }
-            }
+                jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.Visible = false;
+                TrazerParaFrente(jogadores[i].CartaAposta);
+            }           
         }
 
         public static void AtualizarCartas(List<Jogador> jogadores)
@@ -268,9 +217,11 @@ namespace MagicTrick_piIII.classes
             }
         }
 
-        public void ExibirLabelNumero(int numeroCarta)
+        public void ExibirLabelValor(int valor)
         {
-            this.LblValorCarta.Text = numeroCarta.ToString();
+            this.LblValorCarta.Text = valor.ToString();
+            this.LblValorCarta.ForeColor = Color.White;
+            this.LblValorCarta.BackColor = Color.Black;
             this.LblValorCarta.Visible = true;
         }
 
@@ -289,6 +240,14 @@ namespace MagicTrick_piIII.classes
         public void EsconderLabel()
         {
             this.LblValorCarta.Visible = false;
+        }
+
+        public void ExibirValorDescoberto(int valor)
+        {
+            this.LblValorCarta.ForeColor = Color.Black;
+            this.LblValorCarta.BackColor = Color.White;
+            this.LblValorCarta.Visible = true;
+            this.LblValorCarta.Text = valor.ToString(); 
         }
     }
 }

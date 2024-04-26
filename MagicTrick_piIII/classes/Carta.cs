@@ -43,7 +43,7 @@ namespace MagicTrick_piIII.classes
 
         public void TornarIndisponivel(int numeroCarta)
         {
-            this.ImagemCarta.ExibirLabelNumero(numeroCarta);
+            this.ImagemCarta.ExibirLabelValor(numeroCarta);
 
             if (!this.Disponivel)
                 return;
@@ -66,6 +66,9 @@ namespace MagicTrick_piIII.classes
         public void LimitarAbaixo(int limite)
         {
             this.PossiveisValores.RemoveRange(0, limite - 1);
+
+            if (this.PossiveisValores.Count == 1)
+                this.AtualizarCartaDescoberta();
         }
 
         public void LimitarAcima(int limite)
@@ -73,6 +76,15 @@ namespace MagicTrick_piIII.classes
             int qtdItens = this.PossiveisValores.Count - limite - 1;
             int posicaoInicial = this.PossiveisValores.Count - qtdItens;
             this.PossiveisValores.RemoveRange(posicaoInicial, qtdItens);
+
+            if (this.PossiveisValores.Count == 1)
+                this.AtualizarCartaDescoberta();
+        }
+
+        public void AtualizarCartaDescoberta()
+        {
+            this.ValorReal = this.PossiveisValores[0];
+            this.ImagemCarta.ExibirValorDescoberto(this.ValorReal);
         }
     }
 }

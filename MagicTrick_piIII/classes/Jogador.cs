@@ -203,6 +203,14 @@ namespace MagicTrick_piIII
                         jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, orientacao);
                                                              
                     jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
+
+                    /*
+                    for(int j = 0; j < posicao - 1; j++)                    
+                        jogadorAtual.Deck[j].LimitarAbaixo(valorCarta);
+                    
+                    for(int j = posicao - 1; j < jogadorAtual.Deck.Count; j++)
+                        jogadorAtual.Deck[j].LimitarAcima(valorCarta);
+                     */
                 }
             }
         }
