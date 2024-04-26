@@ -100,7 +100,7 @@ namespace MagicTrick_piIII.telas
 
             List<CartasConsulta> cartas = CartasConsulta.HandleConsultarMao(idPartida);
 
-            if (cartas.Count < 0)
+            if (cartas.Count == 0)
                 return false;
 
             Control.ControlCollection controle = this.Controls;

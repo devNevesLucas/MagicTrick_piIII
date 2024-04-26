@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrick_piIII.Enums;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -24,9 +25,9 @@ namespace MagicTrick_piIII.classes
             this.Altura = tamanho;
         }
 
-        public Posicionamento(int dimensaoA, int dimensaoB, char orientacao)
+        public Posicionamento(int dimensaoA, int dimensaoB, Orientacao orientacao)
         {            
-            if (orientacao == 'V')
+            if (orientacao == Orientacao.Vertical)
             {
                 this.Altura = dimensaoA;
                 this.Largura = dimensaoB;

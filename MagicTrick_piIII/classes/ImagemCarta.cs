@@ -1,4 +1,5 @@
-﻿using MagicTrick_piIII.telas;
+﻿using MagicTrick_piIII.Enums;
+using MagicTrick_piIII.telas;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,19 +23,19 @@ namespace MagicTrick_piIII.classes
         public static int[,] posicoesApostas = new int[,] { { 76, 536 }, { 351, 118 }, { 1044, 117 }, { 778, 516 } };
 
 
-        public ImagemCarta(int x, int y, char orientacao, char naipe)
+        public ImagemCarta(int x, int y, Orientacao orientacao, char naipe)
         {
             this.Posicionamento = new PosicionamentoCarta(x, y, orientacao);
             this.InicializarPropriedades(orientacao, naipe);
         }
 
-        public ImagemCarta(int x, int y, char orientacao, char naipe, int iterador)
+        public ImagemCarta(int x, int y, Orientacao orientacao, char naipe, int iterador)
         {
             this.Posicionamento = new PosicionamentoCarta(x, y, orientacao, iterador);
             this.InicializarPropriedades(orientacao, naipe);
         }
 
-        private void InicializarPropriedades(char orientacao, char naipe)
+        private void InicializarPropriedades(Orientacao orientacao, char naipe)
         {
             this.PnlImgNaipe = new Panel();
             this.LblValorCarta = new Label();
@@ -72,11 +73,12 @@ namespace MagicTrick_piIII.classes
            
             this.LblValorCarta.Size = new Size(28, 28);
             this.LblValorCarta.Visible = false;
+
         }
 
-        public static Bitmap RetornarNaipeBitmap(char naipe, char orientacao)
+        public static Bitmap RetornarNaipeBitmap(char naipe, Orientacao orientacao)
         {
-            if(orientacao == 'H')
+            if(orientacao == Orientacao.Horizontal)
                 switch (naipe)
                 {
                     case 'A':
@@ -144,21 +146,21 @@ namespace MagicTrick_piIII.classes
 
         public static void CriarImagemCartas(List<Jogador> jogadores, Control.ControlCollection controle)
         {
-            if(jogadores.Count == 4)
-                for(int i = 0; i <  jogadores.Count; i++)
-                {
-                    char orientacao = 'H';
-                    int x, y;
+            int x, y;
+            char naipe;
+            Orientacao orientacao;
 
-                    if (i % 2 == 0)
-                        orientacao = 'V';
-            
-                    for(int j = 0; j < jogadores[i].Deck.Count; j++)
+            if (jogadores.Count == 4)
+                for(int i = 0; i < jogadores.Count; i++)
+                {                                      
+                    orientacao = jogadores[i].Orientacao;
+                    x = posicoes[i, 0];
+                    y = posicoes[i, 1];
+
+                    for (int j = 0; j < jogadores[i].Deck.Count; j++)
                     {                                      
-                        char naipe = jogadores[i].Deck[j].Naipe;
-                        x = posicoes[i, 0];
-                        y = posicoes[i, 1];
-
+                        naipe = jogadores[i].Deck[j].Naipe;
+                                               
                         jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
 
                         controle.Add(jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe);                       
@@ -196,18 +198,18 @@ namespace MagicTrick_piIII.classes
 
             else 
             {
-                char orientacao = 'H';
-                int contador = 1;
+                int posicaoTela;
 
                 for(int i = 0; i < jogadores.Count; i++)
                 {
-                    int x, y;
+                    orientacao = jogadores[i].Orientacao;
+                    posicaoTela = (int)jogadores[i].Posicao;
 
                     for(int j = 0; j < jogadores[i].Deck.Count(); j++)
                     {
-                        char naipe = jogadores[i].Deck[j].Naipe;
-                        x = posicoes[contador, 0];
-                        y = posicoes[contador, 1];
+                        naipe = jogadores[i].Deck[j].Naipe;
+                        x = posicoes[posicaoTela, 0];
+                        y = posicoes[posicaoTela, 1];
 
                         jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
 
@@ -218,13 +220,13 @@ namespace MagicTrick_piIII.classes
                         jogadores[i].Deck[j].ImagemCarta.LblValorCarta.BringToFront();
 
                     }
-                    x = posicoesJogadas[contador, 0];
-                    y = posicoesJogadas[contador, 1];
+                    x = posicoesJogadas[posicaoTela, 0];
+                    y = posicoesJogadas[posicaoTela, 1];
 
                     jogadores[i].CartaJogada.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
 
-                    x = posicoesApostas[contador, 0];
-                    y = posicoesApostas[contador, 1];
+                    x = posicoesApostas[posicaoTela, 0];
+                    y = posicoesApostas[posicaoTela, 1];
 
                     jogadores[i].CartaAposta.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
 
@@ -242,23 +244,18 @@ namespace MagicTrick_piIII.classes
                     jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.Visible = false;
                     jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.BringToFront();
                     jogadores[i].CartaAposta.ImagemCarta.LblValorCarta.BringToFront();
-
-                    contador = 3;
                 }
             }
         }
 
         public static void AtualizarCartas(List<Jogador> jogadores)
         {
-            char orientacao;  
+            Orientacao orientacao;  
 
             for(int i = 0; i < jogadores.Count; i++)
             {
-                orientacao = 'H';
-
-                if (i % 2 == 0 && jogadores.Count == 4)                
-                    orientacao = 'V';
-                                                  
+                orientacao = jogadores[i].Orientacao;
+         
                 for(int j = 0; j < jogadores[i].Deck.Count; j++)
                 {
                     char naipe = jogadores[i].Deck[j].Naipe;
@@ -277,13 +274,8 @@ namespace MagicTrick_piIII.classes
             this.LblValorCarta.Visible = true;
         }
 
-        public void AtualizarImagemCarta(char naipe, int contador)
-        {
-            char orientacao = 'H';
-
-            if (contador % 2 == 0)
-                orientacao = 'V';
-
+        public void AtualizarImagemCarta(char naipe, Orientacao orientacao)
+        {           
             this.PnlImgNaipe.Visible = true;
             this.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
         }

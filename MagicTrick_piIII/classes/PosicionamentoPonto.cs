@@ -4,6 +4,7 @@ using System.Linq;
 using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
+using MagicTrick_piIII.Enums;
 
 namespace MagicTrick_piIII.classes
 {
@@ -11,14 +12,14 @@ namespace MagicTrick_piIII.classes
     {
         int MargemPontos = 2;
 
-        public PosicionamentoPonto(int x, int y, char orientacao, int iterador) : base(18)
+        public PosicionamentoPonto(int x, int y, Orientacao orientacao, int iterador) : base(18)
         {
             int xFinal = x;
             int yFinal = y;
 
             iterador--;
 
-            if (orientacao == 'V')
+            if (orientacao == Orientacao.Vertical)
             {
                 if (iterador >= 7)
                 {

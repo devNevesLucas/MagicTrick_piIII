@@ -58,7 +58,7 @@ namespace MagicTrick_piIII.classes
             this.IdJogador = historico[indexMaior].IdJogador;
         }
 
-        public static void AtribuirPonto(Jogador jogador, Ponto ponto, int indexJogador, Control.ControlCollection controle)
+        public static void AtribuirPonto(Jogador jogador, Ponto ponto, Control.ControlCollection controle)
         {
             jogador.PontosRodada.Add(ponto);
 
@@ -69,7 +69,7 @@ namespace MagicTrick_piIII.classes
                 if (!jogador.NaipesDePontosDaRodada.Contains(naipe))
                     jogador.NaipesDePontosDaRodada.Add(naipe);
             
-            ponto.ImagemPonto = new ImagemPonto(indexJogador, qtdPontosRodada, naipePonto);
+            ponto.ImagemPonto = new ImagemPonto(jogador.Posicao, qtdPontosRodada, naipePonto);
             controle.Add(ponto.ImagemPonto.PnlPonto);
             ponto.ImagemPonto.PnlPonto.BringToFront();
         }

@@ -179,14 +179,15 @@ namespace MagicTrick_piIII
 
         public static void AtualizarJogadas(List<Jogador> jogadores, DadosVerificacao dados)
         {
-            int indexJogador, valorCarta, posicao;
+            int valorCarta, posicao;
             char naipe, statusCarta;
             Jogador jogadorAtual;
-          
+            Orientacao orientacao;
+
             foreach(CartasVerificacao cartasJogador in dados.CartasRodada)
             {
-                indexJogador = jogadores.FindIndex(j => j.IdJogador == cartasJogador.IdJogador);
-                jogadorAtual = jogadores[indexJogador];
+                jogadorAtual = jogadores.Find(j => j.IdJogador == cartasJogador.IdJogador);
+                orientacao = jogadorAtual.Orientacao;
 
                 for(int i = 0; i < cartasJogador.Posicoes.Count; i++)
                 {
@@ -194,29 +195,13 @@ namespace MagicTrick_piIII
                     posicao = cartasJogador.Posicoes[i];
                     naipe = cartasJogador.NaipeCartas[i];
                     statusCarta = cartasJogador.StatusCartas[i];
+                   
+                    if (statusCarta == 'C')
+                        jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta, orientacao);
 
-                    if(jogadores.Count == 4)
-                    {
-                        if (statusCarta == 'C')
-                            jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta, indexJogador);
-
-                        else
-                            jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, indexJogador);
-                    }
                     else
-                    {
-                        int contador = 1;
-
-                        if (indexJogador == 1)
-                            contador = 3;
-
-                        if(statusCarta == 'C')
-                            jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta, contador);
-
-                        else
-                            jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, contador);
-                    }
-
+                        jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, orientacao);
+                                                             
                     jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
                 }
             }
@@ -243,12 +228,10 @@ namespace MagicTrick_piIII
                 }
             }
 
-            Ponto ponto = new Ponto(historicoJogadas, partida.Rodada);
+            Ponto ponto = new Ponto(historicoJogadas, partida.Rodada);            
+            Jogador jogadorTmp = jogadores.Find(j => j.IdJogador == ponto.IdJogador);
 
-            int indexJogador = jogadores.FindIndex(j => j.IdJogador == ponto.IdJogador);
-            Jogador jogadorTmp = jogadores[indexJogador];
-
-            Ponto.AtribuirPonto(jogadorTmp, ponto, indexJogador, controle);
+            Ponto.AtribuirPonto(jogadorTmp, ponto, controle);
         }
     }
 }

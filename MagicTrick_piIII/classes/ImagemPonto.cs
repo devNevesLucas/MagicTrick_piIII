@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrick_piIII.Enums;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -16,15 +17,16 @@ namespace MagicTrick_piIII.classes
         public static int[,] posicoes = { { 35, 119 }, { 769, 77 }, { 1003, 529 }, { 366, 475 } };
 
 
-        public ImagemPonto(int indexJogador, int qtdPontos, char naipe)
+        public ImagemPonto(Posicao posicao, int qtdPontos, char naipe)
         {
-            char orientacao = 'V';
+            int posicaoTela = (int)posicao;
+            Orientacao orientacao = Orientacao.Horizontal;
 
-            if (indexJogador % 2 == 0)
-                orientacao = 'H';
+            if (posicao == Posicao.Cima || posicao == Posicao.Baixo)
+                orientacao = Orientacao.Vertical;
 
-            int x = posicoes[indexJogador, 0];
-            int y = posicoes[indexJogador, 1];
+            int x = posicoes[posicaoTela, 0];
+            int y = posicoes[posicaoTela, 1];
 
             this.Posicionamento = new PosicionamentoPonto(x, y, orientacao, qtdPontos);
             this.PnlPonto = new Panel();

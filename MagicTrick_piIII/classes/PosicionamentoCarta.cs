@@ -4,6 +4,7 @@ using System.Linq;
 using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
+using MagicTrick_piIII.Enums;
 
 namespace MagicTrick_piIII.classes
 {
@@ -11,9 +12,9 @@ namespace MagicTrick_piIII.classes
     {
         int MargemCartas = 10;
 
-        public PosicionamentoCarta(int x, int y, char orientacao) : base(x, y)
+        public PosicionamentoCarta(int x, int y, Orientacao orientacao) : base(x, y)
         {
-            if (orientacao == 'V')
+            if (orientacao == Orientacao.Vertical)
             {
                 this.Altura = 38;
                 this.Largura = 56;
@@ -25,12 +26,12 @@ namespace MagicTrick_piIII.classes
             }
         }
 
-        public PosicionamentoCarta(int x, int y, char orientacao, int iterador) : base(38, 56, orientacao)
+        public PosicionamentoCarta(int x, int y, Orientacao orientacao, int iterador) : base(38, 56, orientacao)
         {
             int xFinal = x;
             int yFinal = y;
 
-            if (orientacao == 'V')
+            if (orientacao == Orientacao.Vertical)
             {
                 if (iterador >= 7)
                 {
