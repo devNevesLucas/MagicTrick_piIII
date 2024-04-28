@@ -158,6 +158,7 @@ namespace MagicTrick_piIII.telas
             }
 
             Jogador.AtualizarJogadas(this.Jogadores, verificacao);
+            Jogador.AtualizarJogadas(this.Jogadores, verificacao, this.Controls);
 
             if (flagNovaRodada)
                 Jogador.VerificarHistorico(this.Jogadores, this.Partida, this.Controls);

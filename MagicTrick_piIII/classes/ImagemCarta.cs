@@ -149,9 +149,9 @@ namespace MagicTrick_piIII.classes
             carta.ImagemCarta.LblValorCarta.BringToFront();
         }
 
-        public static void CriarImagemCartas(List<Jogador> jogadores, Control.ControlCollection controle)
+        public static void CriarImagensCartas(List<Jogador> jogadores, Control.ControlCollection controle)
         {
-            int x, y, posicaoTela;
+            int x, y, posicaoTela, posicaoCarta;
             char naipe;
             Orientacao orientacao;
            
@@ -165,8 +165,9 @@ namespace MagicTrick_piIII.classes
                 for (int j = 0; j < jogadores[i].Deck.Count; j++)
                 {                                      
                     naipe = jogadores[i].Deck[j].Naipe;
-                                               
-                    jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, j);
+
+                    posicaoCarta = jogadores[i].Deck[j].Posicao - 1;
+                    jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, posicaoCarta);
 
                     controle.Add(jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe);                       
                     controle.Add(jogadores[i].Deck[j].ImagemCarta.LblValorCarta);                    
@@ -195,6 +196,22 @@ namespace MagicTrick_piIII.classes
                 jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.Visible = false;
                 TrazerParaFrente(jogadores[i].CartaAposta);
             }           
+        }
+
+        public static void CriarImagemCarta(Jogador jogador, Control.ControlCollection controle, Carta carta)
+        {
+            int posicaoTela = (int)jogador.Posicao;
+            int x = posicoes[posicaoTela, 0];
+            int y = posicoes[posicaoTela, 1];
+            int posicaoCarta = carta.Posicao - 1;
+            char naipe = carta.Naipe;
+            Orientacao orientacao = jogador.Orientacao;
+
+            carta.ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, posicaoCarta);
+
+            controle.Add(carta.ImagemCarta.PnlImgNaipe);
+            controle.Add(carta.ImagemCarta.LblValorCarta);
+            TrazerParaFrente(carta);
         }
 
         public static void AtualizarCartas(List<Jogador> jogadores)

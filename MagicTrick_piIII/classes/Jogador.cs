@@ -119,7 +119,7 @@ namespace MagicTrick_piIII
 
         public static void PreencherDeck(List<Jogador> jogadores, List<CartasConsulta> decks, Control.ControlCollection controle)
         {
-            int idJogador;
+            int idJogador, posicao;
             CartasConsulta deckJogador;
             char naipe;
 
@@ -133,18 +133,20 @@ namespace MagicTrick_piIII
                 for(int j = 0; j < deckJogador.NaipeCartas.Count; j++)
                 {
                     naipe = deckJogador.NaipeCartas[j];
-                    jogadores[i].Deck.Add(new Carta(naipe));
+                    posicao = deckJogador.Posicoes[j];
+
+                    jogadores[i].Deck.Add(new Carta(naipe, posicao));
                 }
 
-                jogadores[i].CartaJogada = new Carta('C');
-                jogadores[i].CartaAposta = new Carta('C');
+                jogadores[i].CartaJogada = new Carta();
+                jogadores[i].CartaAposta = new Carta();
             }
-                ImagemCarta.CriarImagemCartas(jogadores, controle);
+                ImagemCarta.CriarImagensCartas(jogadores, controle);
         }
 
         public static void AtualizarDeck(List<Jogador> jogadores, List<CartasConsulta> decks)
         {
-            int idJogador;
+            int idJogador, posicaoCarta;
             CartasConsulta deckJogador;
             char naipe;
 
@@ -162,8 +164,18 @@ namespace MagicTrick_piIII
 
                 for(int j = 0; j < deckJogador.NaipeCartas.Count; j++)
                 {
-                    naipe = deckJogador.NaipeCartas[j];
-                    jogadores[i].Deck[j].ResetarCarta(naipe);
+                    posicaoCarta = jogadores[i].Deck[j].Posicao;
+
+                    if(posicaoCarta == deckJogador.Posicoes[j])
+                    {
+                        naipe = deckJogador.NaipeCartas[j];
+                        jogadores[i].Deck[j].ResetarCarta(naipe);
+                    }
+                    else
+                    {
+                        jogadores[i].Deck[j].ImagemCarta.TornarInvisivel();
+                        jogadores[i].Deck.RemoveAt(j);
+                    }
                 }
             }
             ImagemCarta.AtualizarCartas(jogadores);
@@ -177,9 +189,9 @@ namespace MagicTrick_piIII
             }
         }
 
-        public static void AtualizarJogadas(List<Jogador> jogadores, DadosVerificacao dados)
+        public static void AtualizarJogadas(List<Jogador> jogadores, DadosVerificacao dados, Control.ControlCollection controle)
         {
-            int valorCarta, posicao;
+            int valorCarta, posicao, indexCarta;
             char naipe, statusCarta;
             Jogador jogadorAtual;
             Orientacao orientacao;
@@ -202,7 +214,21 @@ namespace MagicTrick_piIII
                     else
                         jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, orientacao);
                                                              
-                    jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
+                    indexCarta = jogadorAtual.Deck.FindIndex(c => c.Posicao == posicao);
+
+                    if(indexCarta > -1)                       
+                        jogadorAtual.Deck[indexCarta].TornarIndisponivel(valorCarta);
+
+                    else
+                    {
+                        Carta novaCarta = new Carta(naipe, posicao);
+
+                        ImagemCarta.CriarImagemCarta(jogadorAtual, controle, novaCarta);
+
+                        jogadorAtual.Deck.OrderBy(c => c.Posicao);
+
+                        novaCarta.TornarIndisponivel(valorCarta);
+                    }
 
                     /*
                     for(int j = 0; j < posicao - 1; j++)                    

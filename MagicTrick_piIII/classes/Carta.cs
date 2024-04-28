@@ -11,6 +11,7 @@ namespace MagicTrick_piIII.classes
     public class Carta
     {
         public int ValorReal { get; set; }
+        public int Posicao { get; set; }
         public List<int> PossiveisValores { get; set; }    
         public char Naipe { get; set; }
         public bool Disponivel {  get; set; }     
@@ -19,13 +20,17 @@ namespace MagicTrick_piIII.classes
 
         int[] valores = new int[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
-        public Carta (char naipe)
+        public Carta () { }
+
+        public Carta (char naipe, int posicao)
         {
             this.PossiveisValores = new List<int>();
 
             this.PossiveisValores.AddRange(valores.ToList());
 
             this.Naipe = naipe;
+
+            this.Posicao = posicao;
 
             this.Disponivel = true;
         }
@@ -65,16 +70,27 @@ namespace MagicTrick_piIII.classes
 
         public void LimitarAbaixo(int limite)
         {
-            this.PossiveisValores.RemoveRange(0, limite - 1);
+            int indexValor = this.PossiveisValores.IndexOf(limite);
+
+            if (indexValor == -1)
+                return;
+
+            int posicaoFinal = indexValor - 1;
+
+            if (posicaoFinal == -1)
+                posicaoFinal = 0;
+
+            this.PossiveisValores.RemoveRange(0, posicaoFinal);
 
             if (this.PossiveisValores.Count == 1)
                 this.AtualizarCartaDescoberta();
         }
 
         public void LimitarAcima(int limite)
-        {          
-            int qtdItens = this.PossiveisValores.Count - limite - 1;
-            int posicaoInicial = this.PossiveisValores.Count - qtdItens;
+        {
+            int indexValor = this.PossiveisValores.IndexOf(limite);
+            int posicaoInicial = indexValor + 1;
+            int qtdItens = this.PossiveisValores.Count - posicaoInicial;
             this.PossiveisValores.RemoveRange(posicaoInicial, qtdItens);
 
             if (this.PossiveisValores.Count == 1)
