@@ -28,8 +28,9 @@ namespace MagicTrick_piIII
         private void btnJogar_Click(object sender, EventArgs e)
         {
             frmMenu menu = new frmMenu();
-            menu.ShowDialog();
+            menu.Show();
 
+            this.Hide();
         }
 
         private void label1_Click(object sender, EventArgs e)

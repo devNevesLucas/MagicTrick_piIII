@@ -55,7 +55,9 @@ namespace MagicTrick_piIII.telas
             Jogador jogador = new Jogador(idJogador, nomeJogador, senhaJogador);
 
             frmPartida frmPartida = new frmPartida(this.Partida, this.JogadoresPartida, jogador);
-            frmPartida.ShowDialog();
+            frmPartida.Show();
+
+            this.Close();
         }
     }
 }

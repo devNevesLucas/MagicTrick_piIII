@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,6 +31,17 @@ namespace MagicTrick_piIII
 
         private void btnVoltar_Click(object sender, EventArgs e)
         {
+            if (Application.OpenForms["Form1"] != null)
+            {
+                Form1 inicio = (Form1)Application.OpenForms["Form1"];
+                inicio.Show();
+            }
+            else
+            {
+                Form1 inicio = new Form1();
+                inicio.Show();
+            }
+
             this.Close();
         }
 
@@ -95,7 +107,7 @@ namespace MagicTrick_piIII
         private void btnEntrar_Click(object sender, EventArgs e)
         {
             frmEntrarPartida frmPartida = new frmEntrarPartida(this.PartidaSelecionada, this.JogadoresPartidaSelecionada);
-            frmPartida.ShowDialog();
+            frmPartida.Show();
         }
     }
 }
