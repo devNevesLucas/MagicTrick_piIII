@@ -230,13 +230,13 @@ namespace MagicTrick_piIII
                         novaCarta.TornarIndisponivel(valorCarta);
                     }
 
-                    /*
-                    for(int j = 0; j < posicao - 1; j++)                    
-                        jogadorAtual.Deck[j].LimitarAbaixo(valorCarta);
+                    for(int j = 0; j < posicao - 1; j++)
+                        if (jogadorAtual.Deck[j].Disponivel || jogadorAtual.Deck[j].PossiveisValores.Count < 1)
+                            jogadorAtual.Deck[j].LimitarAcima(valorCarta);
                     
                     for(int j = posicao - 1; j < jogadorAtual.Deck.Count; j++)
-                        jogadorAtual.Deck[j].LimitarAcima(valorCarta);
-                     */
+                        if (jogadorAtual.Deck[j].Disponivel || jogadorAtual.Deck[j].PossiveisValores.Count < 1)
+                            jogadorAtual.Deck[j].LimitarAbaixo(valorCarta);                     
                 }
             }
         }

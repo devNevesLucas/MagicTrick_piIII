@@ -106,10 +106,16 @@ namespace MagicTrick_piIII.telas
             Control.ControlCollection controle = this.Controls;
 
             if (this.Partida.Round == 1)
+            {
                 Jogador.PreencherDeck(this.Jogadores, cartas, controle);
+                this.Automato.InicializarDeck(this.Jogadores);
+            }
 
             else
+            {
                 Jogador.AtualizarDeck(this.Jogadores, cartas);
+                this.Automato.AtualizarDeck(this.Jogadores);
+            }
 
             return true;
         }
@@ -157,13 +163,14 @@ namespace MagicTrick_piIII.telas
                 flagNovaRodada = false;                
             }
 
-            Jogador.AtualizarJogadas(this.Jogadores, verificacao);
             Jogador.AtualizarJogadas(this.Jogadores, verificacao, this.Controls);
 
             if (flagNovaRodada)
                 Jogador.VerificarHistorico(this.Jogadores, this.Partida, this.Controls);
             
             this.Partida.NaipeRodada = verificacao.NaipeRodada;
+
+            this.Automato.LimitarCartas(verificacao);
 
             if (verificacao.IdJogador == this.Player.IdJogador)
                 return true;

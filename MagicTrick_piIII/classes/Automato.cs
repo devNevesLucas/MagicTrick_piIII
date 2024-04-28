@@ -39,6 +39,14 @@ namespace MagicTrick_piIII.classes
             }
         }
         /*
+            Atualiza a lista de decks do automato ao trocar de rodada
+         */
+        public void AtualizarDeck(List<Jogador> jogadores)
+        {
+            this.Decks.Clear();
+            this.InicializarDeck(jogadores);
+        }
+        /*
             Função responsável por retornar a primeira carta disponível para ser jogada na rodada
             atual. Verifica se há alguma carta disponível com o atual naipe, caso não haja,
             verifica se há alguma carta disponível com o naipe de C - copas, caso não haja,
@@ -65,33 +73,30 @@ namespace MagicTrick_piIII.classes
             return posicao + 1;
         }
 
-        public void LimitarCartas()
+        public void LimitarCartas(DadosVerificacao verificacao)
         {
             char naipe;
             List<Carta> cartas;
             int valor;
 
-           foreach(KeyValuePair<char, List<Carta>> chaveValor in this.Decks)
+            foreach(CartasVerificacao cartasRodada in verificacao.CartasRodada)
             {
-                naipe = chaveValor.Key;
-                cartas = chaveValor.Value;  
+                for(int i = 0; i < cartasRodada.Valores.Count; i++)
+                {
+                    naipe = cartasRodada.NaipeCartas[i];
+                    valor = cartasRodada.Valores[i];
+                    cartas = this.Decks[naipe];
 
-                foreach(Carta cartaAtual in cartas)                
-                    if(!cartaAtual.Disponivel)
+                    foreach(Carta carta in cartas)
                     {
-                        valor = cartaAtual.ValorReal;
+                        if(carta.PossiveisValores.Count > 1)                       
+                            carta.PossiveisValores.Remove(valor);
 
-                        for(int i = 0; i < cartas.Count; i++)                        
-                            if (cartas[i] != cartaAtual)
-                            {
-                                cartas[i].PossiveisValores.Remove(valor);
-
-                                if (cartas[i].PossiveisValores.Count == 1)
-                                    cartas[i].AtualizarCartaDescoberta();
-                            }
-                        
-                    }                
-            }
+                        if (carta.PossiveisValores.Count == 1 && carta.Disponivel)
+                            carta.AtualizarCartaDescoberta();
+                    }
+                }
+            }                     
         }
     }
 }
