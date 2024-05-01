@@ -30,7 +30,7 @@ namespace MagicTrick_piIII
             frmMenu menu = new frmMenu();
             menu.Show();
 
-            this.Hide();
+            //this.Hide();
         }
 
         private void label1_Click(object sender, EventArgs e)
