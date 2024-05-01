@@ -189,7 +189,7 @@ namespace MagicTrick_piIII
             }
         }
 
-        public static void AtualizarJogadas(List<Jogador> jogadores, DadosVerificacao dados, Control.ControlCollection controle)
+        public static void AtualizarJogadas(List<Jogador> jogadores, DadosVerificacao dados, Automato automato, Control.ControlCollection controle)
         {
             int valorCarta, posicao, indexCarta;
             char naipe, statusCarta;
@@ -218,24 +218,28 @@ namespace MagicTrick_piIII
 
                     if(indexCarta > -1)                       
                         jogadorAtual.Deck[indexCarta].TornarIndisponivel(valorCarta);
-
+                     
                     else
                     {
                         Carta novaCarta = new Carta(naipe, posicao);
 
                         ImagemCarta.CriarImagemCarta(jogadorAtual, controle, novaCarta);
 
-                        jogadorAtual.Deck.OrderBy(c => c.Posicao);
+                        jogadorAtual.Deck.Add(novaCarta);
+
+                        jogadorAtual.Deck = jogadorAtual.Deck.OrderBy(c => c.Posicao).ToList();
 
                         novaCarta.TornarIndisponivel(valorCarta);
+
+                        automato.InserirCarta(ref novaCarta);
                     }
 
                     for(int j = 0; j < posicao - 1; j++)
-                        if (jogadorAtual.Deck[j].Disponivel || jogadorAtual.Deck[j].PossiveisValores.Count < 1)
+                        if (jogadorAtual.Deck[j].Disponivel || jogadorAtual.Deck[j].PossiveisValores.Count > 1)
                             jogadorAtual.Deck[j].LimitarAcima(valorCarta);
                     
-                    for(int j = posicao - 1; j < jogadorAtual.Deck.Count; j++)
-                        if (jogadorAtual.Deck[j].Disponivel || jogadorAtual.Deck[j].PossiveisValores.Count < 1)
+                    for(int j = posicao; j < jogadorAtual.Deck.Count; j++)
+                        if (jogadorAtual.Deck[j].Disponivel || jogadorAtual.Deck[j].PossiveisValores.Count > 1)
                             jogadorAtual.Deck[j].LimitarAbaixo(valorCarta);                     
                 }
             }
