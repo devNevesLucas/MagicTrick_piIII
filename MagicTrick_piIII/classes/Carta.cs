@@ -70,17 +70,14 @@ namespace MagicTrick_piIII.classes
 
         public void LimitarAbaixo(int limite)
         {
-            int indexValor = this.PossiveisValores.IndexOf(limite);
+            List<int> valoresRemovidos = new List<int>();
+           
+            foreach (int valor in this.PossiveisValores)
+                if (valor < limite)
+                    valoresRemovidos.Add(valor);
 
-            if (indexValor == -1)
-                return;
-
-            int posicaoFinal = indexValor - 1;
-
-            if (posicaoFinal == -1)
-                posicaoFinal = 0;
-
-            this.PossiveisValores.RemoveRange(0, posicaoFinal);
+            foreach (int valorRemovido in valoresRemovidos)
+                this.PossiveisValores.Remove(valorRemovido);
 
             if (this.PossiveisValores.Count == 1)
                 this.AtualizarCartaDescoberta();
@@ -88,10 +85,14 @@ namespace MagicTrick_piIII.classes
 
         public void LimitarAcima(int limite)
         {
-            int indexValor = this.PossiveisValores.IndexOf(limite);
-            int posicaoInicial = indexValor + 1;
-            int qtdItens = this.PossiveisValores.Count - posicaoInicial;
-            this.PossiveisValores.RemoveRange(posicaoInicial, qtdItens);
+            List<int> valoresRemovidos = new List<int>();
+
+            foreach (int valor in this.PossiveisValores)
+                if (valor > limite)
+                    valoresRemovidos.Add(valor);
+
+            foreach (int valorRemovido in valoresRemovidos)
+                this.PossiveisValores.Remove(valorRemovido);
 
             if (this.PossiveisValores.Count == 1)
                 this.AtualizarCartaDescoberta();
