@@ -146,14 +146,18 @@ namespace MagicTrick_piIII
 
         public static void AtualizarDeck(List<Jogador> jogadores, List<CartasConsulta> decks)
         {
-            int idJogador, posicaoCarta;
+            int idJogador, posicaoCarta, qtdCartas, indexCarta;
             CartasConsulta deckJogador;
             char naipe;
+
+            List<int> cartasParaRemover = new List<int>();
 
             for(int i = 0; i < jogadores.Count; i++)
             {
                 idJogador = jogadores[i].IdJogador;
                 deckJogador = decks.Find(d => d.IdJogador == idJogador);
+
+                cartasParaRemover.Clear();
 
                 foreach (Ponto ponto in jogadores[i].PontosRodada)
                     ponto.ImagemPonto.PnlPonto.Visible = false;
@@ -162,21 +166,27 @@ namespace MagicTrick_piIII
 
                 if (deckJogador == null) continue;
 
-                for(int j = 0; j < deckJogador.NaipeCartas.Count; j++)
+                qtdCartas = jogadores[i].Deck.Count;
+
+                for(int j = 0; j < qtdCartas; j++)
                 {
                     posicaoCarta = jogadores[i].Deck[j].Posicao;
-
-                    if(posicaoCarta == deckJogador.Posicoes[j])
+                    indexCarta = deckJogador.Posicoes.FindIndex(p => p == posicaoCarta);
+                   
+                    if(indexCarta > -1)
                     {
-                        naipe = deckJogador.NaipeCartas[j];
+                        naipe = deckJogador.NaipeCartas[indexCarta];
                         jogadores[i].Deck[j].ResetarCarta(naipe);
                     }
                     else
                     {
                         jogadores[i].Deck[j].ImagemCarta.TornarInvisivel();
-                        jogadores[i].Deck.RemoveAt(j);
+                        cartasParaRemover.Add(j);  
                     }
                 }
+                for (int k = 0; k < cartasParaRemover.Count; k++)               
+                    jogadores[i].Deck.RemoveAt(cartasParaRemover[k]);
+                
             }
             ImagemCarta.AtualizarCartas(jogadores);
         }
