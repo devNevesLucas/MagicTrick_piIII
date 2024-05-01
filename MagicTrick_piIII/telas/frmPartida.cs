@@ -163,7 +163,7 @@ namespace MagicTrick_piIII.telas
                 flagNovaRodada = false;                
             }
 
-            Jogador.AtualizarJogadas(this.Jogadores, verificacao, this.Controls);
+            Jogador.AtualizarJogadas(this.Jogadores, verificacao, this.Automato, this.Controls);
 
             if (flagNovaRodada)
                 Jogador.VerificarHistorico(this.Jogadores, this.Partida, this.Controls);

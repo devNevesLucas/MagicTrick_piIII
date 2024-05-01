@@ -223,7 +223,7 @@ namespace MagicTrick_piIII.classes
                 orientacao = jogadores[i].Orientacao;
          
                 for(int j = 0; j < jogadores[i].Deck.Count; j++)
-                {
+                {                    
                     char naipe = jogadores[i].Deck[j].Naipe;
                     jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
                     jogadores[i].Deck[j].ImagemCarta.EsconderLabel();

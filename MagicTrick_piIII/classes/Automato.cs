@@ -19,7 +19,7 @@ namespace MagicTrick_piIII.classes
             Recebe todos os jogadores da partida, percorre o deck de cada um deles, 
             adiciona cada uma de suas cartas ao dicionário que o autômato possui.         
          */
-        public void InicializarDeck(List<Jogador> jogadores)
+        public void InicializarDeck(ref List<Jogador> jogadores)
         {
             Carta cartaTmp;
             char naipeTmp;
@@ -38,13 +38,20 @@ namespace MagicTrick_piIII.classes
                 }
             }
         }
+
+        public void InserirCarta(ref Carta carta)
+        {
+            char naipe = carta.Naipe;
+            this.Decks[naipe].Add(carta);
+        }
+
         /*
             Atualiza a lista de decks do automato ao trocar de rodada
          */
-        public void AtualizarDeck(List<Jogador> jogadores)
+        public void AtualizarDeck(ref List<Jogador> jogadores)
         {
             this.Decks.Clear();
-            this.InicializarDeck(jogadores);
+            this.InicializarDeck(ref jogadores);
         }
         /*
             Função responsável por retornar a primeira carta disponível para ser jogada na rodada

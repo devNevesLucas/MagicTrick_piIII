@@ -27,7 +27,7 @@ namespace MagicTrick_piIII.classes
 
             int indexMaior = 0, maiorValor = 0;
             int valorAtual;          
-            char naipeDoMaiorValor = this.NaipeRodada;
+            char naipeDoMaiorValor = historico[0].NaipeCartas[indexRodada];
             char naipeAtual;
             bool comparar;
             
