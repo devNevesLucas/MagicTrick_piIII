@@ -1,4 +1,5 @@
-﻿using MagicTrickServer;
+﻿using MagicTrick_piIII.Interfaces;
+using MagicTrickServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MagicTrick_piIII.classes
 {
-    public class CartasHistorico : CartasChamadas
+    public class CartasHistorico : CartasChamadas, IValoresContainer
     {
         public List<int> Rodadas { get; set; }  
         public List<int> Valores { get; set; }
