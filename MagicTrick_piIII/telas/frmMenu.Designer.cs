@@ -223,6 +223,7 @@
             this.dgvJogadores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvJogadores.Size = new System.Drawing.Size(339, 264);
             this.dgvJogadores.TabIndex = 9;
+            this.dgvJogadores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvJogadores_CellContentClick);
             // 
             // frmMenu
             // 

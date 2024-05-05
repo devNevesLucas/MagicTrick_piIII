@@ -105,7 +105,6 @@
             this.Name = "frmPartida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Magic Trick (Luxemburgo) - Partida";
-            this.Load += new System.EventHandler(this.frmPartida_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
