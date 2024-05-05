@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrick_piIII.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace MagicTrick_piIII.classes
             Recebe todos os jogadores da partida, percorre o deck de cada um deles, 
             adiciona cada uma de suas cartas ao dicionário que o autômato possui.         
          */
-        public void InicializarDeck(ref List<Jogador> jogadores)
+        public void InicializarDecks(ref List<Jogador> jogadores)
         {
             Carta cartaTmp;
             char naipeTmp;
@@ -38,21 +39,21 @@ namespace MagicTrick_piIII.classes
                 }
             }
         }
+        /*
+            Atualiza a lista de decks do automato ao trocar de rodada
+         */
+        public void ReiniciarDecks(ref List<Jogador> jogadores)
+        {
+            this.Decks.Clear();
+            this.InicializarDecks(ref jogadores);
+        }
 
         public void InserirCarta(ref Carta carta)
         {
             char naipe = carta.Naipe;
             this.Decks[naipe].Add(carta);
         }
-
-        /*
-            Atualiza a lista de decks do automato ao trocar de rodada
-         */
-        public void AtualizarDeck(ref List<Jogador> jogadores)
-        {
-            this.Decks.Clear();
-            this.InicializarDeck(ref jogadores);
-        }
+        
         /*
             Função responsável por retornar a primeira carta disponível para ser jogada na rodada
             atual. Verifica se há alguma carta disponível com o atual naipe, caso não haja,
@@ -80,30 +81,46 @@ namespace MagicTrick_piIII.classes
             return posicao + 1;
         }
 
-        public void LimitarCartas(DadosVerificacao verificacao)
+        public void LimitarCartas(List<IValoresContainer> cartasRodada)
         {
             char naipe;
-            List<Carta> cartas;
             int valor;
+            CartasChamadas cartaAtual;
 
-            foreach(CartasVerificacao cartasRodada in verificacao.CartasRodada)
+            foreach(IValoresContainer carta in cartasRodada)
             {
-                for(int i = 0; i < cartasRodada.Valores.Count; i++)
+                cartaAtual = (CartasChamadas)carta;
+
+                for(int i = 0; i < carta.Valores.Count; i++)
                 {
-                    naipe = cartasRodada.NaipeCartas[i];
-                    valor = cartasRodada.Valores[i];
-                    cartas = this.Decks[naipe];
+                    naipe = cartaAtual.NaipeCartas[i];
+                    valor = carta.Valores[i];
 
-                    foreach(Carta carta in cartas)
-                    {
-                        if(carta.PossiveisValores.Count > 1)                       
-                            carta.PossiveisValores.Remove(valor);
-
-                        if (carta.PossiveisValores.Count == 1 && carta.Disponivel)
-                            carta.AtualizarCartaDescoberta();
-                    }
+                    this.AtualizarDecks(valor, naipe);
                 }
             }                     
+        }
+
+        public void AtualizarDecks(int valor, char naipe)
+        {
+            List<Carta> cartas = this.Decks[naipe];
+            bool flagRemocao;
+
+            foreach(Carta carta in cartas)
+            {
+                flagRemocao = false;
+                
+                if (carta.PossiveisValores.Count > 1)
+                    flagRemocao = carta.PossiveisValores.Remove(valor);
+
+                if (carta.PossiveisValores.Count == 1 && carta.Disponivel)
+                {
+                    carta.AtualizarCartaDescoberta();
+
+                    if(flagRemocao)
+                        this.AtualizarDecks(carta.PossiveisValores[0], naipe);
+                }
+            }
         }
     }
 }

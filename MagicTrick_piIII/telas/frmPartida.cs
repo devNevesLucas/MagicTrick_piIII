@@ -1,4 +1,5 @@
 ﻿using MagicTrick_piIII.classes;
+using MagicTrick_piIII.Interfaces;
 using MagicTrickServer;
 using System;
 using System.Collections.Generic;
@@ -108,13 +109,13 @@ namespace MagicTrick_piIII.telas
             if (this.Partida.Round == 1)
             {
                 Jogador.PreencherDeck(this.Jogadores, cartas, controle);
-                this.Automato.InicializarDeck(ref this.Jogadores);
+                this.Automato.InicializarDecks(ref this.Jogadores);
             }
 
             else
             {
                 Jogador.AtualizarDeck(this.Jogadores, cartas);
-                this.Automato.AtualizarDeck(ref this.Jogadores);
+                this.Automato.ReiniciarDecks(ref this.Jogadores);
             }
 
             return true;
@@ -135,10 +136,14 @@ namespace MagicTrick_piIII.telas
                 return false;
             }
 
+            List<IValoresContainer> cartasRodada = verificacao.CartasRodada.ConvertAll<IValoresContainer>(c => c);
 
             //Verificações que demonstram que a partida finalizou:
             if (verificacao.StatusPartida == 'E' || verificacao.StatusPartida == 'F')
+            {
+                this.ExibirPlacarFinal(verificacao.StatusPartida);
                 return false;
+            }
 
             if (this.Partida.Rodada != verificacao.RodadaAtual)
             {
@@ -166,12 +171,13 @@ namespace MagicTrick_piIII.telas
             Jogador.AtualizarJogadas(this.Jogadores, verificacao, this.Automato, this.Controls);
 
             if (flagNovaRodada)
-                Jogador.VerificarHistorico(this.Jogadores, this.Partida, this.Controls);
+                Jogador.VerificarHistorico(this.Jogadores, this.Partida, this.Automato, this.Controls);
             
             this.Partida.NaipeRodada = verificacao.NaipeRodada;
 
-            this.Automato.LimitarCartas(verificacao);
+            this.Automato.LimitarCartas(cartasRodada);
 
+            
             if (verificacao.IdJogador == this.Player.IdJogador)
                 return true;
 
@@ -276,9 +282,16 @@ namespace MagicTrick_piIII.telas
             tmrAtualizarEstado.Enabled = true;
         }
 
-        private void frmPartida_Load(object sender, EventArgs e)
+        private void ExibirPlacarFinal(char statusPartida)
         {
+            int idPartida = this.Partida.IdPartida;
+            frmPlacarFinal placarFinal = new frmPlacarFinal(idPartida, statusPartida);
 
+            tmrAtualizarEstado.Stop();
+            
+            placarFinal.ShowDialog();
+
+            this.Close();
         }
     }
 }

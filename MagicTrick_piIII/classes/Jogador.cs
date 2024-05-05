@@ -1,5 +1,6 @@
 ﻿using MagicTrick_piIII.classes;
 using MagicTrick_piIII.Enums;
+using MagicTrick_piIII.Interfaces;
 using MagicTrickServer;
 using System;
 using System.Collections.Generic;
@@ -244,21 +245,16 @@ namespace MagicTrick_piIII
                         automato.InserirCarta(ref novaCarta);
                     }
 
-                    for(int j = 0; j < posicao - 1; j++)
-                        if (jogadorAtual.Deck[j].Disponivel || jogadorAtual.Deck[j].PossiveisValores.Count > 1)
-                            jogadorAtual.Deck[j].LimitarAcima(valorCarta);
-                    
-                    for(int j = posicao; j < jogadorAtual.Deck.Count; j++)
-                        if (jogadorAtual.Deck[j].Disponivel || jogadorAtual.Deck[j].PossiveisValores.Count > 1)
-                            jogadorAtual.Deck[j].LimitarAbaixo(valorCarta);                     
+                    Carta.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                                      
                 }
             }
         }
 
-        public static void VerificarHistorico(List<Jogador> jogadores, Partida partida, Control.ControlCollection controle)
+        public static void VerificarHistorico(List<Jogador> jogadores, Partida partida, Automato automato, Control.ControlCollection controle)
         {
             List<CartasHistorico> historicoJogadas = CartasHistorico.HandleHistoricoJogadas(partida);
             int idJogador, posicao, valorCarta;
+            char naipe;
             Jogador jogadorAtual;
 
             foreach(CartasHistorico cartasPorJogador in historicoJogadas)
@@ -270,9 +266,14 @@ namespace MagicTrick_piIII
                 {
                     posicao = cartasPorJogador.Posicoes[i];
                     valorCarta = cartasPorJogador.Valores[i];
+                    naipe = cartasPorJogador.NaipeCartas[i];
 
                     if (jogadorAtual.Deck[posicao - 1].Disponivel)
+                    {
                         jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
+                        Carta.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                        
+                        automato.AtualizarDecks(valorCarta, naipe);
+                    }
                 }
             }
 

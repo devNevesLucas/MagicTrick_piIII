@@ -68,19 +68,15 @@ namespace MagicTrick_piIII.classes
             this.ImagemCarta.AtualizarImagemCarta(naipe, orientacao);
         }
 
-        public void LimitarAbaixo(int limite)
+        public static void LimitarDeckJogador(List<Carta> deck, int posicao, int valorCarta)
         {
-            List<int> valoresRemovidos = new List<int>();
-           
-            foreach (int valor in this.PossiveisValores)
-                if (valor < limite)
-                    valoresRemovidos.Add(valor);
+            for(int i = 0; i < posicao - 1; i++)
+                if (deck[i].Disponivel || deck[i].PossiveisValores.Count > 1)
+                    deck[i].LimitarAcima(valorCarta);
 
-            foreach (int valorRemovido in valoresRemovidos)
-                this.PossiveisValores.Remove(valorRemovido);
-
-            if (this.PossiveisValores.Count == 1)
-                this.AtualizarCartaDescoberta();
+            for (int i = posicao; i < deck.Count; i++)
+                if (deck[i].Disponivel || deck[i].PossiveisValores.Count > 1)
+                    deck[i].LimitarAbaixo(valorCarta);                        
         }
 
         public void LimitarAcima(int limite)
@@ -98,6 +94,21 @@ namespace MagicTrick_piIII.classes
                 this.AtualizarCartaDescoberta();
         }
 
+        public void LimitarAbaixo(int limite)
+        {
+            List<int> valoresRemovidos = new List<int>();
+           
+            foreach (int valor in this.PossiveisValores)
+                if (valor < limite)
+                    valoresRemovidos.Add(valor);
+
+            foreach (int valorRemovido in valoresRemovidos)
+                this.PossiveisValores.Remove(valorRemovido);
+
+            if (this.PossiveisValores.Count == 1)
+                this.AtualizarCartaDescoberta();
+        }
+   
         public void AtualizarCartaDescoberta()
         {
             this.ValorReal = this.PossiveisValores[0];
