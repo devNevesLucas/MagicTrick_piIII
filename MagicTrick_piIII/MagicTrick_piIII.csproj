@@ -105,6 +105,12 @@
     <Compile Include="telas\frmPartida.Designer.cs">
       <DependentUpon>frmPartida.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\frmPlacarFinal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\frmPlacarFinal.Designer.cs">
+      <DependentUpon>frmPlacarFinal.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +138,9 @@
     </Compile>
     <EmbeddedResource Include="telas\frmPartida.resx">
       <DependentUpon>frmPartida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\frmPlacarFinal.resx">
+      <DependentUpon>frmPlacarFinal.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -221,5 +230,6 @@
   <ItemGroup>
     <None Include="Resources\triangulo_vitoria.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
