@@ -38,8 +38,17 @@ namespace MagicTrick_piIII.classes
 
                 comparar = false;
 
-                if (naipeDoMaiorValor == 'C' && this.NaipeRodada != 'C' && naipeAtual == 'C')
-                    comparar = true;
+
+                if(this.NaipeRodada != 'C' && naipeAtual == 'C')              
+                    if (naipeDoMaiorValor == 'C')
+                        comparar = true;
+
+                    else
+                    {
+                        maiorValor = valorAtual;
+                        indexMaior = i;
+                        naipeDoMaiorValor = naipeAtual;
+                    }                
 
                 if (this.NaipeRodada == naipeAtual)
                     comparar = true;
