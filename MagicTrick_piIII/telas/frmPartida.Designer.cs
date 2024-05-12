@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPartida));
             this.grpJogo = new System.Windows.Forms.GroupBox();
             this.btnIniciarPartida = new System.Windows.Forms.Button();
             this.lblStatusPartida = new System.Windows.Forms.Label();
@@ -102,6 +103,7 @@
             this.Controls.Add(this.lblStatusPartida);
             this.Controls.Add(this.btnIniciarPartida);
             this.Controls.Add(this.grpJogo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPartida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Magic Trick (Luxemburgo) - Partida";

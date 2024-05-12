@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlacarFinal));
             this.lblFimDeJogo = new System.Windows.Forms.Label();
             this.lblPontuacao = new System.Windows.Forms.Label();
             this.dgvJogadores = new System.Windows.Forms.DataGridView();
@@ -143,6 +144,7 @@
             this.Controls.Add(this.lblPontuacao);
             this.Controls.Add(this.lblVitoria);
             this.Controls.Add(this.lblFimDeJogo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPlacarFinal";
             this.Text = "Fim de jogo!";
             ((System.ComponentModel.ISupportInitialize)(this.dgvJogadores)).EndInit();

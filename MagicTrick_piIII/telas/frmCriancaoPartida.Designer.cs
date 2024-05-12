@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCriancaoPartida));
             this.txtNomePartida = new System.Windows.Forms.TextBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.lblNomePartida = new System.Windows.Forms.Label();
@@ -112,6 +113,7 @@
             this.Controls.Add(this.lblNomePartida);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtNomePartida);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(375, 376);
             this.Name = "frmCriancaoPartida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
