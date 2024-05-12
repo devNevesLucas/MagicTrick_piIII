@@ -141,6 +141,8 @@ namespace MagicTrick_piIII.telas
             //Verificações que demonstram que a partida finalizou:
             if (verificacao.StatusPartida == 'E' || verificacao.StatusPartida == 'F')
             {
+                this.Partida.Status = verificacao.StatusPartida;
+
                 this.ExibirPlacarFinal(verificacao.StatusPartida);
                 return false;
             }
@@ -267,6 +269,18 @@ namespace MagicTrick_piIII.telas
             return true;
         }
 
+        private void ExibirPlacarFinal(char statusPartida)
+        {
+            int idPartida = this.Partida.IdPartida;
+            frmPlacarFinal placarFinal = new frmPlacarFinal(idPartida, statusPartida);
+
+            tmrAtualizarEstado.Stop();
+
+            placarFinal.ShowDialog();
+
+            this.Close();
+        }
+
         private void tmrAtualizarEstado_Tick(object sender, EventArgs e)
         {
             int posicao;
@@ -278,20 +292,10 @@ namespace MagicTrick_piIII.telas
             {
                 posicao = this.Automato.JogarPrimeiraCartaPossivel(this.Partida.NaipeRodada);
                 this.Jogar(posicao);
-            }                                                   
-            tmrAtualizarEstado.Enabled = true;
-        }
-
-        private void ExibirPlacarFinal(char statusPartida)
-        {
-            int idPartida = this.Partida.IdPartida;
-            frmPlacarFinal placarFinal = new frmPlacarFinal(idPartida, statusPartida);
-
-            tmrAtualizarEstado.Stop();
+            }                                         
             
-            placarFinal.ShowDialog();
-
-            this.Close();
-        }
+            if(this.Partida.Status != 'F' && this.Partida.Status != 'E')
+                tmrAtualizarEstado.Enabled = true;
+        }       
     }
 }
