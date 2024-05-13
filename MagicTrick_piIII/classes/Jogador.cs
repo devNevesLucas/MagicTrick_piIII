@@ -207,7 +207,55 @@ namespace MagicTrick_piIII
             Jogador jogadorAtual;
             Orientacao orientacao;
 
-            foreach(CartasVerificacao cartasJogador in dados.CartasRodada)
+            List<CartaVerificacao> cartasTmp;
+
+            foreach(KeyValuePair<int, List<CartaVerificacao>> chaveValor in dados.CartasRodada[0].Baralho)
+            {
+                jogadorAtual = jogadores.Find(j => j.IdJogador == chaveValor.Key);
+                orientacao = jogadorAtual.Orientacao;
+
+                cartasTmp = chaveValor.Value;
+
+                for (int i = 0; i <  cartasTmp.Count; i++)
+                {
+                    valorCarta = cartasTmp[i].ValorReal;
+                    posicao = cartasTmp[i].Posicao;
+                    naipe = cartasTmp[i].Naipe;
+                    statusCarta = cartasTmp[i].Status;
+
+                    if (statusCarta == 'C')
+                        jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta, orientacao);
+
+                    else
+                        jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, orientacao);
+
+                    indexCarta = jogadorAtual.Deck.FindIndex(c => c.Posicao == posicao);
+
+                    if (indexCarta > -1)
+                        jogadorAtual.Deck[indexCarta].TornarIndisponivel(valorCarta);
+
+                    else
+                    {
+                        CartaJogador novaCarta = new CartaJogador(naipe, posicao);
+
+                        ImagemCarta.CriarImagemCarta(jogadorAtual, controle, novaCarta);
+
+                        jogadorAtual.Deck.Add(novaCarta);
+
+                        jogadorAtual.Deck = jogadorAtual.Deck.OrderBy(c => c.Posicao).ToList();
+
+                        novaCarta.TornarIndisponivel(valorCarta);
+
+                        automato.InserirCarta(ref novaCarta);
+                    }
+
+                    CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);
+                }
+            }
+
+            /*
+
+            foreach(BaralhoVerificacao cartasJogador in dados.CartasRodada)
             {
                 jogadorAtual = jogadores.Find(j => j.IdJogador == cartasJogador.IdJogador);
                 orientacao = jogadorAtual.Orientacao;
@@ -248,6 +296,9 @@ namespace MagicTrick_piIII
                     CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                                      
                 }
             }
+
+            */
+
         }
 
         public static void VerificarHistorico(List<Jogador> jogadores, Partida partida, Automato automato, Control.ControlCollection controle)
