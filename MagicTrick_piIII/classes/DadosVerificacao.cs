@@ -14,7 +14,7 @@ namespace MagicTrick_piIII.classes
         public int RodadaAtual { get; set; }
         public char StatusRodada { get; set; }
         public char? NaipeRodada { get; set; }  
-        public List<BaralhoVerificacao> CartasRodada { get; set; }
+        public BaralhoVerificacao CartasRodada { get; set; }
 
         public DadosVerificacao(string dadosPartida) 
         {
@@ -29,7 +29,7 @@ namespace MagicTrick_piIII.classes
             this.IdJogador = idJogador;
             this.RodadaAtual = rodada;
             this.StatusRodada = statusRodada;
-            this.CartasRodada = new List<BaralhoVerificacao>();
+            this.CartasRodada = new BaralhoVerificacao();
         }   
 
         public static DadosVerificacao RetornarDadosVerificacao(int idPartida)

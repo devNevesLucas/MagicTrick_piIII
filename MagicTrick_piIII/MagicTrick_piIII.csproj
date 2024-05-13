@@ -58,7 +58,7 @@
     <Compile Include="classes\CartasChamadas.cs" />
     <Compile Include="classes\CartasConsulta.cs" />
     <Compile Include="classes\CartasHistorico.cs" />
-    <Compile Include="classes\CartasVerificacao.cs" />
+    <Compile Include="classes\BaralhoVerificacao.cs" />
     <Compile Include="classes\CartaVerificacao.cs" />
     <Compile Include="classes\DadosVerificacao.cs" />
     <Compile Include="classes\ImagemCarta.cs" />
