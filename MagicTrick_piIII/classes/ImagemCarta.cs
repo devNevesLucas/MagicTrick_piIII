@@ -143,7 +143,7 @@ namespace MagicTrick_piIII.classes
                 }
         }
 
-        private static void TrazerParaFrente(Carta carta)
+        private static void TrazerParaFrente(CartaJogador carta)
         {
             carta.ImagemCarta.PnlImgNaipe.BringToFront();
             carta.ImagemCarta.LblValorCarta.BringToFront();
@@ -198,7 +198,7 @@ namespace MagicTrick_piIII.classes
             }           
         }
 
-        public static void CriarImagemCarta(Jogador jogador, Control.ControlCollection controle, Carta carta)
+        public static void CriarImagemCarta(Jogador jogador, Control.ControlCollection controle, CartaJogador carta)
         {
             int posicaoTela = (int)jogador.Posicao;
             int x = posicoes[posicaoTela, 0];

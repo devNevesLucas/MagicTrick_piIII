@@ -52,10 +52,14 @@
     <Compile Include="Auxiliar.cs" />
     <Compile Include="classes\Automato.cs" />
     <Compile Include="classes\Carta.cs" />
+    <Compile Include="classes\CartaComValor.cs" />
+    <Compile Include="classes\CartaHistorico.cs" />
+    <Compile Include="classes\CartaJogador.cs" />
     <Compile Include="classes\CartasChamadas.cs" />
     <Compile Include="classes\CartasConsulta.cs" />
     <Compile Include="classes\CartasHistorico.cs" />
     <Compile Include="classes\CartasVerificacao.cs" />
+    <Compile Include="classes\CartaVerificacao.cs" />
     <Compile Include="classes\DadosVerificacao.cs" />
     <Compile Include="classes\ImagemCarta.cs" />
     <Compile Include="classes\ImagemPonto.cs" />

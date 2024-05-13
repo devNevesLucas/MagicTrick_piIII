@@ -11,7 +11,8 @@ namespace MagicTrick_piIII.classes
     {
         public List<int> Valores { get; set; }    
         public List<char> StatusCartas { get; set; }
-
+        public Dictionary<int, List<CartaVerificacao>> Baralho = new Dictionary<int, List<CartaVerificacao>>();
+        
         public CartasVerificacao(int idJogador, int posicao, char naipe, int valor, char status) : base(idJogador, posicao, naipe) 
         {
             this.Valores = new List<int>();
@@ -19,7 +20,16 @@ namespace MagicTrick_piIII.classes
 
             this.Valores.Add(valor);
             this.StatusCartas.Add(status);
+
+
+            List<CartaVerificacao> listaTmp = new List<CartaVerificacao>
+            {
+                new CartaVerificacao(posicao, naipe, valor, status)
+            };
+
+            this.Baralho.Add(idJogador, listaTmp);
         }
+
 
         public static List<CartasVerificacao> RetornarCartasVerificacaoTratadas(string[] dadosBrutos, ref char? naipeRodada)
         {
@@ -31,7 +41,9 @@ namespace MagicTrick_piIII.classes
 
             bool flagNaipeRodada = false;
 
-            for(int i = 0; i < dadosBrutos.Length; i++)
+            CartaVerificacao cartaTmp;
+
+            for (int i = 0; i < dadosBrutos.Length; i++)
             {
                 if (dadosBrutos[i].Length == 0) continue;
 
@@ -65,6 +77,21 @@ namespace MagicTrick_piIII.classes
                     posicaoCarta = Convert.ToInt32(dados[4]);
 
                 indexJogador = cartasTmp.FindIndex(c => c.IdJogador == idJogador);
+
+                cartaTmp = new CartaVerificacao(posicaoCarta, naipe, valorCarta, status);                
+                
+                if (cartasTmp[0].Baralho.ContainsKey(idJogador))               
+                    cartasTmp[0].Baralho[idJogador].Add(cartaTmp);
+                
+                else
+                {
+                    List<CartaVerificacao> listaTmp = new List<CartaVerificacao>
+                    {
+                        cartaTmp
+                    };
+
+                    cartasTmp[0].Baralho.Add(idJogador, listaTmp);
+                }
 
                 if (indexJogador > -1)
                 {

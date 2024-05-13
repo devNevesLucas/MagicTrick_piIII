@@ -17,9 +17,9 @@ namespace MagicTrick_piIII
         public string Nome { get; set; }
         public int Pontuacao { get; set; }
         public List<Ponto> PontosRodada { get; set; }
-        public List<Carta> Deck { get; set; }
-        public Carta CartaJogada { get; set; }
-        public Carta CartaAposta { get; set; }
+        public List<CartaJogador> Deck { get; set; }
+        public CartaJogador CartaJogada { get; set; }
+        public CartaJogador CartaAposta { get; set; }
         public List<char> NaipesDePontosDaRodada { get; set; }
         public string Senha { get; set; }
         public Orientacao Orientacao { get; set; }  
@@ -37,7 +37,7 @@ namespace MagicTrick_piIII
             this.Pontuacao = Convert.ToInt32(dados[2]);
 
             this.PontosRodada = new List<Ponto>();
-            this.Deck = new List<Carta>();
+            this.Deck = new List<CartaJogador>();
             this.NaipesDePontosDaRodada = new List<char>();
         }
         
@@ -49,7 +49,7 @@ namespace MagicTrick_piIII
             this.Pontuacao = 0;
 
             this.PontosRodada = new List<Ponto>();
-            this.Deck = new List<Carta>();
+            this.Deck = new List<CartaJogador>();
             this.NaipesDePontosDaRodada = new List<char>();
         }
 
@@ -136,11 +136,11 @@ namespace MagicTrick_piIII
                     naipe = deckJogador.NaipeCartas[j];
                     posicao = deckJogador.Posicoes[j];
 
-                    jogadores[i].Deck.Add(new Carta(naipe, posicao));
+                    jogadores[i].Deck.Add(new CartaJogador(naipe, posicao));
                 }
 
-                jogadores[i].CartaJogada = new Carta();
-                jogadores[i].CartaAposta = new Carta();
+                jogadores[i].CartaJogada = new CartaJogador('C', 15);
+                jogadores[i].CartaAposta = new CartaJogador('C', 15);
             }
                 ImagemCarta.CriarImagensCartas(jogadores, controle);
         }
@@ -232,7 +232,7 @@ namespace MagicTrick_piIII
                      
                     else
                     {
-                        Carta novaCarta = new Carta(naipe, posicao);
+                        CartaJogador novaCarta = new CartaJogador(naipe, posicao);
 
                         ImagemCarta.CriarImagemCarta(jogadorAtual, controle, novaCarta);
 
@@ -245,7 +245,7 @@ namespace MagicTrick_piIII
                         automato.InserirCarta(ref novaCarta);
                     }
 
-                    Carta.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                                      
+                    CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                                      
                 }
             }
         }
@@ -271,7 +271,7 @@ namespace MagicTrick_piIII
                     if (jogadorAtual.Deck[posicao - 1].Disponivel)
                     {
                         jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
-                        Carta.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                        
+                        CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                        
                         automato.AtualizarDecks(valorCarta, naipe);
                     }
                 }

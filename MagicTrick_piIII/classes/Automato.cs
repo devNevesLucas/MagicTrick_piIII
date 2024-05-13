@@ -9,7 +9,7 @@ namespace MagicTrick_piIII.classes
 {
     public class Automato
     {
-        public Dictionary<char, List<Carta>> Decks = new Dictionary<char, List<Carta>>();
+        public Dictionary<char, List<CartaJogador>> Decks = new Dictionary<char, List<CartaJogador>>();
         public Jogador Jogador;
 
         public Automato(Jogador jogador)
@@ -22,7 +22,7 @@ namespace MagicTrick_piIII.classes
          */
         public void InicializarDecks(ref List<Jogador> jogadores)
         {
-            Carta cartaTmp;
+            CartaJogador cartaTmp;
             char naipeTmp;
 
             foreach(Jogador jogadorAtual in jogadores)
@@ -33,7 +33,7 @@ namespace MagicTrick_piIII.classes
                     naipeTmp = cartaTmp.Naipe;
 
                     if (!this.Decks.ContainsKey(naipeTmp))
-                        this.Decks.Add(naipeTmp, new List<Carta>());
+                        this.Decks.Add(naipeTmp, new List<CartaJogador>());
                         
                     this.Decks[naipeTmp].Add(cartaTmp);                    
                 }
@@ -48,7 +48,7 @@ namespace MagicTrick_piIII.classes
             this.InicializarDecks(ref jogadores);
         }
 
-        public void InserirCarta(ref Carta carta)
+        public void InserirCarta(ref CartaJogador carta)
         {
             char naipe = carta.Naipe;
             this.Decks[naipe].Add(carta);
@@ -90,7 +90,7 @@ namespace MagicTrick_piIII.classes
             foreach(IValoresContainer carta in cartasRodada)
             {
                 cartaAtual = (CartasChamadas)carta;
-
+                
                 for(int i = 0; i < carta.Valores.Count; i++)
                 {
                     naipe = cartaAtual.NaipeCartas[i];
@@ -103,10 +103,10 @@ namespace MagicTrick_piIII.classes
 
         public void AtualizarDecks(int valor, char naipe)
         {
-            List<Carta> cartas = this.Decks[naipe];
+            List<CartaJogador> cartas = this.Decks[naipe];
             bool flagRemocao;
 
-            foreach(Carta carta in cartas)
+            foreach(CartaJogador carta in cartas)
             {
                 flagRemocao = false;
                 
