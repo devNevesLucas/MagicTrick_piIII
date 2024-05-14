@@ -209,7 +209,7 @@ namespace MagicTrick_piIII
 
             List<CartaVerificacao> cartasTmp;
 
-            foreach(KeyValuePair<int, List<CartaVerificacao>> chaveValor in dados.CartasRodada[0].Baralho)
+            foreach(KeyValuePair<int, List<CartaVerificacao>> chaveValor in dados.CartasRodada.Baralho)
             {
                 jogadorAtual = jogadores.Find(j => j.IdJogador == chaveValor.Key);
                 orientacao = jogadorAtual.Orientacao;

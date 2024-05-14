@@ -136,7 +136,7 @@ namespace MagicTrick_piIII.telas
                 return false;
             }
 
-            List<IValoresContainer> cartasRodada = verificacao.CartasRodada.ConvertAll<IValoresContainer>(c => c);
+            BaralhoVerificacao cartasRodada = verificacao.CartasRodada;
 
             //Verificações que demonstram que a partida finalizou:
             if (verificacao.StatusPartida == 'E' || verificacao.StatusPartida == 'F')

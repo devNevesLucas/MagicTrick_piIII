@@ -81,24 +81,25 @@ namespace MagicTrick_piIII.classes
             return posicao + 1;
         }
 
-        public void LimitarCartas(List<IValoresContainer> cartasRodada)
+        public void LimitarCartas(BaralhoVerificacao cartasRodada)
         {
             char naipe;
             int valor;
-            CartasChamadas cartaAtual;
 
-            foreach(IValoresContainer carta in cartasRodada)
+            List<CartaVerificacao> cartasTmp;
+            
+            foreach(KeyValuePair<int, List<CartaVerificacao>> chaveValor in cartasRodada.Baralho)
             {
-                cartaAtual = (CartasChamadas)carta;
-                
-                for(int i = 0; i < carta.Valores.Count; i++)
+                cartasTmp = chaveValor.Value;
+
+                for(int i = 0; i < chaveValor.Value.Count; i++)
                 {
-                    naipe = cartaAtual.NaipeCartas[i];
-                    valor = carta.Valores[i];
+                    naipe = cartasTmp[i].Naipe;
+                    valor = cartasTmp[i].ValorReal;
 
                     this.AtualizarDecks(valor, naipe);
                 }
-            }                     
+            }
         }
 
         public void AtualizarDecks(int valor, char naipe)
