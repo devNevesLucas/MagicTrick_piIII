@@ -251,83 +251,40 @@ namespace MagicTrick_piIII
 
                     CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);
                 }
-            }
-
-            /*
-
-            foreach(BaralhoVerificacao cartasJogador in dados.CartasRodada)
-            {
-                jogadorAtual = jogadores.Find(j => j.IdJogador == cartasJogador.IdJogador);
-                orientacao = jogadorAtual.Orientacao;
-
-                for(int i = 0; i < cartasJogador.Posicoes.Count; i++)
-                {
-                    valorCarta = cartasJogador.Valores[i];
-                    posicao = cartasJogador.Posicoes[i];
-                    naipe = cartasJogador.NaipeCartas[i];
-                    statusCarta = cartasJogador.StatusCartas[i];
-                   
-                    if (statusCarta == 'C')
-                        jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta, orientacao);
-
-                    else
-                        jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, orientacao);
-                                                             
-                    indexCarta = jogadorAtual.Deck.FindIndex(c => c.Posicao == posicao);
-
-                    if(indexCarta > -1)                       
-                        jogadorAtual.Deck[indexCarta].TornarIndisponivel(valorCarta);
-                     
-                    else
-                    {
-                        CartaJogador novaCarta = new CartaJogador(naipe, posicao);
-
-                        ImagemCarta.CriarImagemCarta(jogadorAtual, controle, novaCarta);
-
-                        jogadorAtual.Deck.Add(novaCarta);
-
-                        jogadorAtual.Deck = jogadorAtual.Deck.OrderBy(c => c.Posicao).ToList();
-
-                        novaCarta.TornarIndisponivel(valorCarta);
-
-                        automato.InserirCarta(ref novaCarta);
-                    }
-
-                    CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                                      
-                }
-            }
-
-            */
-
+            }         
         }
 
         public static void VerificarHistorico(List<Jogador> jogadores, Partida partida, Automato automato, Control.ControlCollection controle)
         {
-            List<CartasHistorico> historicoJogadas = CartasHistorico.HandleHistoricoJogadas(partida);
-            int idJogador, posicao, valorCarta;
+            BaralhoHistorico historicoJogadas = BaralhoHistorico.HandleHistoricoJogadas(partida);
+
+            int posicao, valorCarta;
             char naipe;
             Jogador jogadorAtual;
 
-            foreach(CartasHistorico cartasPorJogador in historicoJogadas)
-            {
-                idJogador = cartasPorJogador.IdJogador;
-                jogadorAtual = jogadores.Find(j => j.IdJogador == idJogador);
+            List<CartaHistorico> cartasTmp;
 
-                for(int i = 0; i < cartasPorJogador.NaipeCartas.Count; i++)
+            foreach (KeyValuePair<int, List<CartaHistorico>> chaveValor in historicoJogadas.Baralho)
+            {
+                jogadorAtual = jogadores.Find(j => j.IdJogador == chaveValor.Key);
+
+                cartasTmp = chaveValor.Value;
+
+                for(int i = 0; i < cartasTmp.Count; i++)
                 {
-                    posicao = cartasPorJogador.Posicoes[i];
-                    valorCarta = cartasPorJogador.Valores[i];
-                    naipe = cartasPorJogador.NaipeCartas[i];
+                    posicao = cartasTmp[i].Posicao;
+                    valorCarta = cartasTmp[i].ValorReal;
+                    naipe = cartasTmp[i].Naipe;
 
                     if (jogadorAtual.Deck[posicao - 1].Disponivel)
                     {
                         jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
-                        CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);                        
+                        CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);
                         automato.AtualizarDecks(valorCarta, naipe);
                     }
                 }
             }
-
+          
             Ponto ponto = new Ponto(historicoJogadas, partida.Rodada);            
             Jogador jogadorTmp = jogadores.Find(j => j.IdJogador == ponto.IdJogador);
 
