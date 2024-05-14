@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrick_piIII.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MagicTrick_piIII.classes
 {
-    public class CartaComValor : Carta
+    public class CartaComValor : Carta, IValor
     {
         public int ValorReal { get; set; }
 

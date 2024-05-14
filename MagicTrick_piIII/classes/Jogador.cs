@@ -118,23 +118,23 @@ namespace MagicTrick_piIII
             jogadores = jogadoresTmp;
         }
 
-        public static void PreencherDeck(List<Jogador> jogadores, List<CartasConsulta> decks, Control.ControlCollection controle)
+        public static void PreencherDeck(List<Jogador> jogadores, BaralhoConsulta decks, Control.ControlCollection controle)
         {
             int idJogador, posicao;
-            CartasConsulta deckJogador;
+            List<Carta> deckJogador;
             char naipe;
 
             for(int i = 0; i < jogadores.Count; i++)
             {
                 idJogador = jogadores[i].IdJogador;
-                deckJogador = decks.Find(c => c.IdJogador == idJogador);
+                deckJogador = decks.Baralho[idJogador];
 
                 if (deckJogador == null) continue;
 
-                for(int j = 0; j < deckJogador.NaipeCartas.Count; j++)
+                for(int j = 0; j < deckJogador.Count; j++)
                 {
-                    naipe = deckJogador.NaipeCartas[j];
-                    posicao = deckJogador.Posicoes[j];
+                    naipe = deckJogador[j].Naipe;
+                    posicao = deckJogador[j].Posicao;
 
                     jogadores[i].Deck.Add(new CartaJogador(naipe, posicao));
                 }
@@ -145,10 +145,10 @@ namespace MagicTrick_piIII
                 ImagemCarta.CriarImagensCartas(jogadores, controle);
         }
 
-        public static void AtualizarDeck(List<Jogador> jogadores, List<CartasConsulta> decks)
+        public static void AtualizarDeck(List<Jogador> jogadores, BaralhoConsulta decks)
         {
             int idJogador, posicaoCarta, qtdCartas, indexCarta;
-            CartasConsulta deckJogador;
+            List<Carta> deckJogador;
             char naipe;
 
             List<int> cartasParaRemover = new List<int>();
@@ -156,7 +156,7 @@ namespace MagicTrick_piIII
             for(int i = 0; i < jogadores.Count; i++)
             {
                 idJogador = jogadores[i].IdJogador;
-                deckJogador = decks.Find(d => d.IdJogador == idJogador);
+                deckJogador = decks.Baralho[idJogador];
 
                 cartasParaRemover.Clear();
 
@@ -172,11 +172,11 @@ namespace MagicTrick_piIII
                 for(int j = 0; j < qtdCartas; j++)
                 {
                     posicaoCarta = jogadores[i].Deck[j].Posicao;
-                    indexCarta = deckJogador.Posicoes.FindIndex(p => p == posicaoCarta);
+                    indexCarta = deckJogador.FindIndex(c => c.Posicao == posicaoCarta);
                    
                     if(indexCarta > -1)
                     {
-                        naipe = deckJogador.NaipeCartas[indexCarta];
+                        naipe = deckJogador[indexCarta].Naipe;
                         jogadores[i].Deck[j].ResetarCarta(naipe);
                     }
                     else

@@ -99,9 +99,9 @@ namespace MagicTrick_piIII.telas
         {
             int idPartida = this.Partida.IdPartida;
 
-            List<CartasConsulta> cartas = CartasConsulta.HandleConsultarMao(idPartida);
+            BaralhoConsulta cartas = BaralhoConsulta.HandleConsultarMao(idPartida);
 
-            if (cartas.Count == 0)
+            if (cartas.Baralho.Count == 0)
                 return false;
 
             Control.ControlCollection controle = this.Controls;

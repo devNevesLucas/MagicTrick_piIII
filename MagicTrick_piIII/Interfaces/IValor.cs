@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MagicTrick_piIII.Interfaces
 {
-    public interface IValoresContainer
+    public interface IValor
     {
-        List<int> Valores { get; set; }
+        int ValorReal { get; set; }
     }
 }

@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace MagicTrick_piIII.classes
 {
-    public class CartasConsulta : CartasChamadas
+    public class BaralhoConsulta
     {   
-        public CartasConsulta(int idJogador, int posicao, char naipe) : base(idJogador, posicao, naipe) { }
+        public Dictionary<int, List<Carta>> Baralho { get; set; }
 
-        public static List<CartasConsulta> HandleConsultarMao(int idPartida)
+        public BaralhoConsulta() 
         {
-            List<CartasConsulta> cartasConsultaTmp = new List<CartasConsulta>();
+            this.Baralho = new Dictionary<int, List<Carta>>();
+        }
+
+        public static BaralhoConsulta HandleConsultarMao(int idPartida)
+        {
+            BaralhoConsulta cartasConsultaTmp = new BaralhoConsulta();
 
             string result;
 
@@ -36,15 +41,18 @@ namespace MagicTrick_piIII.classes
             return RetornarConsultarMaoTratada(result);   
         }
 
-        private static List<CartasConsulta> RetornarConsultarMaoTratada(string consultaBruta)
+        private static BaralhoConsulta RetornarConsultarMaoTratada(string consultaBruta)
         {
-            List<CartasConsulta> cartasConsulta = new List<CartasConsulta>();
+            BaralhoConsulta cartasConsulta = new BaralhoConsulta();
 
             string[] dadosBrutos = consultaBruta.Split('\n');
             string[] dados;
 
-            int idJogador, indexJogador, indexCarta;
+            int idJogador, indexCarta;
             char naipe;
+
+            Carta novaCarta;
+            List<Carta> listaTmp;
 
             for(int i = 0; i < dadosBrutos.Length; i++)
             {
@@ -55,17 +63,20 @@ namespace MagicTrick_piIII.classes
                 idJogador = Convert.ToInt32(dados[0]);
                 indexCarta = Convert.ToInt32(dados[1]);
                 naipe = Convert.ToChar(dados[2]);
+              
+                novaCarta = new Carta(indexCarta, naipe);
 
-                indexJogador = cartasConsulta.FindIndex(c => c.IdJogador == idJogador);
-
-                if (indexJogador > -1)
-                {
-                    cartasConsulta[indexJogador].Posicoes.Add(indexCarta);
-                    cartasConsulta[indexJogador].NaipeCartas.Add(naipe);
-                }
-
+                if(cartasConsulta.Baralho.ContainsKey(idJogador))
+                    cartasConsulta.Baralho[idJogador].Add(novaCarta);
+                
                 else
-                    cartasConsulta.Add(new CartasConsulta(idJogador, indexCarta, naipe));
+                {
+                    listaTmp = new List<Carta>
+                    {
+                        novaCarta
+                    };
+                    cartasConsulta.Baralho.Add(idJogador, listaTmp);
+                }
             }
             return cartasConsulta;
         }        

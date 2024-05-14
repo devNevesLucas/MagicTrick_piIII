@@ -50,24 +50,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliar.cs" />
-    <Compile Include="classes\Automato.cs" />
-    <Compile Include="classes\Carta.cs" />
-    <Compile Include="classes\CartaComValor.cs" />
-    <Compile Include="classes\CartaHistorico.cs" />
-    <Compile Include="classes\CartaJogador.cs" />
-    <Compile Include="classes\CartasChamadas.cs" />
-    <Compile Include="classes\CartasConsulta.cs" />
-    <Compile Include="classes\BaralhoHistorico.cs" />
-    <Compile Include="classes\BaralhoVerificacao.cs" />
-    <Compile Include="classes\CartaVerificacao.cs" />
-    <Compile Include="classes\DadosVerificacao.cs" />
-    <Compile Include="classes\ImagemCarta.cs" />
-    <Compile Include="classes\ImagemPonto.cs" />
-    <Compile Include="classes\Jogador.cs" />
-    <Compile Include="classes\Ponto.cs" />
-    <Compile Include="classes\Posicionamento.cs" />
-    <Compile Include="classes\PosicionamentoCarta.cs" />
-    <Compile Include="classes\PosicionamentoPonto.cs" />
+    <Compile Include="Classes\Automato.cs" />
+    <Compile Include="Classes\Carta.cs" />
+    <Compile Include="Classes\CartaComValor.cs" />
+    <Compile Include="Classes\CartaHistorico.cs" />
+    <Compile Include="Classes\CartaJogador.cs" />
+    <Compile Include="Classes\BaralhoConsulta.cs" />
+    <Compile Include="Classes\BaralhoHistorico.cs" />
+    <Compile Include="Classes\BaralhoVerificacao.cs" />
+    <Compile Include="Classes\CartaVerificacao.cs" />
+    <Compile Include="Classes\DadosVerificacao.cs" />
+    <Compile Include="Classes\ImagemCarta.cs" />
+    <Compile Include="Classes\ImagemPonto.cs" />
+    <Compile Include="Classes\Jogador.cs" />
+    <Compile Include="Classes\Ponto.cs" />
+    <Compile Include="Classes\Posicionamento.cs" />
+    <Compile Include="Classes\PosicionamentoCarta.cs" />
+    <Compile Include="Classes\PosicionamentoPonto.cs" />
     <Compile Include="Enums\Orientacao.cs" />
     <Compile Include="Enums\Posicao.cs" />
     <Compile Include="Form1.cs">
@@ -76,59 +75,59 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IValoresContainer.cs" />
-    <Compile Include="telas\frmCreditos.cs">
+    <Compile Include="Interfaces\IValor.cs" />
+    <Compile Include="Telas\frmCreditos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="telas\frmCreditos.Designer.cs">
+    <Compile Include="Telas\frmCreditos.Designer.cs">
       <DependentUpon>frmCreditos.cs</DependentUpon>
     </Compile>
-    <Compile Include="telas\frmCriancaoPartida.cs">
+    <Compile Include="Telas\frmCriancaoPartida.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="telas\frmCriancaoPartida.Designer.cs">
+    <Compile Include="Telas\frmCriancaoPartida.Designer.cs">
       <DependentUpon>frmCriancaoPartida.cs</DependentUpon>
     </Compile>
-    <Compile Include="telas\frmEntrarPartida.cs">
+    <Compile Include="Telas\frmEntrarPartida.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="telas\frmEntrarPartida.Designer.cs">
+    <Compile Include="Telas\frmEntrarPartida.Designer.cs">
       <DependentUpon>frmEntrarPartida.cs</DependentUpon>
     </Compile>
-    <Compile Include="telas\frmMenu.cs">
+    <Compile Include="Telas\frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="telas\frmMenu.Designer.cs">
+    <Compile Include="Telas\frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="classes\Partida.cs" />
+    <Compile Include="Classes\Partida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="telas\frmPartida.cs">
+    <Compile Include="Telas\frmPartida.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="telas\frmPartida.Designer.cs">
+    <Compile Include="Telas\frmPartida.Designer.cs">
       <DependentUpon>frmPartida.cs</DependentUpon>
     </Compile>
-    <Compile Include="telas\frmPlacarFinal.cs">
+    <Compile Include="Telas\frmPlacarFinal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="telas\frmPlacarFinal.Designer.cs">
+    <Compile Include="Telas\frmPlacarFinal.Designer.cs">
       <DependentUpon>frmPlacarFinal.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="telas\frmCreditos.resx">
+    <EmbeddedResource Include="Telas\frmCreditos.resx">
       <DependentUpon>frmCreditos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="telas\frmCriancaoPartida.resx">
+    <EmbeddedResource Include="Telas\frmCriancaoPartida.resx">
       <DependentUpon>frmCriancaoPartida.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="telas\frmEntrarPartida.resx">
+    <EmbeddedResource Include="Telas\frmEntrarPartida.resx">
       <DependentUpon>frmEntrarPartida.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="telas\frmMenu.resx">
+    <EmbeddedResource Include="Telas\frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -141,10 +140,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="telas\frmPartida.resx">
+    <EmbeddedResource Include="Telas\frmPartida.resx">
       <DependentUpon>frmPartida.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="telas\frmPlacarFinal.resx">
+    <EmbeddedResource Include="Telas\frmPlacarFinal.resx">
       <DependentUpon>frmPlacarFinal.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
