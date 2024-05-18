@@ -37,6 +37,21 @@
             <param name="idPartida">Id da partida</param>
             <returns>Id do Jogador, nome, pontuação atual</returns>
         </member>
+        <member name="M:MagicTrickServer.Jogo.ListarJogadores2(System.Int32,System.Int32)">
+            <summary>
+            Lista de jogadores de uma determinada partida, trazendo a quantidade atual de rodadas vencidas do round especificado
+            </summary>
+            <param name="idPartida">Id da partida</param>
+            <param name="round">Número do round</param>
+            <returns>Id do Jogador, nome, pontuação atual, qtd rodadas vencidas</returns>
+        </member>
+        <member name="M:MagicTrickServer.Jogo.ListarJogadores2(System.Int32)">
+            <summary>
+            Lista de jogadores de uma determinada partida, trazendo a quantidade atual de rodadas vencidas do round vigente
+            </summary>
+            <param name="idPartida">Id da partida</param>
+            <returns>Id do Jogador, nome, pontuação atual, qtd rodadas vencidas</returns>
+        </member>
         <member name="M:MagicTrickServer.Jogo.EntrarPartida(System.Int32,System.String,System.String)">
             <summary>
             Cria um jogador e entra em uma partida
