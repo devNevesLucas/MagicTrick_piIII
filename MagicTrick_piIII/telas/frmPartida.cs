@@ -29,7 +29,7 @@ namespace MagicTrick_piIII.telas
             this.Jogadores.Add(player);
             this.Player = player;
 
-            this.Automato = new Automato(this.Player);
+            this.Automato = new Automato(this.Player, this.Jogadores);
 
             AtualizarListaDeJogadores();
                                
@@ -292,7 +292,7 @@ namespace MagicTrick_piIII.telas
 
             if (vezDoPlayer)
             {
-                posicao = this.Automato.JogarPrimeiraCartaPossivel(this.Partida.NaipeRodada);
+                posicao = this.Automato.RetornarPosicaoEscolhida(this.Partida.DadosRodada);
                 this.Jogar(posicao);
             }                                         
             

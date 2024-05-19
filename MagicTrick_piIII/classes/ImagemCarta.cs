@@ -231,6 +231,7 @@ namespace MagicTrick_piIII.classes
 
                 jogadores[i].CartaJogada.ImagemCarta.TornarInvisivel();
                 jogadores[i].CartaAposta.ImagemCarta.TornarInvisivel();
+                jogadores[i].CartaAposta.ValorReal = -1;
             }
         }
 

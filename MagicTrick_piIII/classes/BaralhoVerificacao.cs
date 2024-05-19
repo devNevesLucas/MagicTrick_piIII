@@ -81,5 +81,45 @@ namespace MagicTrick_piIII.classes
             }
             return cartasTmp;
         }
+
+        public static CartaVerificacao RetornarCartaCampea(BaralhoVerificacao cartas)
+        {
+            CartaVerificacao cartaCampea = new CartaVerificacao(0, 'A', 0, 'C');
+            CartaVerificacao cartaTmp;
+
+            foreach(KeyValuePair<int, List<CartaVerificacao>> chaveValor in cartas.Baralho)
+            {
+                for(int i = 0; i < chaveValor.Value.Count; i++)
+                {
+                    cartaTmp = chaveValor.Value[i];
+
+                    if (cartaTmp.Status != 'C') continue;
+
+                    if (cartaCampea.Naipe == 'C' && cartaTmp.Naipe != 'C') continue;
+
+                    if (cartaTmp.Naipe == 'C' && cartaCampea.Naipe != 'C')
+                        cartaCampea = cartaTmp;
+
+                    if (cartaTmp.ValorReal > cartaCampea.ValorReal)
+                        cartaCampea = cartaTmp;
+                }
+            }
+
+            if (cartaCampea.Posicao == 0)
+                return null;
+
+            return cartaCampea;
+        }
+
+        public static List<int> RetornarJogadoresQueJaJogaram(BaralhoVerificacao cartas)
+        {
+            List<int> jogadores = new List<int>();
+
+            foreach(KeyValuePair<int, List<CartaVerificacao>> chaveValor in cartas.Baralho)            
+                if (chaveValor.Value.Any(c => c.Status == 'C'))
+                    jogadores.Add(chaveValor.Key);
+          
+            return jogadores;
+        }
     }
 }

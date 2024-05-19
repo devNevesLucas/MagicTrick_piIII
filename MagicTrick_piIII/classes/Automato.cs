@@ -11,10 +11,12 @@ namespace MagicTrick_piIII.classes
     {
         public Dictionary<char, List<CartaJogador>> Decks = new Dictionary<char, List<CartaJogador>>();
         public Jogador Jogador;
+        public List<Jogador> Jogadores;
 
-        public Automato(Jogador jogador)
+        public Automato(Jogador jogador, List<Jogador> jogadores)
         {
             this.Jogador = jogador;
+            this.Jogadores = jogadores;
         }
         /*
             Recebe todos os jogadores da partida, percorre o deck de cada um deles, 
@@ -53,34 +55,7 @@ namespace MagicTrick_piIII.classes
             char naipe = carta.Naipe;
             this.Decks[naipe].Add(carta);
         }
-        
-        /*
-            Função responsável por retornar a primeira carta disponível para ser jogada na rodada
-            atual. Verifica se há alguma carta disponível com o atual naipe, caso não haja,
-            verifica se há alguma carta disponível com o naipe de C - copas, caso não haja,
-            retorna a primeira carta do naipe disponível, significando que não existem cartas desses
-            dois naipes. É somado 1 no final pela posição da carta no banco de dados sendo iniciada com 1,
-            ao invés de 0.
-         */
-        public int JogarPrimeiraCartaPossivel(char? naipeRodada)
-        {
-            int posicao = -1;
-
-            if(naipeRodada != null)
-                posicao = this.Jogador.Deck.FindIndex(c => c.Naipe == naipeRodada && c.Disponivel);
-
-            if(naipeRodada == null)
-                posicao = this.Jogador.Deck.FindIndex(c => c.Disponivel);
-
-            if (posicao < 0)
-                posicao = this.Jogador.Deck.FindIndex(c => c.Naipe == 'C' && c.Disponivel);
-
-            if (posicao < 0)
-                posicao = this.Jogador.Deck.FindIndex(c => c.Disponivel);
-
-            return posicao + 1;
-        }
-
+              
         public void LimitarCartas(BaralhoVerificacao cartasRodada)
         {
             char naipe;
@@ -122,6 +97,161 @@ namespace MagicTrick_piIII.classes
                         this.AtualizarDecks(carta.PossiveisValores[0], naipe);
                 }
             }
+        }
+        public int HandleAposta(int rodada)
+        {
+            if (rodada < 6)
+                return 0;
+
+            return CalcularMelhorAposta();
+        }
+
+        public int CalcularMelhorAposta()
+        {
+            int vitorias = this.Jogador.PontosRodada.Count + 2;
+
+            CartaJogador carta = this.Jogador.Deck.Find(c => c.ValorReal == vitorias && c.Disponivel);
+
+            if (carta == null)
+                carta = this.Jogador.Deck.Find(c => c.ContemValorSuperior(vitorias) && c.Disponivel);
+
+            return carta.Posicao;
+        }
+
+        public int JogarPrimeiraCartaPossivel(char? naipeRodada)
+        {
+            CartaJogador carta = null;
+
+            if (naipeRodada != null)
+                carta = this.Jogador.Deck.Find(c => c.Naipe == naipeRodada && c.Disponivel);
+
+            if (carta == null)
+                carta = this.Jogador.Deck.Find(c => c.Disponivel);
+
+            return carta.Posicao;
+        }
+
+        public int JogarMenorCartaDeCopas()
+        {
+            CartaJogador carta;
+
+            carta = this.Jogador.Deck.Find(c => c.Naipe == 'C' && c.Disponivel);
+
+            if (carta == null)
+                carta = this.Jogador.Deck.Find(c => c.Disponivel);
+
+            return carta.Posicao;
+        }
+
+        public int JogarCartaNoMaiorIntervaloDisponivel()
+        {
+            int inicio = 0, inicioAux = 0;
+            int intervalo = 0, intervaloAux = 0;
+            
+            for(int i = 0; i < this.Jogador.Deck.Count; i++)
+            {
+                if (this.Jogador.Deck[i].Disponivel)
+                    intervaloAux++;
+
+                else                
+                    if(intervaloAux > intervalo)
+                    {
+                        inicio = inicioAux;
+                        inicioAux = i + 1;
+                        intervalo = intervaloAux;
+                        intervaloAux = 0;
+                    }                                        
+            }
+
+            if (intervalo == 0)
+                intervalo = intervaloAux;
+
+            int posicao = (int)(intervalo / 2) + inicio;
+
+            CartaJogador carta = this.Jogador.Deck.Find(c => c.Posicao >= posicao && c.Disponivel);
+
+            return carta.Posicao;
+        }
+
+        public int JogarCartaMaiorQueDemais(int valor, char naipe)
+        {
+            CartaJogador carta;
+
+            carta = this.Jogador.Deck.Find(c => c.ValorReal > valor && c.Naipe == naipe && c.Disponivel);
+
+            if (carta == null)
+                carta = this.Jogador.Deck.Find(c => c.ContemValorSuperior(valor) && c.Naipe == naipe && c.Disponivel);
+
+            if (carta == null)
+                carta = this.Jogador.Deck.Find(c => c.Naipe == naipe && c.Disponivel);
+
+            return carta.Posicao;
+        }    
+        
+        public int JogarMaiorCartaPossivel(char? naipe)
+        {
+            List<CartaJogador> deckTmp = this.Jogador.Deck;
+
+            deckTmp = deckTmp.OrderByDescending(c => c.Posicao).ToList();
+
+            CartaJogador carta = null;
+
+            if (naipe != null)
+                carta = deckTmp.Find(c => c.Naipe == naipe && c.Disponivel);
+
+            if (carta == null)
+                carta = deckTmp.Find(c => c.Disponivel);
+
+            return carta.Posicao;
+        }
+
+        public int HandleJogadas(DadosVerificacao dados)
+        {
+            List<int> jogadoresQueJaJogaram = dados.JogadoresQueJaJogaram;
+
+            CartaVerificacao cartaCampea = BaralhoVerificacao.RetornarCartaCampea(dados.CartasRodada);
+           
+            int aposta = this.Jogador.CartaAposta.ValorReal;
+            int pontosRodada = this.Jogador.PontosRodada.Count;
+            int diferenca = pontosRodada - aposta;
+            char? naipe = dados.NaipeRodada;
+
+            if (naipe == null)
+                return this.JogarCartaNoMaiorIntervaloDisponivel();
+
+            if (this.Jogador.CartasDisponiveisPorNaipe[(char)naipe] == 1)
+                return this.JogarPrimeiraCartaPossivel(naipe);
+
+            int cartasDisponiveis = this.Jogador.CartasDisponiveisPorNaipe[(char)naipe];
+
+            if (diferenca > 0)
+            {
+                if(cartasDisponiveis == 0)
+                {
+                    if (cartaCampea.Naipe != 'C')
+                        return this.JogarMenorCartaDeCopas();
+
+                    return this.JogarPrimeiraCartaPossivel(naipe);
+                }
+
+                if(cartaCampea != null)
+                    return this.JogarCartaMaiorQueDemais(cartaCampea.ValorReal, (char)naipe);
+
+                return this.JogarMaiorCartaPossivel(naipe);
+            }
+
+            if(cartasDisponiveis == 0)           
+                return this.JogarMaiorCartaPossivel(naipe);
+
+            return this.JogarPrimeiraCartaPossivel(naipe);
+        }
+        
+        public int RetornarPosicaoEscolhida(DadosVerificacao dados)
+        {
+            if (dados.StatusRodada == 'A')
+                return this.HandleAposta(dados.RodadaAtual);
+
+            return this.HandleJogadas(dados);
         }
     }
 }

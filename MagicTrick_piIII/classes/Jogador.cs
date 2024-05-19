@@ -21,6 +21,7 @@ namespace MagicTrick_piIII
         public CartaJogador CartaJogada { get; set; }
         public CartaJogador CartaAposta { get; set; }
         public List<char> NaipesDePontosDaRodada { get; set; }
+        public Dictionary<char, int> CartasDisponiveisPorNaipe { get; set; }    
         public string Senha { get; set; }
         public Orientacao Orientacao { get; set; }  
         public Posicao Posicao { get; set; }
@@ -39,6 +40,11 @@ namespace MagicTrick_piIII
             this.PontosRodada = new List<Ponto>();
             this.Deck = new List<CartaJogador>();
             this.NaipesDePontosDaRodada = new List<char>();
+
+            this.CartasDisponiveisPorNaipe = new Dictionary<char, int>
+            {
+                {'C', 0},{'L', 0},{'E', 0},{'S', 0},{'O', 0},{'T', 0},{'P', 0}
+            };
         }
         
         public Jogador(int idJogador, string nome, string senha)
@@ -51,6 +57,11 @@ namespace MagicTrick_piIII
             this.PontosRodada = new List<Ponto>();
             this.Deck = new List<CartaJogador>();
             this.NaipesDePontosDaRodada = new List<char>();
+
+            this.CartasDisponiveisPorNaipe = new Dictionary<char, int>
+            {
+                {'C', 0},{'L', 0},{'E', 0},{'S', 0},{'O', 0},{'T', 0},{'P', 0}
+            };
         }
 
         public static List<Jogador> RetornarJogadoresPartida(int idPartida)
@@ -137,10 +148,12 @@ namespace MagicTrick_piIII
                     posicao = deckJogador[j].Posicao;
 
                     jogadores[i].Deck.Add(new CartaJogador(naipe, posicao));
+                    jogadores[i].CartasDisponiveisPorNaipe[naipe]++;
                 }
 
                 jogadores[i].CartaJogada = new CartaJogador('C', 15);
                 jogadores[i].CartaAposta = new CartaJogador('C', 15);
+                jogadores[i].CartaAposta.ValorReal = -1;
             }
                 ImagemCarta.CriarImagensCartas(jogadores, controle);
         }
@@ -165,6 +178,9 @@ namespace MagicTrick_piIII
 
                 jogadores[i].PontosRodada.Clear();
 
+                foreach (char chave in jogadores[i].CartasDisponiveisPorNaipe.Keys.ToList())
+                    jogadores[i].CartasDisponiveisPorNaipe[chave] = 0;
+
                 if (deckJogador == null) continue;
 
                 qtdCartas = jogadores[i].Deck.Count;
@@ -178,6 +194,7 @@ namespace MagicTrick_piIII
                     {
                         naipe = deckJogador[indexCarta].Naipe;
                         jogadores[i].Deck[j].ResetarCarta(naipe);
+                        jogadores[i].CartasDisponiveisPorNaipe[naipe]++;
                     }
                     else
                     {
@@ -232,7 +249,13 @@ namespace MagicTrick_piIII
                     indexCarta = jogadorAtual.Deck.FindIndex(c => c.Posicao == posicao);
 
                     if (indexCarta > -1)
-                        jogadorAtual.Deck[indexCarta].TornarIndisponivel(valorCarta);
+                    {
+                        if(jogadorAtual.Deck[indexCarta].Disponivel)
+                        {
+                            jogadorAtual.Deck[indexCarta].TornarIndisponivel(valorCarta);
+                            jogadorAtual.CartasDisponiveisPorNaipe[naipe]--;
+                        }                    
+                    }                   
 
                     else
                     {
@@ -278,6 +301,7 @@ namespace MagicTrick_piIII
 
                     if (jogadorAtual.Deck[posicao - 1].Disponivel)
                     {
+                        jogadorAtual.CartasDisponiveisPorNaipe[naipe]--;
                         jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valorCarta);
                         CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);
                         automato.AtualizarDecks(valorCarta, naipe);

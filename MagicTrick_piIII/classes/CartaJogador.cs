@@ -111,5 +111,19 @@ namespace MagicTrick_piIII.classes
             this.ValorReal = this.PossiveisValores[0];
             this.ImagemCarta.ExibirValorDescoberto(this.ValorReal);
         }
+
+        public bool ContemValorSuperior(int valor)
+        {
+            bool flagValor = false;
+
+            foreach (int valorPossivel in PossiveisValores)
+                if (valorPossivel > valor)
+                {
+                    flagValor = true;
+                    break;
+                }
+
+            return flagValor;
+        }
     }
 }
