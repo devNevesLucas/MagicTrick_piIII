@@ -130,6 +130,8 @@ namespace MagicTrick_piIII.telas
 
             DadosVerificacao verificacao = DadosVerificacao.RetornarDadosVerificacao(idPartida);
 
+            this.Partida.DadosRodada = verificacao;
+
             if (verificacao == null)
             {                
                 AtualizarListaDeJogadores();

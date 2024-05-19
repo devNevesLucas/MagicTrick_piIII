@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrick_piIII.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace MagicTrick_piIII
         public int Round { get; set; }
         public string DataCriacao { get; set; }
         public char Status { get; set; }
+        public DadosVerificacao DadosRodada { get; set; }
 
         public Partida(string linha)
         {
