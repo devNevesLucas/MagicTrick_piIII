@@ -21,58 +21,41 @@ namespace MagicTrick_piIII.classes
             this.Naipes = new List<char>();
 
             this.Rodada = rodadaAtual - 1;           
-            int indexMaior = 0, maiorValor = 0;
-            int valorAtual;
-            char naipeDoMaiorValor = 'L';
             char naipeAtual;
             bool comparar;
+            
+            CartaHistorico cartaAtual, maiorCarta;            
+            List<CartaHistorico> listaRodada = historico.Baralho[this.Rodada];
 
-            CartaHistorico cartaTmp;
+            this.NaipeRodada = listaRodada[0].Naipe;
+            this.Naipes.Add(listaRodada[0].Naipe);
 
-            bool flagInicio = false;
+            maiorCarta = listaRodada[0];
 
-            foreach(KeyValuePair<int, List<CartaHistorico>> chaveValor in historico.Baralho)
-            {               
-                cartaTmp = chaveValor.Value.Find(c => c.Rodada == this.Rodada);
-
-                naipeAtual = cartaTmp.Naipe;
-                valorAtual = cartaTmp.ValorReal;
-
-                if (!flagInicio)
-                {
-                    this.NaipeRodada = naipeAtual;
-                    naipeDoMaiorValor = naipeAtual;
-                    flagInicio = true;
-                }
-
+            for(int i = 1; i < listaRodada.Count; i++)
+            {
+                cartaAtual = listaRodada[i];
                 comparar = false;
 
-                if (this.NaipeRodada != 'C' && naipeAtual == 'C')
-                    if (naipeDoMaiorValor == 'C')
-                        comparar = true;
-
-                    else
-                    {
-                        maiorValor = valorAtual;
-                        indexMaior = chaveValor.Key;
-                        naipeDoMaiorValor = naipeAtual;
-                    }
-
-                if (this.NaipeRodada == naipeAtual)
-                    comparar = true;
-
-                if (comparar && valorAtual > maiorValor)
-                {
-                    maiorValor = valorAtual;
-                    indexMaior = chaveValor.Key;
-                    naipeDoMaiorValor = naipeAtual;
-                }
+                naipeAtual = cartaAtual.Naipe;
 
                 if (!this.Naipes.Contains(naipeAtual))
                     this.Naipes.Add(naipeAtual);
+
+                if(cartaAtual.Naipe == maiorCarta.Naipe)               
+                    comparar = true;
+                
+                if(cartaAtual.Naipe == 'C' && maiorCarta.Naipe != 'C')
+                {
+                    maiorCarta = cartaAtual;
+                    continue;
+                }
+
+                if(comparar && cartaAtual.ValorReal > maiorCarta.ValorReal)                
+                    maiorCarta = cartaAtual;                
             }
-       
-            this.IdJogador = indexMaior;
+            
+            this.IdJogador = maiorCarta.IdJogador;
         }
 
         public static void AtribuirPonto(Jogador jogador, Ponto ponto, Control.ControlCollection controle)

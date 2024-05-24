@@ -69,10 +69,10 @@ namespace MagicTrick_piIII.classes
                 valor = Convert.ToInt32(dados[3]);
                 posicao = Convert.ToInt32(dados[4]);
              
-                cartaTmp = new CartaHistorico(posicao, naipe, valor, rodada);               
+                cartaTmp = new CartaHistorico(posicao, naipe, valor, idJogador);               
 
-                if (historicoJogadas.Baralho.ContainsKey(idJogador))                                   
-                    historicoJogadas.Baralho[idJogador].Add(cartaTmp);
+                if (historicoJogadas.Baralho.ContainsKey(rodada))                                   
+                    historicoJogadas.Baralho[rodada].Add(cartaTmp);
                 
                 else
                 {
@@ -81,7 +81,7 @@ namespace MagicTrick_piIII.classes
                         cartaTmp 
                     };
 
-                    historicoJogadas.Baralho.Add(idJogador, listaTmp);
+                    historicoJogadas.Baralho.Add(rodada, listaTmp);
                 }                                
             }
             return historicoJogadas;

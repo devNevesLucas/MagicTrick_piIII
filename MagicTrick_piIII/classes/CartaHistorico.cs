@@ -8,11 +8,11 @@ namespace MagicTrick_piIII.classes
 {
     public class CartaHistorico : CartaComValor
     {
-        public int Rodada { get; set; } 
+        public int IdJogador { get; set; } 
 
-        public CartaHistorico(int posicao, char naipe, int valor, int rodada) : base(posicao, naipe, valor)
+        public CartaHistorico(int posicao, char naipe, int valor, int idJogador) : base(posicao, naipe, valor)
         {
-            this.Rodada = rodada;
+            this.IdJogador = idJogador;
         }
     }
 }

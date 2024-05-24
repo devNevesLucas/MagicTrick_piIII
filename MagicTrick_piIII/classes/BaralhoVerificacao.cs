@@ -87,6 +87,13 @@ namespace MagicTrick_piIII.classes
             CartaVerificacao cartaCampea = new CartaVerificacao(0, 'A', 0, 'C');
             CartaVerificacao cartaTmp;
 
+            char? naipeRodada = 'C';
+
+            if (naipeRodada == null)
+                return null;
+            
+            bool flagInicio = true;
+
             foreach(KeyValuePair<int, List<CartaVerificacao>> chaveValor in cartas.Baralho)
             {
                 for(int i = 0; i < chaveValor.Value.Count; i++)
@@ -95,13 +102,21 @@ namespace MagicTrick_piIII.classes
 
                     if (cartaTmp.Status != 'C') continue;
 
-                    if (cartaCampea.Naipe == 'C' && cartaTmp.Naipe != 'C') continue;
+                    if(flagInicio)
+                    {
+                        cartaCampea = cartaTmp;
+                        flagInicio = false;
+                        continue;
+                    }
 
                     if (cartaTmp.Naipe == 'C' && cartaCampea.Naipe != 'C')
+                    {
                         cartaCampea = cartaTmp;
+                        continue;
+                    }
 
-                    if (cartaTmp.ValorReal > cartaCampea.ValorReal)
-                        cartaCampea = cartaTmp;
+                    if (cartaTmp.Naipe == cartaCampea.Naipe && cartaTmp.ValorReal > cartaCampea.ValorReal)
+                        cartaCampea = cartaTmp;                    
                 }
             }
 

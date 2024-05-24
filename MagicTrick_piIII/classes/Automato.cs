@@ -216,7 +216,7 @@ namespace MagicTrick_piIII.classes
             int diferenca = pontosRodada - aposta;
             char? naipe = dados.NaipeRodada;
 
-            if (naipe == null)
+            if (naipe == null || cartaCampea == null)
                 return this.JogarCartaNoMaiorIntervaloDisponivel();
 
             if (this.Jogador.CartasDisponiveisPorNaipe[(char)naipe] == 1)
