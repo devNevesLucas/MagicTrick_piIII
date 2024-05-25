@@ -44,6 +44,32 @@ namespace MagicTrick_piIII.classes
             return RetornarHistoricoJogadasTratado(result);
         }
 
+        public static BaralhoHistorico HandleHistoricoJogadas(Partida partida, int round)
+        {
+            BaralhoHistorico cartasHistoricoTmp = new BaralhoHistorico();
+
+            int idPartida = partida.IdPartida;
+
+            string result;
+
+            try
+            {
+                result = Jogo.ExibirJogadas2(idPartida, round);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return cartasHistoricoTmp;
+            }
+
+            if (Auxiliar.VerificarErro(result))
+                return cartasHistoricoTmp;
+
+            result = result.Replace("\r", "");
+
+            return RetornarHistoricoJogadasTratado(result);
+        }
+
         private static BaralhoHistorico RetornarHistoricoJogadasTratado(string consultaBruta)
         {
             BaralhoHistorico historicoJogadas = new BaralhoHistorico();

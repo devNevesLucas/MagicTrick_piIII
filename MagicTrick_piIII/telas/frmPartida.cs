@@ -20,6 +20,9 @@ namespace MagicTrick_piIII.telas
         Partida Partida;
         Automato Automato;
         bool CartasImpressas = false;
+
+        static int[,] posicoesNomes = { { 183, 183 }, { 404, 227 }, { 922, 183 }, { 404, 454 } };
+        
         public frmPartida(Partida partida, List<Jogador> adversarios, Jogador player)
         {
             InitializeComponent();
@@ -54,6 +57,35 @@ namespace MagicTrick_piIII.telas
             }                   
         }
 
+        private void ExibirNomes()
+        {
+            int posicao;
+
+            Label lblNome;
+            Font fonteLabel = new Font("Microsoft YaHei", 10, FontStyle.Bold);
+            Point ponto;
+
+            foreach (Jogador jogador in this.Jogadores)
+            {
+                lblNome = new Label();
+                lblNome.Text = jogador.Nome;
+                lblNome.Font = fonteLabel;
+                lblNome.ForeColor = Color.White;
+                lblNome.BackColor = Color.FromArgb(19, 23, 31);
+                lblNome.Visible = true;
+
+                posicao = (int)jogador.Posicao;
+
+                ponto = new Point(posicoesNomes[posicao, 0], posicoesNomes[posicao, 1]);
+
+                lblNome.Location = ponto;
+
+                this.Controls.Add(lblNome);
+                
+                lblNome.BringToFront();
+            }
+        }
+
         private void AtualizarStatus(DadosVerificacao dadosVerificacao)
         {
             
@@ -78,6 +110,9 @@ namespace MagicTrick_piIII.telas
             {
                 this.CartasImpressas = false;
                 this.Partida.Round++;
+
+                Jogador.AdicionarUltimoPontoDoRound(this.Jogadores, this.Partida);
+                Jogador.AtualizarPlacares(this.Jogadores);
             }
 
             this.Partida.Rodada = rodadaAtual;
@@ -162,7 +197,8 @@ namespace MagicTrick_piIII.telas
                 if(this.Partida.Round == 1)
                 {                    
                     AtualizarListaDeJogadores();
-                    Jogador.OrganizarJogadores(ref this.Jogadores, idJogador);
+                    Jogador.OrganizarJogadores(ref this.Jogadores, idJogador, this.Controls);
+                    this.ExibirNomes();
                 }
 
                 if (!ConsultarMao())

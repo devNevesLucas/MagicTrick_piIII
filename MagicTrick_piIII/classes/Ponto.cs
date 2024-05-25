@@ -73,5 +73,19 @@ namespace MagicTrick_piIII.classes
             controle.Add(ponto.ImagemPonto.PnlPonto);
             ponto.ImagemPonto.PnlPonto.BringToFront();
         }
+
+        public static void AtribuirUltimoPontoDoRound(Jogador jogador, Ponto ponto)
+        {
+            jogador.PontosRodada.Add(ponto);
+
+            int qtdPontosRodada = jogador.PontosRodada.Count;
+            char naipePonto = ponto.NaipeRodada;
+
+            foreach (char naipe in ponto.Naipes)
+                if (!jogador.NaipesDePontosDaRodada.Contains(naipe))
+                    jogador.NaipesDePontosDaRodada.Add(naipe);
+
+            ponto.ImagemPonto = new ImagemPonto(jogador.Posicao, qtdPontosRodada, naipePonto);
+        }
     }
 }

@@ -4,6 +4,7 @@ using MagicTrick_piIII.Interfaces;
 using MagicTrickServer;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,9 @@ namespace MagicTrick_piIII
         public string Senha { get; set; }
         public Orientacao Orientacao { get; set; }  
         public Posicao Posicao { get; set; }
+        public Label lblPontuacao { get; set; }
+
+        static int[,] PosicoesPontuacao = { { 183, 493 }, { 732, 227 }, { 980, 493 }, { 732, 457 } };
 
         public Jogador(string linha)
         {
@@ -91,7 +95,31 @@ namespace MagicTrick_piIII
             return jogadoresTmp;
         }
 
-        public static void OrganizarJogadores(ref List<Jogador> jogadores, int idPlayer)
+        private void InstanciarLabel(Control.ControlCollection controle)
+        {
+            int posicao = (int)this.Posicao;
+
+            Point ponto = new Point(PosicoesPontuacao[posicao, 0], PosicoesPontuacao[posicao, 1]);
+            
+            this.lblPontuacao = new Label();
+            this.lblPontuacao.Font = Auxiliar.fontePrincipal;
+            this.lblPontuacao.Location = ponto;
+            this.lblPontuacao.ForeColor = Color.White;
+            this.lblPontuacao.BackColor = Color.FromArgb(19, 23, 31);
+
+            this.lblPontuacao.Text = this.Pontuacao.ToString();
+            controle.Add(this.lblPontuacao);
+
+            this.lblPontuacao.BringToFront();
+        }
+
+        private static void InstanciarLabels(List<Jogador> jogadores, Control.ControlCollection controle)
+        {
+            foreach (Jogador jogador in jogadores)
+                jogador.InstanciarLabel(controle);
+        }
+
+        public static void OrganizarJogadores(ref List<Jogador> jogadores, int idPlayer, Control.ControlCollection controle)
         {
             List<Jogador> jogadoresTmp = new List<Jogador>();
 
@@ -127,6 +155,8 @@ namespace MagicTrick_piIII
             }
 
             jogadores = jogadoresTmp;
+
+            InstanciarLabels(jogadores, controle);
         }
 
         public static void PreencherDeck(List<Jogador> jogadores, BaralhoConsulta decks, Control.ControlCollection controle)
@@ -314,6 +344,61 @@ namespace MagicTrick_piIII
             Jogador jogadorTmp = jogadores.Find(j => j.IdJogador == ponto.IdJogador);
 
             Ponto.AtribuirPonto(jogadorTmp, ponto, controle);
+        }
+
+        public static void AdicionarUltimoPontoDoRound(List<Jogador> jogadores, Partida partida)
+        {
+            int round = partida.Round - 1;
+            int rodadaFinal = 9 + jogadores.Count;
+
+            BaralhoHistorico historicoJogadas = BaralhoHistorico.HandleHistoricoJogadas(partida, round);
+
+            Ponto ponto = new Ponto(historicoJogadas, rodadaFinal);
+
+            Jogador jogadorTmp = jogadores.Find(j => j.IdJogador == ponto.IdJogador);
+
+            Ponto.AtribuirUltimoPontoDoRound(jogadorTmp, ponto);
+        }
+
+        private void AtualizarLblPontuacao()
+        {
+            this.lblPontuacao.Text = this.Pontuacao.ToString();
+        }
+
+        /*
+            Verifico se existe diferença entre a aposta e a quantidade de vitórias no round
+            Se não houver, adiciono 3 pontos a pontosRound, caso contrário, verifico se a 
+            diferença é maior do que 0, para multiplica-la por -1 e garantir que ela seja um número
+            negativo;
+            Após isso, verifico se a minha aposta é igual ao número de naipes das rodadas que ganhei, 
+            caso seja, adiciono dois pontos ao placar.
+         */
+        private void AtualizarPontuacao()
+        {
+            int pontosRound = 0;
+            int aposta = this.CartaAposta.ValorReal;
+
+            int diferenca = aposta - this.PontosRodada.Count;
+
+            if (diferenca == 0)
+                pontosRound = 3;
+
+            else
+                pontosRound += diferenca * (diferenca > 0 ? -1 : 1);
+
+            if (aposta == this.NaipesDePontosDaRodada.Count)
+                pontosRound += 2;
+
+            this.Pontuacao += pontosRound;
+        }
+
+        public static void AtualizarPlacares(List<Jogador> jogadores)
+        {
+            foreach (Jogador jogador in jogadores)
+            {
+                jogador.AtualizarPontuacao();
+                jogador.AtualizarLblPontuacao();
+            }
         }
     }
 }

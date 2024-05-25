@@ -16,6 +16,8 @@ namespace MagicTrick_piIII
     */
     public class Auxiliar
     {
+        public static Font fontePrincipal = new Font("Microsoft YaHei", 10, FontStyle.Bold);
+
         /*         
             Método para verificação de erros, recebe o retorno de métodos do jogo,
             verifica se a string contém a palavra 'ERRO', caso contenha, exibe uma 
