@@ -90,7 +90,7 @@
             // tmrAtualizarEstado
             // 
             this.tmrAtualizarEstado.Enabled = true;
-            this.tmrAtualizarEstado.Interval = 5000;
+            this.tmrAtualizarEstado.Interval = 1500;
             this.tmrAtualizarEstado.Tick += new System.EventHandler(this.tmrAtualizarEstado_Tick);
             // 
             // frmPartida
