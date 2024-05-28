@@ -349,7 +349,7 @@ namespace MagicTrick_piIII
         public static void AdicionarUltimoPontoDoRound(List<Jogador> jogadores, Partida partida)
         {
             int round = partida.Round - 1;
-            int rodadaFinal = 9 + jogadores.Count;
+            int rodadaFinal = 10 + jogadores.Count;
 
             BaralhoHistorico historicoJogadas = BaralhoHistorico.HandleHistoricoJogadas(partida, round);
 
@@ -381,13 +381,15 @@ namespace MagicTrick_piIII
             int diferenca = aposta - this.PontosRodada.Count;
 
             if (diferenca == 0)
+            {
                 pontosRound = 3;
 
-            else
-                pontosRound += diferenca * (diferenca > 0 ? -1 : 1);
+                if (aposta == this.NaipesDePontosDaRodada.Count)
+                    pontosRound += 2;
+            }
 
-            if (aposta == this.NaipesDePontosDaRodada.Count)
-                pontosRound += 2;
+            else
+                pontosRound += diferenca * (diferenca > 0 ? -1 : 1);         
 
             this.Pontuacao += pontosRound;
         }
