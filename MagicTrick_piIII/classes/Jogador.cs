@@ -389,7 +389,7 @@ namespace MagicTrick_piIII
             }
 
             else
-                pontosRound += diferenca * (diferenca > 0 ? -1 : 1);         
+                pontosRound = diferenca * (diferenca > 0 ? -1 : 1);         
 
             this.Pontuacao += pontosRound;
         }

@@ -60,6 +60,7 @@ namespace MagicTrick_piIII.classes
         public void AtualizarCarta(char naipe, int numeroCarta, Orientacao orientacao)
         {
             this.Naipe = naipe;
+            this.ValorReal = numeroCarta;
 
             this.TornarIndisponivel(numeroCarta);
             this.ImagemCarta.AtualizarImagemCarta(naipe, orientacao);
