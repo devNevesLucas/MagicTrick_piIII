@@ -235,6 +235,47 @@
   <ItemGroup>
     <None Include="Resources\triangulo_vitoria.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\coracaoIndisponivel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coracaoIndisponivelHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\espadasIndisponivel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\espadasIndisponivelHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estrelasIndisponivel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estrelasIndisponivelHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luaIndisponivel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luaIndisponivelHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ourosIndisponivel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ourosIndisponivelHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pausIndisponivel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pausIndisponivelHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trianguloIndisponivel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trianguloIndisponivelHorizontal.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
