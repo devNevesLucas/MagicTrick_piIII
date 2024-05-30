@@ -45,7 +45,9 @@ namespace MagicTrick_piIII.classes
 
         public void TornarIndisponivel(int numeroCarta)
         {
-            this.ImagemCarta.ExibirLabelValor(numeroCarta);
+            char naipe = this.Naipe;
+
+            this.ImagemCarta.AtualizarCartaIndisponivel(naipe, numeroCarta);
 
             if (!this.Disponivel)
                 return;
@@ -63,7 +65,7 @@ namespace MagicTrick_piIII.classes
             this.ValorReal = numeroCarta;
 
             this.TornarIndisponivel(numeroCarta);
-            this.ImagemCarta.AtualizarImagemCarta(naipe, orientacao);
+            this.ImagemCarta.AtualizarImagemCarta(naipe);
         }
 
         public static void LimitarDeckJogador(List<CartaJogador> deck, int posicao, int valorCarta)

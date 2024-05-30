@@ -15,6 +15,7 @@ namespace MagicTrick_piIII.classes
         public Panel PnlImgNaipe { get; set; }
         public Label LblValorCarta { get; set; }
         public PosicionamentoCarta Posicionamento { get; set; }
+        public Orientacao OrientacaoCarta { get; set; }
 
         public static int[,] posicoes = new int[,] { { 43, 180 }, { 419, 85 }, { 1011, 180 }, { 422, 483 } };
 
@@ -22,17 +23,72 @@ namespace MagicTrick_piIII.classes
 
         public static int[,] posicoesApostas = new int[,] { { 76, 536 }, { 351, 118 }, { 1044, 117 }, { 778, 516 } };
 
-
-        public ImagemCarta(int x, int y, Orientacao orientacao, char naipe)
+        private static Dictionary<char, Bitmap> BitmapsBaralhoDisponivel_Vertical = new Dictionary<char, Bitmap>
         {
-            this.Posicionamento = new PosicionamentoCarta(x, y, orientacao);
-            this.InicializarPropriedades(orientacao, naipe);
+            { 'C' , Properties.Resources.coracao },
+            { 'E' , Properties.Resources.espadas },
+            { 'S' , Properties.Resources.estrelas },
+            { 'L' , Properties.Resources.lua },
+            { 'O' , Properties.Resources.ouros },
+            { 'P' , Properties.Resources.paus },
+            { 'T' , Properties.Resources.triangulo }
+        };
+
+        private static Dictionary<char, Bitmap> BitmapsBaralhoDisponivel_Horizontal = new Dictionary<char, Bitmap>
+        {
+            { 'C' , Properties.Resources.coracaoHorizontal },
+            { 'E' , Properties.Resources.espadasHorizontal },
+            { 'S' , Properties.Resources.estrelasHorizontal },
+            { 'L' , Properties.Resources.luaHorizontal },
+            { 'O' , Properties.Resources.ourosHorizontal },
+            { 'P' , Properties.Resources.pausHorizontal },
+            { 'T' , Properties.Resources.trianguloHorizontal }
+        };
+
+        private static Dictionary<char, Bitmap> BitmapsBaralhoIndisponivel_Horizontal = new Dictionary<char, Bitmap>
+        {
+            { 'C' , Properties.Resources.coracaoIndisponivelHorizontal },
+            { 'E' , Properties.Resources.espadasIndisponivelHorizontal },
+            { 'S' , Properties.Resources.estrelasIndisponivelHorizontal },
+            { 'L' , Properties.Resources.luaIndisponivelHorizontal },
+            { 'O' , Properties.Resources.ourosIndisponivelHorizontal },
+            { 'P' , Properties.Resources.pausIndisponivelHorizontal },
+            { 'T' , Properties.Resources.trianguloIndisponivelHorizontal }
+        };
+
+        private static Dictionary<char, Bitmap> BitmapsBaralhoIndisponivel_Vertical = new Dictionary<char, Bitmap>
+        {
+            { 'C' , Properties.Resources.coracaoIndisponivel },
+            { 'E' , Properties.Resources.espadasIndisponivel },
+            { 'S' , Properties.Resources.estrelasIndisponivel },
+            { 'L' , Properties.Resources.luaIndisponivel },
+            { 'O' , Properties.Resources.ourosIndisponivel },
+            { 'P' , Properties.Resources.pausIndisponivel },
+            { 'T' , Properties.Resources.trianguloIndisponivel }
+        };
+
+        public ImagemCarta(int x, int y, Orientacao orientacaoDeckJogador, char naipe)
+        {
+            if (orientacaoDeckJogador == Orientacao.Vertical)
+                this.OrientacaoCarta = Orientacao.Horizontal;
+
+            else
+                this.OrientacaoCarta = Orientacao.Vertical;
+
+            this.Posicionamento = new PosicionamentoCarta(x, y, orientacaoDeckJogador);
+            this.InicializarPropriedades(orientacaoDeckJogador, naipe);
         }
 
-        public ImagemCarta(int x, int y, Orientacao orientacao, char naipe, int iterador)
+        public ImagemCarta(int x, int y, Orientacao orientacaoDeckJogador, char naipe, int iterador)
         {
-            this.Posicionamento = new PosicionamentoCarta(x, y, orientacao, iterador);
-            this.InicializarPropriedades(orientacao, naipe);
+            if (orientacaoDeckJogador == Orientacao.Vertical)
+                this.OrientacaoCarta = Orientacao.Horizontal;
+
+            else
+                this.OrientacaoCarta = Orientacao.Vertical;
+
+            this.Posicionamento = new PosicionamentoCarta(x, y, orientacaoDeckJogador, iterador);
+            this.InicializarPropriedades(orientacaoDeckJogador, naipe);
         }
 
         private void InicializarPropriedades(Orientacao orientacao, char naipe)
@@ -42,7 +98,7 @@ namespace MagicTrick_piIII.classes
            
             this.PosicionarPanel();
 
-            this.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
+            this.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, this.OrientacaoCarta);
 
             this.InicializarLabel();
         }
@@ -74,73 +130,23 @@ namespace MagicTrick_piIII.classes
             this.LblValorCarta.Size = new Size(28, 28);
             this.LblValorCarta.Visible = false;
         }
-
-        public static Bitmap RetornarNaipeBitmap(char naipe, Orientacao orientacao)
+       
+        public static Bitmap RetornarNaipeBitmap(char naipe, Orientacao orientacaoCarta)
         {
-            if(orientacao == Orientacao.Horizontal)
-                switch (naipe)
-                {
-                    case 'A':
-                        return Properties.Resources.aposta;
+            if (orientacaoCarta == Orientacao.Vertical)
+                return BitmapsBaralhoDisponivel_Vertical[naipe];
 
-                    case 'C':
-                        return Properties.Resources.coracao;
+            else
+                return BitmapsBaralhoDisponivel_Horizontal[naipe];
+        }
 
-                    case 'E':
-                        return Properties.Resources.espadas;
+        public static Bitmap RetornarNaipeIndisponivelBitmap(char naipe, Orientacao orientacaoCarta)
+        {
+            if (orientacaoCarta == Orientacao.Vertical)
+                return BitmapsBaralhoIndisponivel_Vertical[naipe];
 
-                    case 'L':
-                        return Properties.Resources.lua;
-
-                    case 'M':
-                        return Properties.Resources.mascara;
-
-                    case 'O':
-                        return Properties.Resources.ouros;
-
-                    case 'P':
-                        return Properties.Resources.paus;
-
-                    case 'S':
-                        return Properties.Resources.estrelas;
-
-                    case 'T':
-                        return Properties.Resources.triangulo;
-
-                    default:
-                        return Properties.Resources.ouros;
-                }
-
-            else 
-                switch(naipe)
-                {
-                    case 'C':
-                        return Properties.Resources.coracaoHorizontal;
-
-                    case 'E':
-                        return Properties.Resources.espadasHorizontal;
-
-                    case 'L':
-                        return Properties.Resources.luaHorizontal;
-
-                    case 'M':
-                        return Properties.Resources.mascaraHorizontal;
-
-                    case 'O':
-                        return Properties.Resources.ourosHorizontal;
-
-                    case 'P':
-                        return Properties.Resources.pausHorizontal;
-
-                    case 'S':
-                        return Properties.Resources.estrelasHorizontal;
-
-                    case 'T':
-                        return Properties.Resources.trianguloHorizontal;
-
-                    default:
-                        return Properties.Resources.ourosHorizontal;
-                }
+            else
+                return BitmapsBaralhoIndisponivel_Horizontal[naipe];
         }
 
         private static void TrazerParaFrente(CartaJogador carta)
@@ -216,16 +222,16 @@ namespace MagicTrick_piIII.classes
 
         public static void AtualizarCartas(List<Jogador> jogadores)
         {
-            Orientacao orientacao;  
+            Orientacao orientacaoDeckJogador;  
 
             for(int i = 0; i < jogadores.Count; i++)
-            {
-                orientacao = jogadores[i].Orientacao;
-         
+            {         
+                orientacaoDeckJogador = jogadores[i].Deck[0].ImagemCarta.OrientacaoCarta;
+             
                 for(int j = 0; j < jogadores[i].Deck.Count; j++)
                 {                    
                     char naipe = jogadores[i].Deck[j].Naipe;
-                    jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
+                    jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacaoDeckJogador);
                     jogadores[i].Deck[j].ImagemCarta.EsconderLabel();
                 }
 
@@ -235,18 +241,23 @@ namespace MagicTrick_piIII.classes
             }
         }
 
-        public void ExibirLabelValor(int valor)
+        public void AtualizarCartaIndisponivel(char naipe, int valor)
         {
+            Orientacao orientacaoCarta = this.OrientacaoCarta;
+           
             this.LblValorCarta.Text = valor.ToString();
             this.LblValorCarta.ForeColor = Color.White;
-            this.LblValorCarta.BackColor = Color.Black;
+            this.LblValorCarta.BackColor = Color.Transparent;
+
+            this.PnlImgNaipe.BackgroundImage = RetornarNaipeIndisponivelBitmap(naipe, orientacaoCarta);
+
             this.LblValorCarta.Visible = true;
         }
 
-        public void AtualizarImagemCarta(char naipe, Orientacao orientacao)
+        public void AtualizarImagemCarta(char naipe)
         {           
             this.PnlImgNaipe.Visible = true;
-            this.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, orientacao);
+            this.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, this.OrientacaoCarta);
         }
 
         public void TornarInvisivel()
