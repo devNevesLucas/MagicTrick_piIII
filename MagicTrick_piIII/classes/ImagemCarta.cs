@@ -17,7 +17,7 @@ namespace MagicTrick_piIII.classes
         public PosicionamentoCarta Posicionamento { get; set; }
         public Orientacao OrientacaoCarta { get; set; }
 
-        public static int[,] posicoes = new int[,] { { 43, 180 }, { 419, 85 }, { 1011, 180 }, { 422, 483 } };
+        public static int[,] posicoes = new int[,] { { 43, 180 }, { 419, 85 }, { 1011, 180 }, { 419, 483 } };
 
         public static int[,] posicoesJogadas = new int[,] { { 498, 328 }, { 560, 275 }, { 604, 328 }, { 560, 363 } };
 
@@ -116,7 +116,7 @@ namespace MagicTrick_piIII.classes
 
             Font fonteLabel = new Font("Microsoft YaHei", 10, FontStyle.Bold);
 
-            Point ponto = this.Posicionamento.Ponto;
+            Point ponto = new Point(0, 0);
             ponto.X += this.Posicionamento.Largura / 2 - 14;
             ponto.Y += this.Posicionamento.Altura / 2 - 14;
 
@@ -129,6 +129,8 @@ namespace MagicTrick_piIII.classes
            
             this.LblValorCarta.Size = new Size(28, 28);
             this.LblValorCarta.Visible = false;
+
+            this.PnlImgNaipe.Controls.Add(this.LblValorCarta);
         }
        
         public static Bitmap RetornarNaipeBitmap(char naipe, Orientacao orientacaoCarta)
@@ -176,7 +178,7 @@ namespace MagicTrick_piIII.classes
                     jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, posicaoCarta);
 
                     controle.Add(jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe);                       
-                    controle.Add(jogadores[i].Deck[j].ImagemCarta.LblValorCarta);                    
+                    //controle.Add(jogadores[i].Deck[j].ImagemCarta.LblValorCarta);                    
                     TrazerParaFrente(jogadores[i].Deck[j]);
                 }
 
@@ -186,7 +188,7 @@ namespace MagicTrick_piIII.classes
                 jogadores[i].CartaJogada.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
                     
                 controle.Add(jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe);
-                controle.Add(jogadores[i].CartaJogada.ImagemCarta.LblValorCarta);
+                //controle.Add(jogadores[i].CartaJogada.ImagemCarta.LblValorCarta);
 
                 jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe.Visible = false;
                 TrazerParaFrente(jogadores[i].CartaJogada);
@@ -197,7 +199,7 @@ namespace MagicTrick_piIII.classes
                 jogadores[i].CartaAposta.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
 
                 controle.Add(jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe);
-                controle.Add(jogadores[i].CartaAposta.ImagemCarta.LblValorCarta);
+                //controle.Add(jogadores[i].CartaAposta.ImagemCarta.LblValorCarta);
 
                 jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.Visible = false;
                 TrazerParaFrente(jogadores[i].CartaAposta);
@@ -216,7 +218,7 @@ namespace MagicTrick_piIII.classes
             carta.ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, posicaoCarta);
 
             controle.Add(carta.ImagemCarta.PnlImgNaipe);
-            controle.Add(carta.ImagemCarta.LblValorCarta);
+            //controle.Add(carta.ImagemCarta.LblValorCarta);
             TrazerParaFrente(carta);
         }
 
@@ -250,7 +252,7 @@ namespace MagicTrick_piIII.classes
             this.LblValorCarta.BackColor = Color.Transparent;
 
             this.PnlImgNaipe.BackgroundImage = RetornarNaipeIndisponivelBitmap(naipe, orientacaoCarta);
-
+           
             this.LblValorCarta.Visible = true;
         }
 

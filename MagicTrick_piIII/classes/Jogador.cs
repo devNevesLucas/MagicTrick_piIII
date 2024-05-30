@@ -28,7 +28,7 @@ namespace MagicTrick_piIII
         public Posicao Posicao { get; set; }
         public Label lblPontuacao { get; set; }
 
-        static int[,] PosicoesPontuacao = { { 183, 493 }, { 732, 227 }, { 980, 493 }, { 732, 457 } };
+        static int[,] PosicoesPontuacao = { { 183, 478 }, { 732, 227 }, { 980, 478 }, { 732, 457 } };
 
         public Jogador(string linha)
         {
@@ -272,10 +272,10 @@ namespace MagicTrick_piIII
                     statusCarta = cartasTmp[i].Status;
 
                     if (statusCarta == 'C')
-                        jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta, orientacao);
+                        jogadorAtual.CartaJogada.AtualizarCarta(naipe, valorCarta);
 
                     else
-                        jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta, orientacao);
+                        jogadorAtual.CartaAposta.AtualizarCarta(naipe, valorCarta);
 
                     indexCarta = jogadorAtual.Deck.FindIndex(c => c.Posicao == posicao);
 

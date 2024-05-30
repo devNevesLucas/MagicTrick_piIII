@@ -1,6 +1,7 @@
 ﻿using MagicTrick_piIII.Enums;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,13 +60,15 @@ namespace MagicTrick_piIII.classes
             this.PossiveisValores.Add(numeroCarta);
         }
 
-        public void AtualizarCarta(char naipe, int numeroCarta, Orientacao orientacao)
+        public void AtualizarCarta(char naipe, int numeroCarta)
         {
             this.Naipe = naipe;
             this.ValorReal = numeroCarta;
 
             this.TornarIndisponivel(numeroCarta);
             this.ImagemCarta.AtualizarImagemCarta(naipe);
+
+            this.ImagemCarta.LblValorCarta.BackColor = Color.Black;
         }
 
         public static void LimitarDeckJogador(List<CartaJogador> deck, int posicao, int valorCarta)
