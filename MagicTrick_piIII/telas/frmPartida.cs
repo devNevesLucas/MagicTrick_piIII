@@ -21,7 +21,7 @@ namespace MagicTrick_piIII.telas
         Automato Automato;
         bool CartasImpressas = false;
 
-        static int[,] posicoesNomes = { { 183, 183 }, { 404, 227 }, { 922, 183 }, { 404, 454 } };
+        static int[,] posicoesNomes = { { 183, 183 }, { 419, 227 }, { 922, 183 }, { 419, 454 } };
         
         public frmPartida(Partida partida, List<Jogador> adversarios, Jogador player)
         {

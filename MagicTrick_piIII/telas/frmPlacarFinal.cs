@@ -39,12 +39,13 @@ namespace MagicTrick_piIII.telas
             
             dgvJogadores.DataSource = this.Jogadores;
 
-            dgvJogadores.Columns[0].Visible = false;
             dgvJogadores.Columns[3].Visible = false;
             dgvJogadores.Columns[4].Visible = false;
             dgvJogadores.Columns[5].Visible = false;
             dgvJogadores.Columns[6].Visible = false;
             dgvJogadores.Columns[7].Visible = false;
+            dgvJogadores.Columns[8].Visible = false;
+            dgvJogadores.Columns[9].Visible = false;
         }
 
         private void btnFecharPartida_Click(object sender, EventArgs e)

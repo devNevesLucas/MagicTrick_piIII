@@ -78,6 +78,7 @@ namespace MagicTrick_piIII
             dgvPartidas.Columns.Remove("Senha");
             dgvPartidas.Columns.Remove("NaipeRodada");
             dgvPartidas.Columns.Remove("StatusRodada");
+            dgvPartidas.Columns.Remove("DadosRodada");
         }
 
         private void dgvPartidas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -100,6 +101,8 @@ namespace MagicTrick_piIII
             dgvJogadores.Columns.Remove("CartaJogada");
             dgvJogadores.Columns.Remove("CartaAposta");
             dgvJogadores.Columns.Remove("Orientacao");
+            dgvJogadores.Columns.Remove("CartasDisponiveisPorNaipe");
+            dgvJogadores.Columns.Remove("lblPontuacao");
         }
 
         private void btnCriar_Click(object sender, EventArgs e)
