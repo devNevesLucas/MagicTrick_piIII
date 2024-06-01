@@ -1,6 +1,7 @@
 ﻿using MagicTrick_piIII.classes;
 using MagicTrick_piIII.Enums;
 using MagicTrick_piIII.Interfaces;
+using MagicTrick_piIII.Telas;
 using MagicTrickServer;
 using System;
 using System.Collections.Generic;
@@ -247,8 +248,8 @@ namespace MagicTrick_piIII
                 jogadores[i].CartaJogada.ImagemCarta.TornarInvisivel();
             }
         }
-
-        public static void AtualizarJogadas(List<Jogador> jogadores, DadosVerificacao dados, Automato automato, Control.ControlCollection controle)
+        
+        public static void AtualizarJogadas(List<Jogador> jogadores, DadosVerificacao dados, Automato automato, Control.ControlCollection controle, frmNarrador narrador)
         {
             int valorCarta, posicao, indexCarta;
             char naipe, statusCarta;
@@ -286,6 +287,12 @@ namespace MagicTrick_piIII
                             jogadorAtual.Deck[indexCarta].TornarIndisponivel(valorCarta);
                             jogadorAtual.CartasDisponiveisPorNaipe[naipe]--;
                             automato.RemoverValorPossivel(valorCarta, naipe);
+
+                            if (statusCarta == 'C')
+                                narrador.NarrarCartaJogada(jogadorAtual, cartasTmp[i]);
+
+                            else
+                                narrador.NarrarCartaApostada(jogadorAtual, cartasTmp[i]);
                         }                    
                     }                   
 
@@ -302,6 +309,12 @@ namespace MagicTrick_piIII
                         novaCarta.TornarIndisponivel(valorCarta);
 
                         automato.InserirCarta(ref novaCarta);
+
+                        if (statusCarta == 'C')
+                            narrador.NarrarCartaJogada(jogadorAtual, novaCarta);
+
+                        else
+                            narrador.NarrarCartaApostada(jogadorAtual, novaCarta);
                     }
 
                     CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valorCarta);
@@ -309,7 +322,7 @@ namespace MagicTrick_piIII
             }         
         }
 
-        public static void VerificarHistorico(List<Jogador> jogadores, Partida partida, Automato automato, Control.ControlCollection controle)
+        public static void VerificarHistorico(List<Jogador> jogadores, Partida partida, Automato automato, Control.ControlCollection controle, frmNarrador narrador)
         {
             BaralhoHistorico historicoJogadas = BaralhoHistorico.HandleHistoricoJogadas(partida);
 
@@ -339,6 +352,8 @@ namespace MagicTrick_piIII
                     CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valor);
                     automato.AtualizarDecks(valor, naipe);
                     automato.RemoverValorPossivel(valor, naipe);
+
+                    narrador.NarrarCartaJogada(jogadorAtual, carta);
                 }
             }
             
@@ -375,19 +390,24 @@ namespace MagicTrick_piIII
             Após isso, verifico se a minha aposta é igual ao número de naipes das rodadas que ganhei, 
             caso seja, adiciono dois pontos ao placar.
          */
-        private void AtualizarPontuacao()
+        private void AtualizarPontuacao(frmNarrador narrador)
         {
             int pontosRound = 0;
             int aposta = this.CartaAposta.ValorReal;
 
             int diferenca = aposta - this.PontosRodada.Count;
 
+            narrador.NarrarPontuacaoCalculada(this.IdJogador, diferenca);
+
             if (diferenca == 0)
             {
                 pontosRound = 3;
-
+               
                 if (aposta == this.NaipesDePontosDaRodada.Count)
+                {
                     pontosRound += 2;
+                    narrador.NarrarPrestigioGanho(this.IdJogador);
+                }
             }
 
             else
@@ -396,15 +416,18 @@ namespace MagicTrick_piIII
             this.Pontuacao += pontosRound;
         }
 
-        public static void AtualizarPlacares(List<Jogador> jogadores)
+        public static void AtualizarPlacares(List<Jogador> jogadores, frmNarrador narrador)
         {
             foreach (Jogador jogador in jogadores)
             {
-                jogador.AtualizarPontuacao();
+                jogador.AtualizarPontuacao(narrador);
                 jogador.AtualizarLblPontuacao();
             }
-        }
 
+            foreach (Jogador jogador in jogadores)
+                narrador.NarrarNovaPontuacao(jogador);
+        }
+        
         public static List<char> RetornarNaipesEmComum(List<Jogador> jogadores, Jogador jogador)
         {
             Dictionary<char, int> naipesEmComumDictionary = new Dictionary<char, int>();
@@ -416,9 +439,9 @@ namespace MagicTrick_piIII
             foreach(Jogador jogadorTmp in jogadores)
             {
                 if (jogadorTmp.IdJogador == jogador.IdJogador) continue;
-
-                foreach (char naipe in naipesEmComumDictionary.Keys)
-                    if (jogadorTmp.CartasDisponiveisPorNaipe[naipe] > 0)
+               
+                foreach(char naipe in jogadorTmp.CartasDisponiveisPorNaipe.Keys)                
+                    if (naipesEmComumDictionary.ContainsKey(naipe) && jogadorTmp.CartasDisponiveisPorNaipe[naipe] > 0)
                         naipesEmComumDictionary[naipe]++;
             }
 

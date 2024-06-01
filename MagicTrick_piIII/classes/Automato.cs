@@ -221,7 +221,10 @@ namespace MagicTrick_piIII.classes
 
             if (carta == null)
                 carta = this.Jogador.Deck.Find(c => c.ContemValorSuperior(pontosRodada) && c.Disponivel);
-           
+
+            if (carta == null)
+                carta = this.Jogador.Deck.Find(c => c.Disponivel);
+
             return carta.Posicao;
         }
 

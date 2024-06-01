@@ -1,5 +1,6 @@
 ﻿using MagicTrick_piIII.classes;
 using MagicTrick_piIII.Interfaces;
+using MagicTrick_piIII.Telas;
 using MagicTrickServer;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace MagicTrick_piIII.telas
         Automato Automato;
         bool CartasImpressas = false;
 
+        frmNarrador Narrador;
+
         static int[,] posicoesNomes = { { 183, 183 }, { 419, 227 }, { 922, 183 }, { 419, 454 } };
         
         public frmPartida(Partida partida, List<Jogador> adversarios, Jogador player)
@@ -37,10 +40,18 @@ namespace MagicTrick_piIII.telas
             AtualizarListaDeJogadores();
                                
             lblVersao.Text += Jogo.Versao;
+
+            
+            this.Narrador.Show();
+
+            this.Narrador.NarrarPartidaNaoIniciada();
         }
 
         private void AtualizarListaDeJogadores()
         {
+            if(this.Narrador == null)
+                this.Narrador = new frmNarrador();
+
             int idPartida = this.Partida.IdPartida;
             int idJogador = this.Player.IdJogador;
 
@@ -54,7 +65,9 @@ namespace MagicTrick_piIII.telas
                 this.Jogadores = jogadoresTmp;
                 int indexJogador = this.Jogadores.FindIndex(j => j.IdJogador == idJogador);
                 this.Jogadores[indexJogador] = this.Player;
-            }                   
+            }
+
+            this.Narrador.AtualizarJogadores(jogadoresTmp);
         }
 
         private void ExibirNomes()
@@ -112,7 +125,7 @@ namespace MagicTrick_piIII.telas
                 this.Partida.Round++;
 
                 Jogador.AdicionarUltimoPontoDoRound(this.Jogadores, this.Partida);
-                Jogador.AtualizarPlacares(this.Jogadores);
+                Jogador.AtualizarPlacares(this.Jogadores, this.Narrador);
             }
 
             this.Partida.Rodada = rodadaAtual;
@@ -145,12 +158,14 @@ namespace MagicTrick_piIII.telas
             {
                 Jogador.PreencherDeck(this.Jogadores, cartas, controle);
                 this.Automato.InicializarPropriedades(ref this.Jogadores);
+                this.Narrador.NarrarComecoDePartida();
             }
 
             else
             {
                 Jogador.AtualizarDeck(this.Jogadores, cartas);
                 this.Automato.ReiniciarPropriedades(ref this.Jogadores);
+                this.Narrador.NarrarNovoRound(this.Partida.Round);
             }
 
             return true;
@@ -188,6 +203,8 @@ namespace MagicTrick_piIII.telas
             {
                 Jogador.EsconderCartasJogadas(this.Jogadores);
                 flagNovaRodada = true;
+
+                this.Narrador.NarrarNovaRodada(verificacao.RodadaAtual);
             }
 
             AtualizarStatus(verificacao);
@@ -208,15 +225,14 @@ namespace MagicTrick_piIII.telas
                 flagNovaRodada = false;                
             }
 
-            Jogador.AtualizarJogadas(this.Jogadores, verificacao, this.Automato, this.Controls);
+            Jogador.AtualizarJogadas(this.Jogadores, verificacao, this.Automato, this.Controls, this.Narrador);
 
             if (flagNovaRodada)
-                Jogador.VerificarHistorico(this.Jogadores, this.Partida, this.Automato, this.Controls);
+                Jogador.VerificarHistorico(this.Jogadores, this.Partida, this.Automato, this.Controls, this.Narrador);
             
             this.Partida.NaipeRodada = verificacao.NaipeRodada;
 
             this.Automato.LimitarCartas(cartasRodada);
-
             
             if (verificacao.IdJogador == this.Player.IdJogador)
                 return true;
@@ -310,13 +326,12 @@ namespace MagicTrick_piIII.telas
         private void ExibirPlacarFinal(char statusPartida)
         {
             int idPartida = this.Partida.IdPartida;
-            frmPlacarFinal placarFinal = new frmPlacarFinal(idPartida, statusPartida);
+            frmPlacarFinal placarFinal = new frmPlacarFinal(idPartida, statusPartida, this, this.Narrador);
+
+            this.Narrador.NarrarFimDeJogo();
 
             tmrAtualizarEstado.Stop();
-
-            placarFinal.ShowDialog();
-
-            this.Close();
+            placarFinal.Show();
         }
 
         private void tmrAtualizarEstado_Tick(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using MagicTrick_piIII.telas;
+using MagicTrick_piIII.Telas;
 using MagicTrickServer;
 using System;
 using System.Collections.Generic;
@@ -29,8 +30,6 @@ namespace MagicTrick_piIII
         {
             frmMenu menu = new frmMenu();
             menu.Show();
-
-            //this.Hide();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -45,7 +44,7 @@ namespace MagicTrick_piIII
 
         private void btnCreditos_Click(object sender, EventArgs e)
         {
-        
+
         }
     }
 }

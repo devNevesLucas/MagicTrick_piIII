@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicTrick_piIII.Telas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,12 +17,18 @@ namespace MagicTrick_piIII.telas
 
         Jogador Vencedor;
 
-        public frmPlacarFinal(int idPartida, char status)
+        frmPartida Partida;
+        frmNarrador Narrador;
+
+        public frmPlacarFinal(int idPartida, char status, frmPartida partida, frmNarrador narrador)
         {
             InitializeComponent();
 
             this.Jogadores = Jogador.RetornarJogadoresPartida(idPartida);
             this.Jogadores = this.Jogadores.OrderByDescending(j => j.Pontuacao).ToList();
+
+            this.Partida = partida;
+            this.Narrador = narrador;
 
             if (this.Jogadores.Count == 0)
                 return;
@@ -50,7 +57,9 @@ namespace MagicTrick_piIII.telas
 
         private void btnFecharPartida_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            this.Partida.Close();
+            this.Narrador.Close();
+            this.Close();
         }
     }
 }
