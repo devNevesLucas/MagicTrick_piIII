@@ -13,6 +13,22 @@ namespace MagicTrick_piIII.classes
         public Jogador Jogador;
         public List<Jogador> Jogadores;
 
+        public CartaJogador CartaReserva1;
+        public CartaJogador CartaReserva2;
+
+        private Dictionary<char, List<int>> ValoresDisponiveisPorNaipe = new Dictionary<char, List<int>>();
+
+        private static List<char> naipesCartas = new List<char>()
+        {
+            'C', 'T', 'L', 'E', 'P', 'O', 'S'
+        };
+
+        private static List<int> valoresCartas = new List<int>()
+        {
+            0, 1, 2, 3, 4, 5, 6, 7
+        };
+
+
         public Automato(Jogador jogador, List<Jogador> jogadores)
         {
             this.Jogador = jogador;
@@ -22,7 +38,7 @@ namespace MagicTrick_piIII.classes
             Recebe todos os jogadores da partida, percorre o deck de cada um deles, 
             adiciona cada uma de suas cartas ao dicionário que o autômato possui.         
          */
-        public void InicializarDecks(ref List<Jogador> jogadores)
+        public void InicializarPropriedades(ref List<Jogador> jogadores)
         {
             CartaJogador cartaTmp;
             char naipeTmp;
@@ -40,14 +56,18 @@ namespace MagicTrick_piIII.classes
                     this.Decks[naipeTmp].Add(cartaTmp);                    
                 }
             }
+            this.InicializarValoresPossiveis();
+            this.CartaReserva1 = null;
+            this.CartaReserva2 = null;
         }
         /*
-            Atualiza a lista de decks do automato ao trocar de rodada
+            Atualiza a lista de decks e dicionário de valores possíveis do automato ao trocar de rodada
          */
-        public void ReiniciarDecks(ref List<Jogador> jogadores)
+        public void ReiniciarPropriedades(ref List<Jogador> jogadores)
         {
             this.Decks.Clear();
-            this.InicializarDecks(ref jogadores);
+            this.ValoresDisponiveisPorNaipe.Clear();
+            this.InicializarPropriedades(ref jogadores);
         }
 
         public void InserirCarta(ref CartaJogador carta)
@@ -55,7 +75,18 @@ namespace MagicTrick_piIII.classes
             char naipe = carta.Naipe;
             this.Decks[naipe].Add(carta);
         }
-              
+
+        public void InicializarValoresPossiveis()
+        {
+            foreach (char naipe in naipesCartas)
+                this.ValoresDisponiveisPorNaipe.Add(naipe, valoresCartas.ToList());
+        }
+
+        public void RemoverValorPossivel(int valor, char naipe)
+        {
+            this.ValoresDisponiveisPorNaipe[naipe].Remove(valor);
+        }
+
         public void LimitarCartas(BaralhoVerificacao cartasRodada)
         {
             char naipe;
@@ -98,23 +129,99 @@ namespace MagicTrick_piIII.classes
                 }
             }
         }
-        public int HandleAposta(int rodada)
-        {
-            if (rodada < 6)
-                return 0;
 
-            return CalcularMelhorAposta();
+        private void ReservarCarta(CartaJogador carta)
+        {            
+            if (this.CartaReserva1 == null)
+                this.CartaReserva1 = carta;
+
+            if(this.CartaReserva2 == null)
+                this.CartaReserva2 = carta;
+
+            if(this.CartaReserva1 != null && this.CartaReserva2 != null)
+            {
+                int pontosRodada = this.Jogador.PontosRodada.Count;
+
+                if (this.CartaReserva1.ValorReal == pontosRodada) return;
+
+                if(this.CartaReserva2.ValorReal == pontosRodada)
+                {
+                    CartaJogador cartaTmp = this.CartaReserva2;
+                    this.CartaReserva2 = this.CartaReserva1;
+                    this.CartaReserva1 = cartaTmp;
+                }
+            }
         }
 
-        public int CalcularMelhorAposta()
+        private void AtualizarReservas(CartaJogador cartaJogada)
         {
-            int vitorias = this.Jogador.PontosRodada.Count + 2;
+            if (this.CartaReserva1 == null && this.CartaReserva2 == null) return;
 
-            CartaJogador carta = this.Jogador.Deck.Find(c => c.ValorReal == vitorias && c.Disponivel);
+            if(this.CartaReserva1 == cartaJogada)
+            {
+                this.CartaReserva1 = this.CartaReserva2;
+                this.CartaReserva2 = null;
+            }
+
+            if (this.CartaReserva2 == cartaJogada)
+                this.CartaReserva2 = null;
+        }
+
+        private bool VerificarReservas(CartaJogador carta)
+        {
+            if (this.CartaReserva1 != null && carta.Posicao == this.CartaReserva1.Posicao)
+                return true;
+
+            if (this.CartaReserva2 != null && carta.Posicao == this.CartaReserva2.Posicao)
+                return true;
+
+            return false;
+        }
+
+        public int HandleAposta(int rodada)
+        {
+            if (rodada < 8)
+            {
+                int pontosRodada = this.Jogador.PontosRodada.Count;
+                CartaJogador cartaParaReservar = this.Jogador.Deck.Find(c => c.ValorReal == pontosRodada && c.Disponivel);
+
+                if (cartaParaReservar != null)
+                    this.ReservarCarta(cartaParaReservar);
+
+                cartaParaReservar = null;
+
+                cartaParaReservar = this.Jogador.Deck.Find(c => c.ValorReal == pontosRodada + 1 && c.Disponivel);
+
+                if (cartaParaReservar != null)
+                    this.ReservarCarta(cartaParaReservar);
+
+                return 0;
+            }
+
+            return EscolherCartaAposta();
+        }
+
+        public int EscolherCartaAposta()
+        {
+            int pontosRodada = this.Jogador.PontosRodada.Count;
+
+            CartaJogador carta = this.CartaReserva1;
+
+            if (carta != null && carta.ValorReal == pontosRodada && carta.Disponivel)
+                return carta.Posicao;
+
+            carta = null;
+
+            carta = this.CartaReserva2;
+
+            if (carta != null && carta.ValorReal == pontosRodada && carta.Disponivel)
+                return carta.Posicao;
+
+            carta = this.Jogador.Deck.Find(c => c.ValorReal == pontosRodada && c.Disponivel);
 
             if (carta == null)
-                carta = this.Jogador.Deck.Find(c => c.ContemValorSuperior(vitorias) && c.Disponivel);
-
+                carta = this.Jogador.Deck.Find(c => c.ContemValorSuperior(pontosRodada) && c.Disponivel);
+           
             return carta.Posicao;
         }
 
@@ -122,128 +229,128 @@ namespace MagicTrick_piIII.classes
         {
             CartaJogador carta = null;
 
+            List<CartaJogador> deck = this.Jogador.Deck;
+
             if (naipeRodada != null)
-                carta = this.Jogador.Deck.Find(c => c.Naipe == naipeRodada && c.Disponivel);
-
-            if (carta == null)
-                carta = this.Jogador.Deck.Find(c => c.Disponivel);
-
-            return carta.Posicao;
-        }
-
-        public int JogarMenorCartaDeCopas()
-        {
-            CartaJogador carta;
-
-            carta = this.Jogador.Deck.Find(c => c.Naipe == 'C' && c.Disponivel);
-
-            if (carta == null)
-                carta = this.Jogador.Deck.Find(c => c.Disponivel);
-
-            return carta.Posicao;
-        }
-
-        public int JogarCartaNoMaiorIntervaloDisponivel()
-        {
-            int inicio = 0, inicioAux = 0;
-            int intervalo = 0, intervaloAux = 0;
+                carta = deck.Find(c => c.Naipe == naipeRodada && !this.VerificarReservas(c) && c.Disponivel);
             
-            for(int i = 0; i < this.Jogador.Deck.Count; i++)
-            {
-                if (this.Jogador.Deck[i].Disponivel)
-                    intervaloAux++;
+            if (naipeRodada != null && carta == null)            
+                carta = deck.Find(c => c.Naipe == naipeRodada && c.Disponivel);
+             
+            if (carta == null)
+                carta = deck.Find(c => c.Disponivel);
+            
+            this.AtualizarReservas(carta);
+            
+            return carta.Posicao;
+        }
 
-                else                
-                    if(intervaloAux > intervalo)
-                    {
-                        inicio = inicioAux;
-                        inicioAux = i + 1;
-                        intervalo = intervaloAux;
-                        intervaloAux = 0;
-                    }                                        
-            }
+        public int JogarUnicaCartaDisponivel(char naipe)
+        {
+            CartaJogador carta = this.Jogador.Deck.Find(c => c.Naipe == naipe && c.Disponivel);
 
-            if (intervalo == 0)
-                intervalo = intervaloAux;
-
-            int posicao = (int)(intervalo / 2) + inicio;
-
-            CartaJogador carta = this.Jogador.Deck.Find(c => c.Posicao >= posicao && c.Disponivel);
+            this.AtualizarReservas(carta);
 
             return carta.Posicao;
         }
 
-        public int JogarCartaMaiorQueDemais(int valor, char naipe)
-        {
-            CartaJogador carta;
-
-            carta = this.Jogador.Deck.Find(c => c.ValorReal > valor && c.Naipe == naipe && c.Disponivel);
-
-            if (carta == null)
-                carta = this.Jogador.Deck.Find(c => c.ContemValorSuperior(valor) && c.Naipe == naipe && c.Disponivel);
-
-            if (carta == null)
-                carta = this.Jogador.Deck.Find(c => c.Naipe == naipe && c.Disponivel);
-
-            return carta.Posicao;
-        }    
-        
-        public int JogarMaiorCartaPossivel(char? naipe)
+        public int JogarMaiorCartaPossivel(char naipe)
         {
             List<CartaJogador> deckTmp = this.Jogador.Deck;
 
             deckTmp = deckTmp.OrderByDescending(c => c.Posicao).ToList();
 
-            CartaJogador carta = null;
+            CartaJogador carta = deckTmp.Find(c => c.Naipe == naipe && !this.VerificarReservas(c) && c.Disponivel);
 
-            if (naipe != null)
+            if(carta == null)
                 carta = deckTmp.Find(c => c.Naipe == naipe && c.Disponivel);
 
-            if (carta == null)
-                carta = deckTmp.Find(c => c.Disponivel);
+            this.AtualizarReservas(carta);
 
             return carta.Posicao;
         }
 
-        public int HandleJogadas(DadosVerificacao dados)
+        public int JogarMaiorCartaPossivel()
         {
-            List<int> jogadoresQueJaJogaram = dados.JogadoresQueJaJogaram;
+            List<CartaJogador> deckTmp = this.Jogador.Deck;
 
+            deckTmp = deckTmp.OrderByDescending(c => c.Posicao).ToList();
+
+            CartaJogador carta = deckTmp.Find(c => c.Naipe != 'C' && c.Disponivel);
+
+            if (carta == null)
+                carta = deckTmp.Find(c => c.Disponivel);
+
+            this.AtualizarReservas(carta);
+
+            return carta.Posicao;
+        }
+
+        public int JogarPrimeiraCartaDaRodada()
+        {
+            List<char> naipesEmComum = Jogador.RetornarNaipesEmComum(this.Jogadores, this.Jogador);
+
+            List<CartaJogador> deck = this.Jogador.Deck;
+
+            CartaJogador carta = deck.Find(c => c.Naipe == 'C' && !this.VerificarReservas(c) && c.Disponivel);
+                
+            if(carta == null)                
+                carta = deck.Find(c => naipesEmComum.Contains(c.Naipe) && !this.VerificarReservas(c) && c.Disponivel);
+
+            if (carta == null)
+                carta = deck.Find(c => naipesEmComum.Contains(c.Naipe) && c.Disponivel);
+                
+            if (carta == null)                
+                carta = deck.Find(c => c.Disponivel);
+
+            this.AtualizarReservas(carta);
+
+            return carta.Posicao;
+        }
+
+        public int JogarCartaComValorMenor(CartaVerificacao cartaCampea, char naipeRodada)
+        {
+            if (cartaCampea.Naipe == 'C' && naipeRodada != 'C')
+                return JogarMaiorCartaPossivel(naipeRodada);
+
+            int maiorValor = cartaCampea.ValorReal;
+
+            List<CartaJogador> deck = this.Jogador.Deck;
+            CartaJogador carta;    
+
+            carta = deck.Find(c => c.ValorReal < maiorValor && c.Naipe == naipeRodada && c.Disponivel);
+
+            if (carta == null)
+                carta = deck.Find(c => c.PossiveisValores.Max() < maiorValor && c.Naipe == naipeRodada && c.Disponivel);
+
+            if (carta != null && carta.ValorReal < cartaCampea.ValorReal)
+            {
+                this.AtualizarReservas(carta);
+                return carta.Posicao;
+            }
+                        
+            return JogarPrimeiraCartaPossivel(naipeRodada);
+        }
+
+        public int HandleJogadas(DadosVerificacao dados)
+        {    
             CartaVerificacao cartaCampea = BaralhoVerificacao.RetornarCartaCampea(dados.CartasRodada);
            
-            int aposta = this.Jogador.CartaAposta.ValorReal;
-            int pontosRodada = this.Jogador.PontosRodada.Count;
-            int diferenca = pontosRodada - aposta;
             char? naipe = dados.NaipeRodada;
 
-            if (naipe == null || cartaCampea == null)
-                return this.JogarCartaNoMaiorIntervaloDisponivel();
+            if (naipe == null)
+                return this.JogarPrimeiraCartaDaRodada();
+
+            if (this.Jogador.CartasDisponiveisPorNaipe[(char)naipe] == 0)
+                return this.JogarMaiorCartaPossivel();
 
             if (this.Jogador.CartasDisponiveisPorNaipe[(char)naipe] == 1)
-                return this.JogarPrimeiraCartaPossivel(naipe);
+                return this.JogarUnicaCartaDisponivel((char)naipe);
 
-            int cartasDisponiveis = this.Jogador.CartasDisponiveisPorNaipe[(char)naipe];
+            if (cartaCampea.ValorReal == 7)
+                return this.JogarMaiorCartaPossivel((char)naipe);
 
-            if (diferenca > 0)
-            {
-                if(cartasDisponiveis == 0)
-                {
-                    if (cartaCampea.Naipe != 'C')
-                        return this.JogarMenorCartaDeCopas();
-
-                    return this.JogarPrimeiraCartaPossivel(naipe);
-                }
-
-                if(cartaCampea != null)
-                    return this.JogarCartaMaiorQueDemais(cartaCampea.ValorReal, (char)naipe);
-
-                return this.JogarMaiorCartaPossivel(naipe);
-            }
-
-            if(cartasDisponiveis == 0)           
-                return this.JogarMaiorCartaPossivel(naipe);
-
-            return this.JogarPrimeiraCartaPossivel(naipe);
+            return this.JogarCartaComValorMenor(cartaCampea, (char)naipe);
         }
         
         public int RetornarPosicaoEscolhida(DadosVerificacao dados)

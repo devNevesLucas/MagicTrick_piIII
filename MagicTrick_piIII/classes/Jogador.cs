@@ -285,6 +285,7 @@ namespace MagicTrick_piIII
                         {
                             jogadorAtual.Deck[indexCarta].TornarIndisponivel(valorCarta);
                             jogadorAtual.CartasDisponiveisPorNaipe[naipe]--;
+                            automato.RemoverValorPossivel(valorCarta, naipe);
                         }                    
                     }                   
 
@@ -337,6 +338,7 @@ namespace MagicTrick_piIII
                     jogadorAtual.Deck[posicao - 1].TornarIndisponivel(valor);
                     CartaJogador.LimitarDeckJogador(jogadorAtual.Deck, posicao, valor);
                     automato.AtualizarDecks(valor, naipe);
+                    automato.RemoverValorPossivel(valor, naipe);
                 }
             }
             
@@ -401,6 +403,31 @@ namespace MagicTrick_piIII
                 jogador.AtualizarPontuacao();
                 jogador.AtualizarLblPontuacao();
             }
+        }
+
+        public static List<char> RetornarNaipesEmComum(List<Jogador> jogadores, Jogador jogador)
+        {
+            Dictionary<char, int> naipesEmComumDictionary = new Dictionary<char, int>();
+            
+            foreach(KeyValuePair<char, int> chaveValor in jogador.CartasDisponiveisPorNaipe)            
+                if (jogador.CartasDisponiveisPorNaipe[chaveValor.Key] > 0)
+                    naipesEmComumDictionary.Add(chaveValor.Key, 0);
+           
+            foreach(Jogador jogadorTmp in jogadores)
+            {
+                if (jogadorTmp.IdJogador == jogador.IdJogador) continue;
+
+                foreach (char naipe in naipesEmComumDictionary.Keys)
+                    if (jogadorTmp.CartasDisponiveisPorNaipe[naipe] > 0)
+                        naipesEmComumDictionary[naipe]++;
+            }
+
+            List<char> naipesEmComum = new List<char>();
+
+            foreach (KeyValuePair<char, int> chaveValor in naipesEmComumDictionary.OrderBy(c => c.Value))
+                naipesEmComum.Add(chaveValor.Key);
+
+            return naipesEmComum;
         }
     }
 }

@@ -144,13 +144,13 @@ namespace MagicTrick_piIII.telas
             if (this.Partida.Round == 1)
             {
                 Jogador.PreencherDeck(this.Jogadores, cartas, controle);
-                this.Automato.InicializarDecks(ref this.Jogadores);
+                this.Automato.InicializarPropriedades(ref this.Jogadores);
             }
 
             else
             {
                 Jogador.AtualizarDeck(this.Jogadores, cartas);
-                this.Automato.ReiniciarDecks(ref this.Jogadores);
+                this.Automato.ReiniciarPropriedades(ref this.Jogadores);
             }
 
             return true;

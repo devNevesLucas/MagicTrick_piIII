@@ -39,6 +39,8 @@ namespace MagicTrick_piIII.classes
 
             this.PossiveisValores.AddRange(valores.ToList());
 
+            this.ValorReal = -1;
+
             this.Naipe = naipe;
 
             this.Disponivel = true;
@@ -66,9 +68,6 @@ namespace MagicTrick_piIII.classes
             this.ValorReal = numeroCarta;
 
             this.TornarIndisponivel(numeroCarta);
-            this.ImagemCarta.AtualizarImagemCarta(naipe);
-
-            this.ImagemCarta.LblValorCarta.BackColor = Color.Black;
             this.ImagemCarta.AtualizarImagemCarta(naipe);            
         }
 
@@ -117,7 +116,6 @@ namespace MagicTrick_piIII.classes
         {
             char naipe = this.Naipe;
             this.ValorReal = this.PossiveisValores[0];
-            this.ImagemCarta.ExibirValorDescoberto(this.ValorReal);
             this.ImagemCarta.ExibirValorDescoberto(naipe, this.ValorReal);
         }
 
