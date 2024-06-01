@@ -277,5 +277,47 @@
   <ItemGroup>
     <None Include="Resources\trianguloIndisponivelHorizontal.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coracaoDescoberto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coracaoDescobertoHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\espadasDescoberta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\espadasDescobertaHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estrelasDescoberta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estrelasDescobertaHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luaDescoberta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luaDescobertaHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ourosDescoberto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ourosDescobertoHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pausDescoberto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pausDescobertoHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trianguloDescoberto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trianguloDescobertoHorizontal.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

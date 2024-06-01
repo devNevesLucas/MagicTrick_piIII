@@ -69,6 +69,7 @@ namespace MagicTrick_piIII.classes
             this.ImagemCarta.AtualizarImagemCarta(naipe);
 
             this.ImagemCarta.LblValorCarta.BackColor = Color.Black;
+            this.ImagemCarta.AtualizarImagemCarta(naipe);            
         }
 
         public static void LimitarDeckJogador(List<CartaJogador> deck, int posicao, int valorCarta)
@@ -114,8 +115,10 @@ namespace MagicTrick_piIII.classes
    
         public void AtualizarCartaDescoberta()
         {
+            char naipe = this.Naipe;
             this.ValorReal = this.PossiveisValores[0];
             this.ImagemCarta.ExibirValorDescoberto(this.ValorReal);
+            this.ImagemCarta.ExibirValorDescoberto(naipe, this.ValorReal);
         }
 
         public bool ContemValorSuperior(int valor)

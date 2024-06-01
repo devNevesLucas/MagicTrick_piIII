@@ -45,15 +45,26 @@ namespace MagicTrick_piIII.classes
             { 'T' , Properties.Resources.trianguloHorizontal }
         };
 
-        private static Dictionary<char, Bitmap> BitmapsBaralhoIndisponivel_Horizontal = new Dictionary<char, Bitmap>
+        private static Dictionary<char, Bitmap> BitmapsBaralhoDescoberto_Vertical = new Dictionary<char, Bitmap>
         {
-            { 'C' , Properties.Resources.coracaoIndisponivelHorizontal },
-            { 'E' , Properties.Resources.espadasIndisponivelHorizontal },
-            { 'S' , Properties.Resources.estrelasIndisponivelHorizontal },
-            { 'L' , Properties.Resources.luaIndisponivelHorizontal },
-            { 'O' , Properties.Resources.ourosIndisponivelHorizontal },
-            { 'P' , Properties.Resources.pausIndisponivelHorizontal },
-            { 'T' , Properties.Resources.trianguloIndisponivelHorizontal }
+            { 'C', Properties.Resources.coracaoDescoberto },
+            { 'E', Properties.Resources.espadasDescoberta },
+            { 'S', Properties.Resources.estrelasDescoberta },
+            { 'L', Properties.Resources.luaDescoberta },
+            { 'O', Properties.Resources.ourosDescoberto },
+            { 'P', Properties.Resources.pausDescoberto },
+            { 'T', Properties.Resources.trianguloDescoberto }
+        };
+
+        private static Dictionary<char, Bitmap> BitmapsBaralhoDescoberto_Horizontal = new Dictionary<char, Bitmap>
+        {
+            { 'C', Properties.Resources.coracaoDescobertoHorizontal },
+            { 'E', Properties.Resources.espadasDescobertaHorizontal },
+            { 'S', Properties.Resources.estrelasDescobertaHorizontal },
+            { 'L', Properties.Resources.luaDescobertaHorizontal },
+            { 'O', Properties.Resources.ourosDescobertoHorizontal },
+            { 'P', Properties.Resources.pausDescobertoHorizontal },
+            { 'T', Properties.Resources.trianguloDescobertoHorizontal }
         };
 
         private static Dictionary<char, Bitmap> BitmapsBaralhoIndisponivel_Vertical = new Dictionary<char, Bitmap>
@@ -65,6 +76,17 @@ namespace MagicTrick_piIII.classes
             { 'O' , Properties.Resources.ourosIndisponivel },
             { 'P' , Properties.Resources.pausIndisponivel },
             { 'T' , Properties.Resources.trianguloIndisponivel }
+        };
+
+        private static Dictionary<char, Bitmap> BitmapsBaralhoIndisponivel_Horizontal = new Dictionary<char, Bitmap>
+        {
+            { 'C' , Properties.Resources.coracaoIndisponivelHorizontal },
+            { 'E' , Properties.Resources.espadasIndisponivelHorizontal },
+            { 'S' , Properties.Resources.estrelasIndisponivelHorizontal },
+            { 'L' , Properties.Resources.luaIndisponivelHorizontal },
+            { 'O' , Properties.Resources.ourosIndisponivelHorizontal },
+            { 'P' , Properties.Resources.pausIndisponivelHorizontal },
+            { 'T' , Properties.Resources.trianguloIndisponivelHorizontal }
         };
 
         public ImagemCarta(int x, int y, Orientacao orientacaoDeckJogador, char naipe)
@@ -122,7 +144,6 @@ namespace MagicTrick_piIII.classes
 
             this.LblValorCarta.Location = ponto;
             this.LblValorCarta.ForeColor = Color.White;
-            this.LblValorCarta.BackColor = Color.Black;
 
             this.LblValorCarta.TextAlign = ContentAlignment.MiddleCenter;
             this.LblValorCarta.Font = fonteLabel;
@@ -140,6 +161,15 @@ namespace MagicTrick_piIII.classes
 
             else
                 return BitmapsBaralhoDisponivel_Horizontal[naipe];
+        }
+
+        public static Bitmap RetornarNaipeDescobertoBitmap(char naipe, Orientacao orientacaoCarta)
+        {
+            if (orientacaoCarta == Orientacao.Vertical)
+                return BitmapsBaralhoDescoberto_Vertical[naipe];
+
+            else
+                return BitmapsBaralhoDescoberto_Horizontal[naipe];
         }
 
         public static Bitmap RetornarNaipeIndisponivelBitmap(char naipe, Orientacao orientacaoCarta)
@@ -177,8 +207,7 @@ namespace MagicTrick_piIII.classes
                     posicaoCarta = jogadores[i].Deck[j].Posicao - 1;
                     jogadores[i].Deck[j].ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, posicaoCarta);
 
-                    controle.Add(jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe);                       
-                    //controle.Add(jogadores[i].Deck[j].ImagemCarta.LblValorCarta);                    
+                    controle.Add(jogadores[i].Deck[j].ImagemCarta.PnlImgNaipe);                                                             
                     TrazerParaFrente(jogadores[i].Deck[j]);
                 }
 
@@ -188,7 +217,6 @@ namespace MagicTrick_piIII.classes
                 jogadores[i].CartaJogada.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
                     
                 controle.Add(jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe);
-                //controle.Add(jogadores[i].CartaJogada.ImagemCarta.LblValorCarta);
 
                 jogadores[i].CartaJogada.ImagemCarta.PnlImgNaipe.Visible = false;
                 TrazerParaFrente(jogadores[i].CartaJogada);
@@ -199,7 +227,6 @@ namespace MagicTrick_piIII.classes
                 jogadores[i].CartaAposta.ImagemCarta = new ImagemCarta(x, y, orientacao, 'C');
 
                 controle.Add(jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe);
-                //controle.Add(jogadores[i].CartaAposta.ImagemCarta.LblValorCarta);
 
                 jogadores[i].CartaAposta.ImagemCarta.PnlImgNaipe.Visible = false;
                 TrazerParaFrente(jogadores[i].CartaAposta);
@@ -218,7 +245,6 @@ namespace MagicTrick_piIII.classes
             carta.ImagemCarta = new ImagemCarta(x, y, orientacao, naipe, posicaoCarta);
 
             controle.Add(carta.ImagemCarta.PnlImgNaipe);
-            //controle.Add(carta.ImagemCarta.LblValorCarta);
             TrazerParaFrente(carta);
         }
 
@@ -259,7 +285,7 @@ namespace MagicTrick_piIII.classes
         public void AtualizarImagemCarta(char naipe)
         {           
             this.PnlImgNaipe.Visible = true;
-            this.PnlImgNaipe.BackgroundImage = RetornarNaipeBitmap(naipe, this.OrientacaoCarta);
+            this.PnlImgNaipe.BackgroundImage = RetornarNaipeDescobertoBitmap(naipe, this.OrientacaoCarta);
         }
 
         public void TornarInvisivel()
@@ -273,12 +299,15 @@ namespace MagicTrick_piIII.classes
             this.LblValorCarta.Visible = false;
         }
 
-        public void ExibirValorDescoberto(int valor)
+        public void ExibirValorDescoberto(char naipe, int valor)
         {
-            this.LblValorCarta.ForeColor = Color.Black;
-            this.LblValorCarta.BackColor = Color.White;
+            this.LblValorCarta.Text = valor.ToString();
+            this.LblValorCarta.ForeColor = Color.White;
+            this.LblValorCarta.BackColor = Color.Transparent;
+
+            this.PnlImgNaipe.BackgroundImage = RetornarNaipeDescobertoBitmap(naipe, this.OrientacaoCarta);
+           
             this.LblValorCarta.Visible = true;
-            this.LblValorCarta.Text = valor.ToString(); 
         }
     }
 }

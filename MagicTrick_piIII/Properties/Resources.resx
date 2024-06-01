@@ -235,4 +235,46 @@
   <data name="trianguloIndisponivelHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\trianguloIndisponivelHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="coracaoDescoberto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coracaoDescoberto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coracaoDescobertoHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coracaoDescobertoHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="espadasDescoberta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\espadasDescoberta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="espadasDescobertaHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\espadasDescobertaHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="estrelasDescoberta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\estrelasDescoberta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="estrelasDescobertaHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\estrelasDescobertaHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="luaDescoberta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\luaDescoberta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="luaDescobertaHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\luaDescobertaHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ourosDescoberto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ourosDescoberto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ourosDescobertoHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ourosDescobertoHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pausDescoberto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pausDescoberto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pausDescobertoHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pausDescobertoHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="trianguloDescoberto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trianguloDescoberto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="trianguloDescobertoHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trianguloDescobertoHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
