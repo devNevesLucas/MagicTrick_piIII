@@ -28,8 +28,11 @@ namespace MagicTrick_piIII
         public Orientacao Orientacao { get; set; }  
         public Posicao Posicao { get; set; }
         public Label lblPontuacao { get; set; }
+        public Label lblQtdNaipes { get; set; }
 
         static int[,] PosicoesPontuacao = { { 183, 478 }, { 732, 227 }, { 980, 478 }, { 732, 457 } };
+        
+        static int[,] posicoesNaipesVitorias = { { 99, 104 }, { 828, 140 }, { 1068, 575 }, { 344, 540 } };
 
         public Jogador(string linha)
         {
@@ -96,7 +99,7 @@ namespace MagicTrick_piIII
             return jogadoresTmp;
         }
 
-        private void InstanciarLabel(Control.ControlCollection controle)
+        private void InstanciarLabels(Control.ControlCollection controle)
         {
             int posicao = (int)this.Posicao;
 
@@ -111,13 +114,25 @@ namespace MagicTrick_piIII
             this.lblPontuacao.Text = this.Pontuacao.ToString();
             controle.Add(this.lblPontuacao);
 
+            ponto = new Point(posicoesNaipesVitorias[posicao, 0], posicoesNaipesVitorias[posicao, 1]);
+
+            this.lblQtdNaipes = new Label();
+            this.lblQtdNaipes.Font = Auxiliar.fontePrincipal;
+            this.lblQtdNaipes.Location = ponto;
+            this.lblQtdNaipes.ForeColor = Color.White;
+            this.lblQtdNaipes.BackColor = Color.FromArgb(19, 23, 31);
+
+            this.lblQtdNaipes.Text = this.NaipesDePontosDaRodada.Count.ToString();
+            controle.Add(this.lblQtdNaipes);
+
             this.lblPontuacao.BringToFront();
+            this.lblQtdNaipes.BringToFront();
         }
 
         private static void InstanciarLabels(List<Jogador> jogadores, Control.ControlCollection controle)
         {
             foreach (Jogador jogador in jogadores)
-                jogador.InstanciarLabel(controle);
+                jogador.InstanciarLabels(controle);
         }
 
         public static void OrganizarJogadores(ref List<Jogador> jogadores, int idPlayer, Control.ControlCollection controle)
@@ -209,6 +224,7 @@ namespace MagicTrick_piIII
                 
                 jogadores[i].PontosRodada.Clear();
                 jogadores[i].NaipesDePontosDaRodada.Clear();
+                jogadores[i].AtualizarLblNaipesVitorias();
 
                 foreach (char chave in jogadores[i].CartasDisponiveisPorNaipe.Keys.ToList())
                     jogadores[i].CartasDisponiveisPorNaipe[chave] = 0;
@@ -377,6 +393,13 @@ namespace MagicTrick_piIII
             Ponto.AtribuirUltimoPontoDoRound(jogadorTmp, ponto);
         }
 
+        public void AtualizarLblNaipesVitorias()
+        {
+            int qtdNaipes = this.NaipesDePontosDaRodada.Count;
+            this.lblQtdNaipes.ResetText();
+            this.lblQtdNaipes.Text = qtdNaipes.ToString();
+        }
+
         private void AtualizarLblPontuacao()
         {
             this.lblPontuacao.Text = this.Pontuacao.ToString();
@@ -421,11 +444,14 @@ namespace MagicTrick_piIII
             foreach (Jogador jogador in jogadores)
             {
                 jogador.AtualizarPontuacao(narrador);
+                jogador.AtualizarLblNaipesVitorias();
                 jogador.AtualizarLblPontuacao();
             }
 
             foreach (Jogador jogador in jogadores)
                 narrador.NarrarNovaPontuacao(jogador);
+
+            narrador.AtualizarJogadores(jogadores);
         }
         
         public static List<char> RetornarNaipesEmComum(List<Jogador> jogadores, Jogador jogador)

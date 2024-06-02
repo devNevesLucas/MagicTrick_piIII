@@ -68,7 +68,9 @@ namespace MagicTrick_piIII.classes
             foreach(char naipe in ponto.Naipes)            
                 if (!jogador.NaipesDePontosDaRodada.Contains(naipe))
                     jogador.NaipesDePontosDaRodada.Add(naipe);
-            
+
+            jogador.AtualizarLblNaipesVitorias();
+
             ponto.ImagemPonto = new ImagemPonto(jogador.Posicao, qtdPontosRodada, naipePonto);
             controle.Add(ponto.ImagemPonto.PnlPonto);
             ponto.ImagemPonto.PnlPonto.BringToFront();
@@ -84,6 +86,8 @@ namespace MagicTrick_piIII.classes
             foreach (char naipe in ponto.Naipes)
                 if (!jogador.NaipesDePontosDaRodada.Contains(naipe))
                     jogador.NaipesDePontosDaRodada.Add(naipe);
+
+            jogador.AtualizarLblNaipesVitorias();
 
             ponto.ImagemPonto = new ImagemPonto(jogador.Posicao, qtdPontosRodada, naipePonto);
         }

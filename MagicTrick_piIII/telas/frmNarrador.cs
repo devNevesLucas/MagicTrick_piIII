@@ -49,16 +49,17 @@ namespace MagicTrick_piIII.Telas
 
         public void AtualizarJogadores(List<Jogador> jogadores)
         {
-            this.Jogadores = jogadores;
+            this.Jogadores = jogadores;            
             dgvJogadores.DataSource = this.Jogadores;
 
-            dgvJogadores.Columns.Remove("Posicao");
-            dgvJogadores.Columns.Remove("Senha");
-            dgvJogadores.Columns.Remove("CartaJogada");
-            dgvJogadores.Columns.Remove("CartaAposta");
-            dgvJogadores.Columns.Remove("Orientacao");
-            dgvJogadores.Columns.Remove("CartasDisponiveisPorNaipe");
-            dgvJogadores.Columns.Remove("lblPontuacao");
+            dgvJogadores.Columns[3].Visible = false;
+            dgvJogadores.Columns[4].Visible = false;
+            dgvJogadores.Columns[5].Visible = false;
+            dgvJogadores.Columns[6].Visible = false;
+            dgvJogadores.Columns[7].Visible = false;
+            dgvJogadores.Columns[8].Visible = false;
+            dgvJogadores.Columns[9].Visible = false;
+            dgvJogadores.Columns[10].Visible = false;
         }
 
         private void NarrarTextoColorido(string texto, char naipe)

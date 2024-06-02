@@ -25,7 +25,7 @@ namespace MagicTrick_piIII.telas
         frmNarrador Narrador;
 
         static int[,] posicoesNomes = { { 183, 183 }, { 419, 227 }, { 922, 183 }, { 419, 454 } };
-        
+       
         public frmPartida(Partida partida, List<Jogador> adversarios, Jogador player)
         {
             InitializeComponent();
@@ -70,7 +70,7 @@ namespace MagicTrick_piIII.telas
             this.Narrador.AtualizarJogadores(jogadoresTmp);
         }
 
-        private void ExibirNomes()
+        private void ExibirLabels()
         {
             int posicao;
 
@@ -80,6 +80,7 @@ namespace MagicTrick_piIII.telas
 
             foreach (Jogador jogador in this.Jogadores)
             {
+                posicao = (int)jogador.Posicao;
                 lblNome = new Label();
                 lblNome.Text = jogador.Nome;
                 lblNome.Font = fonteLabel;
@@ -87,10 +88,7 @@ namespace MagicTrick_piIII.telas
                 lblNome.BackColor = Color.FromArgb(19, 23, 31);
                 lblNome.Visible = true;
 
-                posicao = (int)jogador.Posicao;
-
                 ponto = new Point(posicoesNomes[posicao, 0], posicoesNomes[posicao, 1]);
-
                 lblNome.Location = ponto;
 
                 this.Controls.Add(lblNome);
@@ -215,7 +213,7 @@ namespace MagicTrick_piIII.telas
                 {                    
                     AtualizarListaDeJogadores();
                     Jogador.OrganizarJogadores(ref this.Jogadores, idJogador, this.Controls);
-                    this.ExibirNomes();
+                    this.ExibirLabels();
                 }
 
                 if (!ConsultarMao())
