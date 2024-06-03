@@ -122,6 +122,8 @@ namespace MagicTrick_piIII
             this.lblQtdNaipes.ForeColor = Color.White;
             this.lblQtdNaipes.BackColor = Color.FromArgb(19, 23, 31);
 
+            this.lblQtdNaipes.Width = 25;
+
             this.lblQtdNaipes.Text = this.NaipesDePontosDaRodada.Count.ToString();
             controle.Add(this.lblQtdNaipes);
 

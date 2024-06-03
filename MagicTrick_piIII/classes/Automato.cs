@@ -163,6 +163,9 @@ namespace MagicTrick_piIII.classes
         {
             if (this.CartaReserva1 == null && this.CartaReserva2 == null) return;
 
+            if (this.CartaReserva1 == this.CartaReserva2)
+                this.CartaReserva2 = null;
+
             if(this.CartaReserva1 == cartaJogada)
             {
                 this.CartaReserva1 = this.CartaReserva2;
@@ -353,7 +356,7 @@ namespace MagicTrick_piIII.classes
             if (carta == null)
                 carta = deck.Find(c => c.ValorReal < maiorValor && c.Naipe == naipeRodada && c.Disponivel);
 
-            if (carta != null && carta.ValorReal < cartaCampea.ValorReal)
+            if (carta != null && carta.ValorReal < cartaCampea.ValorReal && carta.ValorReal != -1)
             {
                 this.AtualizarReservas(carta);
 

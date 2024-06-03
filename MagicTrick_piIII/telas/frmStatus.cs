@@ -86,6 +86,7 @@ namespace MagicTrick_piIII.Telas
 
                 pnlCartaCampea.BackgroundImage = imagemCarta;
                 lblCartaCampea.Text = valor;
+                lblCartaCampea.BackColor = Color.Transparent;
                 pnlCartaCampea.Visible = true;
             }
             else
@@ -106,7 +107,8 @@ namespace MagicTrick_piIII.Telas
 
                 pnlReserva1.BackgroundImage = imagemCarta;
                 lblReserva1.Text = valor;
-                pnlReserva1.Visible = true; 
+                pnlReserva1.Visible = true;
+                lblReserva1.BackColor = Color.Transparent;
             }
             else
                 pnlReserva1.Visible = false;
@@ -120,6 +122,7 @@ namespace MagicTrick_piIII.Telas
                 pnlReserva2.BackgroundImage = imagemCarta;
                 lblReserva2.Text = valor;
                 pnlReserva2.Visible = true;
+                lblReserva2.BackColor = Color.Transparent;
             }
             else
                 pnlReserva2.Visible = false;

@@ -38,10 +38,10 @@
             this.lblEstrategia = new System.Windows.Forms.Label();
             this.gpbCartasReserva = new System.Windows.Forms.GroupBox();
             this.gpbReserva2 = new System.Windows.Forms.GroupBox();
-            this.gpbReserva1 = new System.Windows.Forms.GroupBox();
-            this.pnlReserva1 = new System.Windows.Forms.Panel();
             this.pnlReserva2 = new System.Windows.Forms.Panel();
             this.lblReserva2 = new System.Windows.Forms.Label();
+            this.gpbReserva1 = new System.Windows.Forms.GroupBox();
+            this.pnlReserva1 = new System.Windows.Forms.Panel();
             this.lblReserva1 = new System.Windows.Forms.Label();
             this.gpbNaipe.SuspendLayout();
             this.gpbCartaCampea.SuspendLayout();
@@ -49,9 +49,9 @@
             this.gpbEstrategia.SuspendLayout();
             this.gpbCartasReserva.SuspendLayout();
             this.gpbReserva2.SuspendLayout();
+            this.pnlReserva2.SuspendLayout();
             this.gpbReserva1.SuspendLayout();
             this.pnlReserva1.SuspendLayout();
-            this.pnlReserva2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gpbNaipe
@@ -121,9 +121,10 @@
             // lblEstrategia
             // 
             this.lblEstrategia.AutoSize = true;
+            this.lblEstrategia.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstrategia.Location = new System.Drawing.Point(16, 35);
             this.lblEstrategia.Name = "lblEstrategia";
-            this.lblEstrategia.Size = new System.Drawing.Size(15, 21);
+            this.lblEstrategia.Size = new System.Drawing.Size(10, 16);
             this.lblEstrategia.TabIndex = 0;
             this.lblEstrategia.Text = " ";
             // 
@@ -153,6 +154,23 @@
             this.gpbReserva2.TabStop = false;
             this.gpbReserva2.Text = "Reserva 2";
             // 
+            // pnlReserva2
+            // 
+            this.pnlReserva2.Controls.Add(this.lblReserva2);
+            this.pnlReserva2.Location = new System.Drawing.Point(31, 25);
+            this.pnlReserva2.Name = "pnlReserva2";
+            this.pnlReserva2.Size = new System.Drawing.Size(38, 56);
+            this.pnlReserva2.TabIndex = 1;
+            // 
+            // lblReserva2
+            // 
+            this.lblReserva2.AutoSize = true;
+            this.lblReserva2.Location = new System.Drawing.Point(12, 18);
+            this.lblReserva2.Name = "lblReserva2";
+            this.lblReserva2.Size = new System.Drawing.Size(15, 21);
+            this.lblReserva2.TabIndex = 0;
+            this.lblReserva2.Text = " ";
+            // 
             // gpbReserva1
             // 
             this.gpbReserva1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(23)))), ((int)(((byte)(31)))));
@@ -172,23 +190,6 @@
             this.pnlReserva1.Name = "pnlReserva1";
             this.pnlReserva1.Size = new System.Drawing.Size(38, 56);
             this.pnlReserva1.TabIndex = 0;
-            // 
-            // pnlReserva2
-            // 
-            this.pnlReserva2.Controls.Add(this.lblReserva2);
-            this.pnlReserva2.Location = new System.Drawing.Point(31, 25);
-            this.pnlReserva2.Name = "pnlReserva2";
-            this.pnlReserva2.Size = new System.Drawing.Size(38, 56);
-            this.pnlReserva2.TabIndex = 1;
-            // 
-            // lblReserva2
-            // 
-            this.lblReserva2.AutoSize = true;
-            this.lblReserva2.Location = new System.Drawing.Point(12, 18);
-            this.lblReserva2.Name = "lblReserva2";
-            this.lblReserva2.Size = new System.Drawing.Size(15, 21);
-            this.lblReserva2.TabIndex = 0;
-            this.lblReserva2.Text = " ";
             // 
             // lblReserva1
             // 
@@ -221,11 +222,11 @@
             this.gpbEstrategia.PerformLayout();
             this.gpbCartasReserva.ResumeLayout(false);
             this.gpbReserva2.ResumeLayout(false);
+            this.pnlReserva2.ResumeLayout(false);
+            this.pnlReserva2.PerformLayout();
             this.gpbReserva1.ResumeLayout(false);
             this.pnlReserva1.ResumeLayout(false);
             this.pnlReserva1.PerformLayout();
-            this.pnlReserva2.ResumeLayout(false);
-            this.pnlReserva2.PerformLayout();
             this.ResumeLayout(false);
 
         }
