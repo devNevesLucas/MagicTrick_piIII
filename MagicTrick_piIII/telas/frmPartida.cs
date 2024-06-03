@@ -23,6 +23,7 @@ namespace MagicTrick_piIII.telas
         bool CartasImpressas = false;
 
         frmNarrador Narrador;
+        frmStatus StatusForm;
 
         static int[,] posicoesNomes = { { 183, 183 }, { 419, 227 }, { 922, 183 }, { 419, 454 } };
        
@@ -35,7 +36,8 @@ namespace MagicTrick_piIII.telas
             this.Jogadores.Add(player);
             this.Player = player;
 
-            this.Automato = new Automato(this.Player, this.Jogadores);
+            this.StatusForm = new frmStatus();
+            this.Automato = new Automato(this.Player, this.Jogadores, this.StatusForm);
 
             AtualizarListaDeJogadores();
                                
@@ -43,8 +45,9 @@ namespace MagicTrick_piIII.telas
 
             
             this.Narrador.Show();
-
             this.Narrador.NarrarPartidaNaoIniciada();
+
+            this.StatusForm.Show();
         }
 
         private void AtualizarListaDeJogadores()
@@ -164,6 +167,7 @@ namespace MagicTrick_piIII.telas
                 Jogador.AtualizarDeck(this.Jogadores, cartas);
                 this.Automato.ReiniciarPropriedades(ref this.Jogadores);
                 this.Narrador.NarrarNovoRound(this.Partida.Round);
+                this.StatusForm.LimparStatus();
             }
 
             return true;
@@ -196,6 +200,12 @@ namespace MagicTrick_piIII.telas
                 this.ExibirPlacarFinal(verificacao.StatusPartida);
                 return false;
             }
+
+            this.StatusForm.AtualizarNaipeRodada(verificacao.NaipeRodada);
+
+            CartaVerificacao cartaCampea = BaralhoVerificacao.RetornarCartaCampea(verificacao.CartasRodada);
+
+            this.StatusForm.AtualizarCartaCampea(cartaCampea);
 
             if (this.Partida.Rodada != verificacao.RodadaAtual)
             {
@@ -324,7 +334,7 @@ namespace MagicTrick_piIII.telas
         private void ExibirPlacarFinal(char statusPartida)
         {
             int idPartida = this.Partida.IdPartida;
-            frmPlacarFinal placarFinal = new frmPlacarFinal(idPartida, statusPartida, this, this.Narrador);
+            frmPlacarFinal placarFinal = new frmPlacarFinal(idPartida, statusPartida, this, this.Narrador, this.StatusForm);
 
             this.Narrador.NarrarFimDeJogo();
 

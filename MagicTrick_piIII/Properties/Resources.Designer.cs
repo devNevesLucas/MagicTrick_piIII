@@ -153,6 +153,16 @@ namespace MagicTrick_piIII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap coracaoNaipe {
+            get {
+                object obj = ResourceManager.GetObject("coracaoNaipe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap espadas {
             get {
                 object obj = ResourceManager.GetObject("espadas", resourceCulture);
@@ -216,6 +226,16 @@ namespace MagicTrick_piIII.Properties {
         internal static System.Drawing.Bitmap espadasIndisponivelHorizontal {
             get {
                 object obj = ResourceManager.GetObject("espadasIndisponivelHorizontal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap espadasNaipe {
+            get {
+                object obj = ResourceManager.GetObject("espadasNaipe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,6 +313,16 @@ namespace MagicTrick_piIII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap estrelasNaipe {
+            get {
+                object obj = ResourceManager.GetObject("estrelasNaipe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap lua {
             get {
                 object obj = ResourceManager.GetObject("lua", resourceCulture);
@@ -356,6 +386,16 @@ namespace MagicTrick_piIII.Properties {
         internal static System.Drawing.Bitmap luaIndisponivelHorizontal {
             get {
                 object obj = ResourceManager.GetObject("luaIndisponivelHorizontal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap luaNaipe {
+            get {
+                object obj = ResourceManager.GetObject("luaNaipe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -453,6 +493,16 @@ namespace MagicTrick_piIII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ourosNaipe {
+            get {
+                object obj = ResourceManager.GetObject("ourosNaipe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap paus {
             get {
                 object obj = ResourceManager.GetObject("paus", resourceCulture);
@@ -523,6 +573,16 @@ namespace MagicTrick_piIII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pausNaipe {
+            get {
+                object obj = ResourceManager.GetObject("pausNaipe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap triangulo {
             get {
                 object obj = ResourceManager.GetObject("triangulo", resourceCulture);
@@ -586,6 +646,16 @@ namespace MagicTrick_piIII.Properties {
         internal static System.Drawing.Bitmap trianguloIndisponivelHorizontal {
             get {
                 object obj = ResourceManager.GetObject("trianguloIndisponivelHorizontal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trianguloNaipe {
+            get {
+                object obj = ResourceManager.GetObject("trianguloNaipe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

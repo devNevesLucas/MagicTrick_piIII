@@ -122,6 +122,12 @@
     <Compile Include="Telas\frmPlacarFinal.Designer.cs">
       <DependentUpon>frmPlacarFinal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Telas\frmStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Telas\frmStatus.Designer.cs">
+      <DependentUpon>frmStatus.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -155,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Telas\frmPlacarFinal.resx">
       <DependentUpon>frmPlacarFinal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Telas\frmStatus.resx">
+      <DependentUpon>frmStatus.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -327,6 +336,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\trianguloDescobertoHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coracaoNaipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\espadasNaipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estrelasNaipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luaNaipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ourosNaipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pausNaipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trianguloNaipe.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

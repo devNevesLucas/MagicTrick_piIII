@@ -19,8 +19,9 @@ namespace MagicTrick_piIII.telas
 
         frmPartida Partida;
         frmNarrador Narrador;
+        frmStatus StatusForm;
 
-        public frmPlacarFinal(int idPartida, char status, frmPartida partida, frmNarrador narrador)
+        public frmPlacarFinal(int idPartida, char status, frmPartida partida, frmNarrador narrador, frmStatus statusForm)
         {
             InitializeComponent();
 
@@ -29,6 +30,7 @@ namespace MagicTrick_piIII.telas
 
             this.Partida = partida;
             this.Narrador = narrador;
+            this.StatusForm = statusForm;
 
             if (this.Jogadores.Count == 0)
                 return;
@@ -60,6 +62,8 @@ namespace MagicTrick_piIII.telas
         {
             this.Partida.Close();
             this.Narrador.Close();
+            this.StatusForm.Close();
+
             this.Close();
         }
     }

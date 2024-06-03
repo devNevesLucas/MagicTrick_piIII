@@ -1,4 +1,5 @@
 ﻿using MagicTrick_piIII.Interfaces;
+using MagicTrick_piIII.Telas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace MagicTrick_piIII.classes
         public CartaJogador CartaReserva1;
         public CartaJogador CartaReserva2;
 
+        public frmStatus StatusForm;
+
         private Dictionary<char, List<int>> ValoresDisponiveisPorNaipe = new Dictionary<char, List<int>>();
 
         private static List<char> naipesCartas = new List<char>()
@@ -29,10 +32,11 @@ namespace MagicTrick_piIII.classes
         };
 
 
-        public Automato(Jogador jogador, List<Jogador> jogadores)
+        public Automato(Jogador jogador, List<Jogador> jogadores, frmStatus statusForm)
         {
             this.Jogador = jogador;
             this.Jogadores = jogadores;
+            this.StatusForm = statusForm;
         }
         /*
             Recebe todos os jogadores da partida, percorre o deck de cada um deles, 
@@ -151,6 +155,8 @@ namespace MagicTrick_piIII.classes
                     this.CartaReserva1 = cartaTmp;
                 }
             }
+
+            this.StatusForm.AtualizarCartasReservadas(this.CartaReserva1, this.CartaReserva2);
         }
 
         private void AtualizarReservas(CartaJogador cartaJogada)
@@ -165,6 +171,8 @@ namespace MagicTrick_piIII.classes
 
             if (this.CartaReserva2 == cartaJogada)
                 this.CartaReserva2 = null;
+
+            this.StatusForm.AtualizarCartasReservadas(this.CartaReserva1, this.CartaReserva2);
         }
 
         private bool VerificarReservas(CartaJogador carta)
@@ -183,6 +191,10 @@ namespace MagicTrick_piIII.classes
             if (rodada < 8)
             {
                 int pontosRodada = this.Jogador.PontosRodada.Count;
+
+
+
+
                 CartaJogador cartaParaReservar = this.Jogador.Deck.Find(c => c.ValorReal == pontosRodada && c.Disponivel);
 
                 if (cartaParaReservar != null)
@@ -207,6 +219,8 @@ namespace MagicTrick_piIII.classes
 
             CartaJogador carta = this.CartaReserva1;
 
+            List<CartaJogador> deck = this.Jogador.Deck.FindAll(c => c.Disponivel);
+
             if (carta != null && carta.ValorReal == pontosRodada && carta.Disponivel)
                 return carta.Posicao;
 
@@ -217,15 +231,18 @@ namespace MagicTrick_piIII.classes
             if (carta != null && carta.ValorReal == pontosRodada && carta.Disponivel)
                 return carta.Posicao;
 
-            carta = this.Jogador.Deck.Find(c => c.ValorReal == pontosRodada && c.Disponivel);
+            carta = deck.Find(c => c.ValorReal == pontosRodada && c.Disponivel);
 
             if (carta == null)
-                carta = this.Jogador.Deck.Find(c => c.ContemValorSuperior(pontosRodada) && c.Disponivel);
+                carta = deck.Find(c => c.ContemValorSuperior(pontosRodada) && c.Disponivel);
 
-            if (carta == null)
-                carta = this.Jogador.Deck.Find(c => c.Disponivel);
+            if (carta != null)
+                return carta.Posicao;
 
-            return carta.Posicao;
+            if (deck.Count > 1)
+                return 0;
+
+            return deck[0].Posicao;
         }
 
         public int JogarPrimeiraCartaPossivel(char? naipeRodada)
@@ -254,6 +271,8 @@ namespace MagicTrick_piIII.classes
 
             this.AtualizarReservas(carta);
 
+            this.StatusForm.AtualizarEstrategia("Jogar única carta disponível do naipe");
+
             return carta.Posicao;
         }
 
@@ -270,6 +289,8 @@ namespace MagicTrick_piIII.classes
 
             this.AtualizarReservas(carta);
 
+            this.StatusForm.AtualizarEstrategia("Queimar a maior carta possível");
+
             return carta.Posicao;
         }
 
@@ -285,6 +306,8 @@ namespace MagicTrick_piIII.classes
                 carta = deckTmp.Find(c => c.Disponivel);
 
             this.AtualizarReservas(carta);
+
+            this.StatusForm.AtualizarEstrategia("Queimar a maior carta possível");
 
             return carta.Posicao;
         }
@@ -308,6 +331,8 @@ namespace MagicTrick_piIII.classes
 
             this.AtualizarReservas(carta);
 
+            this.StatusForm.AtualizarEstrategia("Iniciar rodada com carta de naipe em comum");
+
             return carta.Posicao;
         }
 
@@ -319,16 +344,21 @@ namespace MagicTrick_piIII.classes
             int maiorValor = cartaCampea.ValorReal;
 
             List<CartaJogador> deck = this.Jogador.Deck;
-            CartaJogador carta;    
+            CartaJogador carta;
 
-            carta = deck.Find(c => c.ValorReal < maiorValor && c.Naipe == naipeRodada && c.Disponivel);
+            deck = deck.OrderByDescending(c => c.Posicao).ToList();
+
+            carta = deck.Find(c => c.PossiveisValores.Max() < maiorValor && c.Naipe == naipeRodada && c.Disponivel);
 
             if (carta == null)
-                carta = deck.Find(c => c.PossiveisValores.Max() < maiorValor && c.Naipe == naipeRodada && c.Disponivel);
+                carta = deck.Find(c => c.ValorReal < maiorValor && c.Naipe == naipeRodada && c.Disponivel);
 
             if (carta != null && carta.ValorReal < cartaCampea.ValorReal)
             {
                 this.AtualizarReservas(carta);
+
+                this.StatusForm.AtualizarEstrategia("Jogar carta com valor menor que campeã");
+
                 return carta.Posicao;
             }
                         
