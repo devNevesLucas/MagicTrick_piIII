@@ -374,6 +374,9 @@ namespace MagicTrick_piIII.classes
            
             char? naipe = dados.NaipeRodada;
 
+            int pontosRodada = this.Jogador.PontosRodada.Count;
+            int aposta = this.Jogador.CartaAposta.ValorReal;
+
             if (naipe == null)
                 return this.JogarPrimeiraCartaDaRodada();
 
@@ -383,7 +386,7 @@ namespace MagicTrick_piIII.classes
             if (this.Jogador.CartasDisponiveisPorNaipe[(char)naipe] == 1)
                 return this.JogarUnicaCartaDisponivel((char)naipe);
 
-            if (cartaCampea.ValorReal == 7)
+            if (cartaCampea.ValorReal == 7 || pontosRodada < aposta)
                 return this.JogarMaiorCartaPossivel((char)naipe);
 
             return this.JogarCartaComValorMenor(cartaCampea, (char)naipe);

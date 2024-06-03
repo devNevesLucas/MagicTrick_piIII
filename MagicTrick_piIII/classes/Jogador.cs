@@ -475,9 +475,12 @@ namespace MagicTrick_piIII
 
             List<char> naipesEmComum = new List<char>();
 
-            foreach (KeyValuePair<char, int> chaveValor in naipesEmComumDictionary.OrderBy(c => c.Value))
-                naipesEmComum.Add(chaveValor.Key);
+            List<char> naipes = naipesEmComumDictionary.Keys.ToList();
 
+            foreach (char naipe in naipes)
+                if (naipesEmComumDictionary[naipe] > 0)
+                    naipesEmComum.Add(naipe);
+               
             return naipesEmComum;
         }
     }
