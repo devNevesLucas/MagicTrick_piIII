@@ -200,7 +200,7 @@ namespace MagicTrick_piIII.classes
 
                 int pontosPorCopas = Jogador.RetornarQtdDeCopas(this.Jogadores, this.Jogador);
 
-                int pontosRodada = pontosAtuais + pontosPorCopas;
+                int pontosRodada = pontosAtuais; //+ pontosPorCopas;
 
                 CartaJogador cartaParaReservar = this.Jogador.Deck.Find(c => c.ValorReal == pontosRodada && c.Disponivel);
 
@@ -226,8 +226,8 @@ namespace MagicTrick_piIII.classes
 
             int pontosPorCopas = Jogador.RetornarQtdDeCopas(this.Jogadores, this.Jogador);
 
-            int pontosRodada = pontosAtuais + pontosPorCopas;
-
+            int pontosRodada = pontosAtuais;  //+ pontosPorCopas;
+            
             CartaJogador carta = this.CartaReserva1;
 
             List<CartaJogador> deck = this.Jogador.Deck.FindAll(c => c.Disponivel);
@@ -243,9 +243,6 @@ namespace MagicTrick_piIII.classes
                 return carta.Posicao;
 
             carta = deck.Find(c => c.ValorReal == pontosRodada && c.Disponivel);
-
-            if (carta == null)
-                carta = deck.Find(c => c.ContemValorSuperior(pontosRodada) && c.Disponivel);
 
             if (carta != null)
                 return carta.Posicao;
@@ -273,6 +270,15 @@ namespace MagicTrick_piIII.classes
             
             this.AtualizarReservas(carta);
             
+            return carta.Posicao;
+        }
+
+        public int JogarPrimeiraCartaPossivel()
+        {
+            CartaJogador carta = this.Jogador.Deck.Find(c => c.Disponivel);
+
+            this.AtualizarReservas(carta);
+
             return carta.Posicao;
         }
 
@@ -319,6 +325,9 @@ namespace MagicTrick_piIII.classes
             this.AtualizarReservas(carta);
 
             this.StatusForm.AtualizarEstrategia("Queimar a maior carta possível");
+
+            if (carta == null)
+                carta = deckTmp.Find(c => c.Disponivel);
 
             return carta.Posicao;
         }
@@ -389,7 +398,12 @@ namespace MagicTrick_piIII.classes
                 return this.JogarPrimeiraCartaDaRodada();
 
             if (this.Jogador.CartasDisponiveisPorNaipe[(char)naipe] == 0)
+            {
+                if (pontosRodada < aposta)
+                    return this.JogarPrimeiraCartaPossivel();
+
                 return this.JogarMaiorCartaPossivel();
+            }
 
             if (this.Jogador.CartasDisponiveisPorNaipe[(char)naipe] == 1)
                 return this.JogarUnicaCartaDisponivel((char)naipe);

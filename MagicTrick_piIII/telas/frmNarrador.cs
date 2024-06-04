@@ -49,7 +49,9 @@ namespace MagicTrick_piIII.Telas
 
         public void AtualizarJogadores(List<Jogador> jogadores)
         {
-            this.Jogadores = jogadores;            
+            this.Jogadores = jogadores;
+
+            dgvJogadores.DataSource = null;
             dgvJogadores.DataSource = jogadores;
 
             dgvJogadores.Columns[3].Visible = false;
