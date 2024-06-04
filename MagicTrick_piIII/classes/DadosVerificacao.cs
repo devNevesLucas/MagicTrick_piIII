@@ -13,8 +13,7 @@ namespace MagicTrick_piIII.classes
         public int IdJogador { get; set; } 
         public int RodadaAtual { get; set; }
         public char StatusRodada { get; set; }
-        public char? NaipeRodada { get; set; }  
-        public List<int> JogadoresQueJaJogaram { get; set; }        
+        public char? NaipeRodada { get; set; }        
         public BaralhoVerificacao CartasRodada { get; set; }
 
         public DadosVerificacao(string dadosPartida) 
@@ -30,7 +29,6 @@ namespace MagicTrick_piIII.classes
             this.IdJogador = idJogador;
             this.RodadaAtual = rodada;
             this.StatusRodada = statusRodada;
-            this.JogadoresQueJaJogaram = new List<int>();
             this.CartasRodada = new BaralhoVerificacao();
         }   
 
@@ -64,9 +62,7 @@ namespace MagicTrick_piIII.classes
             dadosTmp = dadosTmp.Skip(1).ToArray();
 
             dadosVerificacao.CartasRodada = BaralhoVerificacao.RetornarCartasVerificacaoTratadas(dadosTmp, ref naipeTmp);
-
-            dadosVerificacao.JogadoresQueJaJogaram = BaralhoVerificacao.RetornarJogadoresQueJaJogaram(dadosVerificacao.CartasRodada);
-
+            
             dadosVerificacao.NaipeRodada = naipeTmp;
 
             return dadosVerificacao;    

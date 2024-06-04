@@ -125,16 +125,5 @@ namespace MagicTrick_piIII.classes
 
             return cartaCampea;
         }
-
-        public static List<int> RetornarJogadoresQueJaJogaram(BaralhoVerificacao cartas)
-        {
-            List<int> jogadores = new List<int>();
-
-            foreach(KeyValuePair<int, List<CartaVerificacao>> chaveValor in cartas.Baralho)            
-                if (chaveValor.Value.Any(c => c.Status == 'C'))
-                    jogadores.Add(chaveValor.Key);
-          
-            return jogadores;
-        }
     }
 }
