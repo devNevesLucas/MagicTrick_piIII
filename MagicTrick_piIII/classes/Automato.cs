@@ -156,6 +156,9 @@ namespace MagicTrick_piIII.classes
                 }
             }
 
+            if (this.CartaReserva1 == this.CartaReserva2)
+                this.CartaReserva2 = null;
+
             this.StatusForm.AtualizarCartasReservadas(this.CartaReserva1, this.CartaReserva2);
         }
 
@@ -193,10 +196,11 @@ namespace MagicTrick_piIII.classes
         {
             if (rodada < 8)
             {
-                int pontosRodada = this.Jogador.PontosRodada.Count;
+                int pontosAtuais = this.Jogador.PontosRodada.Count;
 
+                int pontosPorCopas = Jogador.RetornarQtdDeCopas(this.Jogadores, this.Jogador);
 
-
+                int pontosRodada = pontosAtuais + pontosPorCopas;
 
                 CartaJogador cartaParaReservar = this.Jogador.Deck.Find(c => c.ValorReal == pontosRodada && c.Disponivel);
 
@@ -218,7 +222,11 @@ namespace MagicTrick_piIII.classes
 
         public int EscolherCartaAposta()
         {
-            int pontosRodada = this.Jogador.PontosRodada.Count;
+            int pontosAtuais = this.Jogador.PontosRodada.Count;
+
+            int pontosPorCopas = Jogador.RetornarQtdDeCopas(this.Jogadores, this.Jogador);
+
+            int pontosRodada = pontosAtuais + pontosPorCopas;
 
             CartaJogador carta = this.CartaReserva1;
 

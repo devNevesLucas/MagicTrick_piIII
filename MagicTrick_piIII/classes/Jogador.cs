@@ -131,7 +131,7 @@ namespace MagicTrick_piIII
             this.lblQtdNaipes.BringToFront();
         }
 
-        private static void InstanciarLabels(List<Jogador> jogadores, Control.ControlCollection controle)
+        private static void InstanciarLabelsJogadores(List<Jogador> jogadores, Control.ControlCollection controle)
         {
             foreach (Jogador jogador in jogadores)
                 jogador.InstanciarLabels(controle);
@@ -174,7 +174,7 @@ namespace MagicTrick_piIII
 
             jogadores = jogadoresTmp;
 
-            InstanciarLabels(jogadores, controle);
+            InstanciarLabelsJogadores(jogadores, controle);
         }
 
         public static void PreencherDeck(List<Jogador> jogadores, BaralhoConsulta decks, Control.ControlCollection controle)
@@ -482,6 +482,25 @@ namespace MagicTrick_piIII
                     naipesEmComum.Add(naipe);
                
             return naipesEmComum;
+        }
+
+        public static int RetornarQtdDeCopas(List<Jogador> jogadores, Jogador jogador)
+        {
+            int copasDoJogador = jogador.CartasDisponiveisPorNaipe['C'];
+            int maiorQtdCopas = 0;
+
+            foreach(Jogador jogadorTmp in jogadores)
+            {
+                if (jogadorTmp.IdJogador == jogador.IdJogador) continue;
+
+                if (jogadorTmp.CartasDisponiveisPorNaipe['C'] > maiorQtdCopas)
+                    maiorQtdCopas = jogadorTmp.CartasDisponiveisPorNaipe['C'];
+            }
+
+            if (copasDoJogador - maiorQtdCopas <= 0)
+                return 0;
+
+            return copasDoJogador - maiorQtdCopas;
         }
     }
 }
