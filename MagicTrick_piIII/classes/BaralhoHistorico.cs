@@ -10,6 +10,11 @@ namespace MagicTrick_piIII.classes
 {
     public class BaralhoHistorico
     {
+        //Sobre o dicionário:
+        // int: rodada
+        // List<CartaHistorico>: Cartas jogadas naquela rodada
+        //
+        // Representa o histórico de um round específico.
         public Dictionary<int, List<CartaHistorico>> Baralho { get; set; }
 
         public BaralhoHistorico()

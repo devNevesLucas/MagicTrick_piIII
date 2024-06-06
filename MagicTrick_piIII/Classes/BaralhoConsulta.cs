@@ -9,6 +9,9 @@ namespace MagicTrick_piIII.classes
 {
     public class BaralhoConsulta
     {   
+        //Sobre o Dicionário:
+        //int: ID do jogador
+        //List<Carta>: Cartas do jogador
         public Dictionary<int, List<Carta>> Baralho { get; set; }
 
         public BaralhoConsulta() 

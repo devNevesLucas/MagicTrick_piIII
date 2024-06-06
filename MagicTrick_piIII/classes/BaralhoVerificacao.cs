@@ -9,7 +9,9 @@ namespace MagicTrick_piIII.classes
 {
     public class BaralhoVerificacao
     {
-
+            // Sobre o dicionário:
+            // int: ID do Jogador
+            // List<CartaVerificacao>: Cartas jogadas pelo jogador nessa rodada.
         public Dictionary<int, List<CartaVerificacao>> Baralho;
         
         public BaralhoVerificacao()
